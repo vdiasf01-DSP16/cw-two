@@ -8,6 +8,9 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import controllers.ColourLoaderImpl;
+import controllers.IColourLoader;
+
 /**
  * Testing the Colour Loader.
  * 
@@ -72,7 +75,7 @@ public class TestColourLoader {
 	@Test
 	public void testIsSameSize() {
 		Map<String, String> loadedColours = loader.getColours();
-		assertEquals(expectedColours.size() == loadedColours.size());
+		assertTrue(expectedColours.size() == loadedColours.size());
 	}
 
 	/**

@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import controllers.IPegGenerator;
+import controllers.PegGeneratorImpl;
 import models.IPeg;
 
 /**
@@ -37,7 +38,7 @@ public class TestPegGenerator {
 	 * Test null on get peg for an unknown colour.
 	 */
 	@Test
-	public void testGetPeg() {
+	public void testGetPegIsNull() {
 		IPeg foundPeg = pegGen.getPeg("Not known colour");
 		assertNull(foundPeg);
 	}

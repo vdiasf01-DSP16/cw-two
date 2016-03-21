@@ -6,7 +6,6 @@ package tests;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
@@ -14,6 +13,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import controllers.IPegGenerator;
+import controllers.IStringToPeg;
+import controllers.StringToPegImpl;
 import models.IPeg;
 import models.PegImpl;
 
@@ -34,7 +35,7 @@ public class TestStringToPeg {
 	/**
 	 * The StringToPegs handler
 	 */
-	private StringToPeg stringToPeg;
+	private IStringToPeg stringToPeg;
 	
 	/**
 	 * The peg generator mock.
