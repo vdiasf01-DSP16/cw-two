@@ -3,7 +3,7 @@
  */
 package controllers;
 
-import java.util.List;
+import java.util.Map;
 
 import models.IPeg;
 
@@ -13,6 +13,6 @@ import models.IPeg;
  */
 public interface IStringToPeg {
 
-	List<IPeg> getPegs(String string);
+	Map<Integer, IPeg> getPegs(String string);
 
 }

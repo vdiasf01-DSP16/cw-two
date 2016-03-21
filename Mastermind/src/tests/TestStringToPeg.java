@@ -3,14 +3,15 @@
  */
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import controllers.IPegGenerator;
 import controllers.IStringToPeg;
@@ -41,7 +42,7 @@ public class TestStringToPeg {
 	 * The peg generator mock.
 	 */
 	@Mock
-	private IPegGenerator pegGeneratorMock;
+	private IPegGenerator pegGeneratorMock = Mockito.mock(IPegGenerator.class);
 
 	/**
 	 * The initial test setup.
@@ -63,7 +64,8 @@ public class TestStringToPeg {
 	 */
 	@Test
 	public void testNoValidPegs() {
-		List<IPeg> foundPegs = stringToPeg.getPegs("QWET");
+		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("QWET");
+		System.out.println(foundPegs.toString());
 		assertTrue(foundPegs.isEmpty());
 	}
 	
@@ -73,7 +75,7 @@ public class TestStringToPeg {
 	 */
 	@Test
 	public void testOneValidPeg() {
-		List<IPeg> foundPegs = stringToPeg.getPegs("QGET");
+		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("QGET");
 		assertTrue(foundPegs.get(1).equals(greenPeg));
 	}
 
@@ -82,7 +84,7 @@ public class TestStringToPeg {
 	 */
 	@Test
 	public void testAllValidPeg() {
-		List<IPeg> foundPegs = stringToPeg.getPegs("RGBY");
+		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("RGBY");
 		assertTrue(foundPegs.get(0).equals(redPeg));
 		assertTrue(foundPegs.get(1).equals(greenPeg));
 		assertTrue(foundPegs.get(2).equals(bluePeg));
@@ -94,7 +96,7 @@ public class TestStringToPeg {
 	 */
 	@Test
 	public void testAnyLengthValidPegs() {
-		List<IPeg> foundPegs = stringToPeg.getPegs("RGBYYYY");
+		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("RGBYYYY");
 		assertTrue(foundPegs.get(0).equals(redPeg));
 		assertTrue(foundPegs.get(1).equals(greenPeg));
 		assertTrue(foundPegs.get(2).equals(bluePeg));
