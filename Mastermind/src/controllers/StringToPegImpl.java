@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.inject.Inject;
+
 import models.IPeg;
 
 /**
@@ -18,6 +20,7 @@ public class StringToPegImpl implements IStringToPeg {
 
 	private final IPegGenerator pegGenerator;
 
+	@Inject
 	public StringToPegImpl(IPegGenerator pegGenerator) {
 		this.pegGenerator = pegGenerator;
 	}

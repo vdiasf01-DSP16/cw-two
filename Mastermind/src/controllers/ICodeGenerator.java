@@ -3,7 +3,7 @@
  */
 package controllers;
 
-import java.util.List;
+import java.util.Map;
 
 import models.IPeg;
 
@@ -13,8 +13,7 @@ import models.IPeg;
  */
 public interface ICodeGenerator {
 
-	public void generateNewCode();
+	void generateNewCode();
 
-	public List<IPeg> getCode();
-
+	Map<Integer, IPeg> getCode();
 }

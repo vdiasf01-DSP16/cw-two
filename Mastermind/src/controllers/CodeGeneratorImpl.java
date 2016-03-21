@@ -3,7 +3,10 @@
  */
 package controllers;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.inject.Inject;
 
 import models.IPeg;
 
@@ -13,20 +16,37 @@ import models.IPeg;
  */
 public class CodeGeneratorImpl implements ICodeGenerator {
 
-	public CodeGeneratorImpl(int codeLength) {
-		// TODO Auto-generated constructor stub
+	private final IPegGenerator pegGenerator;
+	private final int CODE_LENGTH;
+	private Map<Integer, IPeg> generatedCodePegs;
+	
+	@Inject
+	public CodeGeneratorImpl(int codeLength, IPegGenerator pegGenerator) {
+		super();
+		this.CODE_LENGTH = codeLength;
+		this.pegGenerator = pegGenerator;
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.ICodeGenerator#generateNewCode()
+	 */
 	@Override
 	public void generateNewCode() {
-		// TODO Auto-generated method stub
+		generatedCodePegs = new HashMap<>();
 		
+		for (int i = 0; i < CODE_LENGTH; i++) {
+			IPeg peg = pegGenerator.getAPeg();
+			if (peg != null) {
+				generatedCodePegs.put(i, peg);
+			}
+		}
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.ICodeGenerator#getCode()
+	 */
 	@Override
-	public List<IPeg> getCode() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<Integer, IPeg> getCode() {
+		return generatedCodePegs;
 	}
-
 }

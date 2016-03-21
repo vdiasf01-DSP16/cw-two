@@ -44,15 +44,6 @@ public class TestPegGenerator {
 	}
 	
 	/**
-	 * Test not null on get a peg.
-	 */
-	@Test
-	public void testGetAPeg() {
-		IPeg foundPeg = pegGen.getAPeg();
-		assertNotNull(foundPeg);
-	}
-	
-	/**
 	 * Test Peg found is of a known colour.
 	 */
 	@Test

@@ -13,13 +13,6 @@ import models.IPeg;
 public interface IPegGenerator {
 
 	/**
-	 * Returns a generated Peg from a known random colour list.
-	 * 
-	 * @return IPeg
-	 */
-	public IPeg getAPeg();
-	
-	/**
 	 * For the supplied colour, returns a generated Peg.
 	 * If the supplied colour is not known, it will return null.
 	 * 
@@ -27,4 +20,12 @@ public interface IPegGenerator {
 	 * @return IPeg
 	 */
 	public IPeg getPeg(String colour);
+	
+	/**
+	 * Returns a generated Peg from a known random colour list.
+	 * 
+	 * @return IPeg
+	 */
+	public IPeg getAPeg();
+
 }

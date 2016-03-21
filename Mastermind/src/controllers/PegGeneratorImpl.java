@@ -18,19 +18,19 @@ public class PegGeneratorImpl implements IPegGenerator {
 	}
 
 	/* (non-Javadoc)
-	 * @see controllers.IPegGenerator#getAPeg()
+	 * @see controllers.IPegGenerator#getPeg(java.lang.String)
 	 */
 	@Override
-	public IPeg getAPeg() {
+	public IPeg getPeg(String colour) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/* (non-Javadoc)
-	 * @see controllers.IPegGenerator#getPeg(java.lang.String)
+	 * @see controllers.IPegGenerator#getAPeg()
 	 */
 	@Override
-	public IPeg getPeg(String colour) {
+	public IPeg getAPeg() {
 		// TODO Auto-generated method stub
 		return null;
 	}

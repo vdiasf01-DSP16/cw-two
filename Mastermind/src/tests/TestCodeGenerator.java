@@ -3,13 +3,21 @@
  */
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import controllers.CodeGeneratorImpl;
 import controllers.ICodeGenerator;
+import controllers.IPegGenerator;
+import models.IPeg;
+import models.PegImpl;
 
 /**
  * Test the code generator controller.
@@ -22,11 +30,23 @@ public class TestCodeGenerator {
 	private ICodeGenerator codeGenerator;
 
 	/**
-	 * @throws java.lang.Exception
+	 * List of known pegs.
+	 */
+	private IPeg greenPeg = new PegImpl("G", "Green");
+	
+	/**
+	 * The peg generator mock.
+	 */
+	@Mock
+	private IPegGenerator pegGeneratorMock = Mockito.mock(IPegGenerator.class);
+
+	/**
+	 * The initial test setup.
 	 */
 	@Before
-	public void setUp() throws Exception {
-		codeGenerator = new CodeGeneratorImpl(CODE_LENGTH);
+	public void setUp()  {
+		when(pegGeneratorMock.getAPeg()).thenReturn(greenPeg);
+		codeGenerator = new CodeGeneratorImpl(CODE_LENGTH, pegGeneratorMock);
 	}
 
 	@Test
