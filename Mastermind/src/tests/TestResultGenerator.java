@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import controllers.IPegGenerator;
 import models.IPeg;
 import models.PegImpl;
 
@@ -63,18 +62,11 @@ public class TestResultGenerator {
 	private IPeg yellowPeg = new PegImpl("Y", "Yellow");
 	private IPeg redPeg = new PegImpl("R", "Red");
 
-	@Mock
-	private IPegGenerator pegGeneratorMock;
-
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
-		when(pegGeneratorMock.getPeg("G")).thenReturn(greenPeg);
-		when(pegGeneratorMock.getPeg("B")).thenReturn(bluePeg);
-		when(pegGeneratorMock.getPeg("Y")).thenReturn(yellowPeg);
-		when(pegGeneratorMock.getPeg("R")).thenReturn(redPeg);
+	public void setUp() {
 		generatedCode = new ArrayList<IPeg>();
 		generatedCode.add(greenPeg);
 		generatedCode.add(bluePeg);
@@ -82,7 +74,7 @@ public class TestResultGenerator {
 		generatedCode.add(redPeg);
 
 		// TODO use Guice
-		resultGenerator = new ResultGeneratorImpl(pegGeneratorMock);
+		resultGenerator = new ResultGeneratorImpl();
 		resultGenerator.setGeneratedCode(generatedCode);
 	}
 	
