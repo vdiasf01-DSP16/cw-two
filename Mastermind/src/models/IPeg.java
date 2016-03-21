@@ -11,9 +11,9 @@ public interface IPeg {
 	/**
 	 * The Peg colour.
 	 * 
-	 * @return IColour
+	 * @return String
 	 */
-	public char getColour();
+	public String getColour();
 
 	/**
 	 * The Peg colour name.

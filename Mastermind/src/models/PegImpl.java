@@ -6,12 +6,12 @@ package models;
  * @author pdeara01
  *
  */
-public class PegIml implements IPeg {
+public class PegImpl implements IPeg {
 	
 	/**
 	 * The Peg colour.
 	 */
-	private final char colour;
+	private final String colour;
 
 	/**
 	 * The Peg colour Name.
@@ -21,7 +21,7 @@ public class PegIml implements IPeg {
 	/**
 	 * Constructor
 	 */
-	public PegIml(char colour, String colourName) {
+	public PegImpl(String colour, String colourName) {
 		this.colour = colour;
 		this.colourName = colourName;
 
@@ -31,7 +31,7 @@ public class PegIml implements IPeg {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public char getColour() {
+	public String getColour() {
 		return colour;
 	}
 
