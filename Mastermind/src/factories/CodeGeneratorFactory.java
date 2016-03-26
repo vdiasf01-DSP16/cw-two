@@ -1,17 +1,15 @@
 package factories;
 
 import com.google.inject.Guice;
-import com.google.inject.Inject;
 
-import controllers.IFlowController;
+import controllers.ICodeGenerator;
 import guiceModules.ControllerModule;
 import guiceModules.PropertiesModule;
 
-public class FlowControllerFactory {
-	
-	@Inject
-	public IFlowController factoryMethod() {
+public class CodeGeneratorFactory {
+
+	public ICodeGenerator factoryMethod(){
 		return Guice.createInjector(new PropertiesModule(), new ControllerModule())
-				.getInstance(IFlowController.class);
+				.getInstance(ICodeGenerator.class);
 	}
 }

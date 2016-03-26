@@ -6,6 +6,8 @@ package controllers;
 import java.util.List;
 import java.util.Map;
 
+import com.google.inject.Inject;
+
 import models.IPeg;
 
 /**
@@ -14,6 +16,7 @@ import models.IPeg;
  */
 public class PegGeneratorImpl implements IPegGenerator {
 
+	@Inject
 	public PegGeneratorImpl(Map<String, String> colourList) {
 		// TODO Auto-generated constructor stub
 	}

@@ -4,6 +4,8 @@
 package controllers;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.google.inject.Inject;
@@ -46,7 +48,22 @@ public class CodeGeneratorImpl implements ICodeGenerator {
 	 * @see controllers.ICodeGenerator#getCode()
 	 */
 	@Override
-	public Map<Integer, IPeg> getCode() {
-		return generatedCodePegs;
+	public List<IPeg> getCode() {
+		List<IPeg> finalList = new LinkedList<>();
+		for(int index = 0; index < generatedCodePegs.size(); index++ ) {
+			finalList.add(generatedCodePegs.get(index));
+		}
+		return finalList;
+	}
+
+	@Override
+	public String getCodeString() {
+		String codeString = "";
+		
+		for (IPeg peg : getCode()) {
+			codeString += peg.getColour();
+		}
+		
+		return codeString;
 	}
 }

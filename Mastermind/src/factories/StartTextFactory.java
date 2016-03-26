@@ -6,9 +6,8 @@ import guiceModules.PropertiesModule;
 import guiceModules.ViewModule;
 import views.IStartText;
 
-public class StartTextFactory extends DisplayFactory {
+public class StartTextFactory{
 
-	@Override
 	public IStartText factoryMethod() {
 		return Guice.createInjector(new PropertiesModule(), new ViewModule()).getInstance(IStartText.class);
 	}
