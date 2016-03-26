@@ -6,7 +6,7 @@ package factories;
 import com.google.inject.Guice;
 
 import controllers.IColourLoader;
-import guiceModules.ControllerModule;
+import guiceModules.BindingsModule;
 import guiceModules.PropertiesModule;
 
 /**
@@ -16,7 +16,7 @@ import guiceModules.PropertiesModule;
 public class ColourLoaderFactory {
 
 	public IColourLoader factoryMethod(){
-		return Guice.createInjector(new PropertiesModule(), new ControllerModule())
+		return Guice.createInjector(new PropertiesModule(), new BindingsModule())
 				.getInstance(IColourLoader.class);
 	}
 }

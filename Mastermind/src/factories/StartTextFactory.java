@@ -2,14 +2,14 @@ package factories;
 
 import com.google.inject.Guice;
 
+import guiceModules.BindingsModule;
 import guiceModules.PropertiesModule;
-import guiceModules.ViewModule;
 import views.IStartText;
 
 public class StartTextFactory{
 
 	public IStartText factoryMethod() {
-		return Guice.createInjector(new PropertiesModule(), new ViewModule()).getInstance(IStartText.class);
+		return Guice.createInjector(new PropertiesModule(), new BindingsModule()).getInstance(IStartText.class);
 	}
 
 }
