@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controllers.pegGenerator;
+package controllers;
 
 import java.util.List;
 import java.util.Map;

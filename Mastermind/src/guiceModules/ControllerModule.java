@@ -7,9 +7,9 @@ import controllers.ColourLoaderImpl;
 import controllers.FlowControllerImpl;
 import controllers.IColourLoader;
 import controllers.IFlowController;
-import controllers.pegGenerator.IPegGenerator;
-import controllers.pegGenerator.PegGeneratorFactory;
-import controllers.pegGenerator.PegGeneratorImpl;
+import controllers.IPegGenerator;
+import controllers.PegGeneratorImpl;
+import factories.PegGeneratorFactory;
 
 public class ControllerModule extends AbstractModule {
 

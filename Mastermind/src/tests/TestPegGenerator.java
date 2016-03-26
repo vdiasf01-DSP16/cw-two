@@ -8,8 +8,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import controllers.pegGenerator.IPegGenerator;
-import controllers.pegGenerator.PegGeneratorImpl;
+import controllers.IPegGenerator;
+import controllers.PegGeneratorImpl;
 import models.IPeg;
 
 /**

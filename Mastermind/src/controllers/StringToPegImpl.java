@@ -10,7 +10,6 @@ import java.util.Map;
 
 import com.google.inject.Inject;
 
-import controllers.pegGenerator.IPegGenerator;
 import models.IPeg;
 
 /**

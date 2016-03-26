@@ -7,9 +7,9 @@ import com.google.inject.name.Named;
 
 import controllers.IColourLoader;
 import controllers.IFlowController;
-import controllers.pegGenerator.PegGeneratorFactory;
 import factories.ColourLoaderFactory;
 import factories.FlowControllerFactory;
+import factories.PegGeneratorFactory;
 import factories.StartTextFactory;
 import factories.TextBeforeGuessFactory;
 import views.IStartText;

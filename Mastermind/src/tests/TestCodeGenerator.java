@@ -15,7 +15,7 @@ import org.mockito.Mockito;
 
 import controllers.CodeGeneratorImpl;
 import controllers.ICodeGenerator;
-import controllers.pegGenerator.IPegGenerator;
+import controllers.IPegGenerator;
 import models.IPeg;
 import models.PegImpl;
 
