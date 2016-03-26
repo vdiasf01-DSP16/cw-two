@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,22 +14,17 @@ public class GuessHistoryImpl implements IGuessHistory {
 	/**
 	 * The list of past plays.
 	 */
-	private List<IGuessPlay> playedList;
+	private List<IGuessPlay> playedList = new ArrayList<>();
 
-	/**
-	 * Constructor
-	 * 
-	 * @param playedList
-	 */
-	public GuessHistoryImpl(List<IGuessPlay> playedList) {
-		this.playedList = playedList;
-	}
-	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public List<IGuessPlay> getPlayHistory() {
 		return playedList;
+	}
+	
+	public void addGuessPlay(IGuessPlay guessPlay){
+		playedList.add(guessPlay);
 	}
 }
