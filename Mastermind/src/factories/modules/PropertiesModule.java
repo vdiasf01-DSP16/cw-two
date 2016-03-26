@@ -1,4 +1,4 @@
-package guiceModules;
+package factories.modules;
 
 import java.io.FileInputStream;
 import java.io.IOException;

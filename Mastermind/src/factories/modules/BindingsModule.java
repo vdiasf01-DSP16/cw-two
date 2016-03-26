@@ -1,4 +1,4 @@
-package guiceModules;
+package factories.modules;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;

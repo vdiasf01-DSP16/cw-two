@@ -2,8 +2,8 @@ package factories;
 
 import com.google.inject.Guice;
 
-import guiceModules.BindingsModule;
-import guiceModules.PropertiesModule;
+import factories.modules.BindingsModule;
+import factories.modules.PropertiesModule;
 import views.ITextBeforeGuess;
 
 public class TextBeforeGuessFactory{

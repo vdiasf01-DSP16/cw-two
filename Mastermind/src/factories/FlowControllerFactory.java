@@ -4,8 +4,8 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 
 import controllers.IFlowController;
-import guiceModules.BindingsModule;
-import guiceModules.PropertiesModule;
+import factories.modules.BindingsModule;
+import factories.modules.PropertiesModule;
 
 public class FlowControllerFactory {
 	

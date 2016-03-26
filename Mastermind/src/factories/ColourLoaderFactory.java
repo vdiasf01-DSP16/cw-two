@@ -6,8 +6,8 @@ package factories;
 import com.google.inject.Guice;
 
 import controllers.IColourLoader;
-import guiceModules.BindingsModule;
-import guiceModules.PropertiesModule;
+import factories.modules.BindingsModule;
+import factories.modules.PropertiesModule;
 
 /**
  * @author pedro

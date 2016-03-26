@@ -4,8 +4,8 @@ import com.google.inject.Guice;
 
 import controllers.ICodeGenerator;
 import controllers.IPegGenerator;
-import guiceModules.BindingsModule;
-import guiceModules.PropertiesModule;
+import factories.modules.BindingsModule;
+import factories.modules.PropertiesModule;
 
 public class CodeGeneratorFactory {
 

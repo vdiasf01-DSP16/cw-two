@@ -2,8 +2,8 @@ package classes;
 
 import com.google.inject.Guice;
 
-import guiceModules.BindingsModule;
-import guiceModules.PropertiesModule;
+import factories.modules.BindingsModule;
+import factories.modules.PropertiesModule;
 
 public class Factory {
 
