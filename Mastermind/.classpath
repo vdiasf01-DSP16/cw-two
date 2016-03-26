@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="tests/TestGuessChecker.java|views/AbstractDisplay.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="src" output="target/classes" path="BLOOMSBURYFS/home/pdeara01/Desktop/GitHub/cwtwo/Mastermind/src">
 		<attributes>

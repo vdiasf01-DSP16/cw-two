@@ -3,6 +3,7 @@
  */
 package controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import models.IPeg;
@@ -31,6 +32,12 @@ public class PegGeneratorImpl implements IPegGenerator {
 	 */
 	@Override
 	public IPeg getAPeg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<IPeg> getPegList(String colors) {
 		// TODO Auto-generated method stub
 		return null;
 	}

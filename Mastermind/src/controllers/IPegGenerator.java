@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import models.IPeg;
 
 /**
@@ -28,4 +30,10 @@ public interface IPegGenerator {
 	 */
 	public IPeg getAPeg();
 
+	/**
+	 * Returns a list of pegs based on the input colours.
+	 * @param colors
+	 * @return
+	 */
+	public List<IPeg> getPegList(String colors);
 }
