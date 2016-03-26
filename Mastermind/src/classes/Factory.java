@@ -1,8 +1,13 @@
 package classes;
 
+import com.google.inject.Guice;
+
+import guiceModules.ControllerModule;
+import guiceModules.PropertiesModule;
+
 public class Factory {
 
-    public static Game getInstance(Class<Game> c, Boolean b){
-        return new GameImpl(b);
-    }
+	public static Game getInstance() {
+		return Guice.createInjector(new PropertiesModule(), new ControllerModule()).getInstance(GameImpl.class);
+	}
 }

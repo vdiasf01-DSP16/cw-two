@@ -13,9 +13,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import controllers.IPegGenerator;
 import controllers.IStringToPeg;
 import controllers.StringToPegImpl;
+import controllers.pegGenerator.IPegGenerator;
 import models.IPeg;
 import models.PegImpl;
 

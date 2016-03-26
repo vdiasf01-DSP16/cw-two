@@ -1,4 +1,4 @@
-package controllers;
+package controllers.pegGenerator;
 
 import java.util.List;
 

@@ -1,12 +1,13 @@
 /**
  * 
  */
-package controllers;
+package controllers.pegGenerator;
 
 import java.util.List;
 import java.util.Map;
 
 import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 
 import models.IPeg;
 
@@ -17,7 +18,7 @@ import models.IPeg;
 public class PegGeneratorImpl implements IPegGenerator {
 
 	@Inject
-	public PegGeneratorImpl(Map<String, String> colourList) {
+	public PegGeneratorImpl(@Assisted Map<String, String> colourList) {
 		// TODO Auto-generated constructor stub
 	}
 
