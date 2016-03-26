@@ -18,4 +18,6 @@ public interface ICodeGenerator {
 	List<IPeg> getCode();
 	
 	public String getCodeString();
+	
+	public void setPegGenerator(IPegGenerator pegGenerator);
 }

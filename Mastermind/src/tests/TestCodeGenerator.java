@@ -46,7 +46,8 @@ public class TestCodeGenerator {
 	@Before
 	public void setUp()  {
 		when(pegGeneratorMock.getAPeg()).thenReturn(greenPeg);
-		codeGenerator = new CodeGeneratorImpl(CODE_LENGTH, pegGeneratorMock);
+		codeGenerator = new CodeGeneratorImpl(CODE_LENGTH);
+		codeGenerator.setPegGenerator(pegGeneratorMock);
 	}
 
 	@Test

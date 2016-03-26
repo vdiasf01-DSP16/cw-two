@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 import models.IPeg;
 
@@ -18,15 +19,14 @@ import models.IPeg;
  */
 public class CodeGeneratorImpl implements ICodeGenerator {
 
-	private final IPegGenerator pegGenerator;
+	private IPegGenerator pegGenerator;
 	private final int CODE_LENGTH;
 	private Map<Integer, IPeg> generatedCodePegs;
 	
 	@Inject
-	public CodeGeneratorImpl(int codeLength, IPegGenerator pegGenerator) {
+	public CodeGeneratorImpl(@Named("codeLength") int codeLength) {
 		super();
 		this.CODE_LENGTH = codeLength;
-		this.pegGenerator = pegGenerator;
 	}
 
 	/* (non-Javadoc)
@@ -65,5 +65,10 @@ public class CodeGeneratorImpl implements ICodeGenerator {
 		}
 		
 		return codeString;
+	}
+
+	@Override
+	public void setPegGenerator(IPegGenerator pegGenerator) {
+		this.pegGenerator = pegGenerator;
 	}
 }
