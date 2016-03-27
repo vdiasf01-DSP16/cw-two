@@ -57,11 +57,6 @@ public class TestCodeGenerator {
 	}
 
 	@Test
-	public void testIsNull() {
-		assertNull(codeGenerator.getCode());
-	}
-
-	@Test
 	public void testGeneratedCode() {
 		codeGenerator.generateNewCode();
 		int actual = codeGenerator.getCode().size();
