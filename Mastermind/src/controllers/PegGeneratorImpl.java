@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
 import models.IPeg;
+import models.PegGenerationError;
 
 /**
  * @author pdeara01
@@ -26,7 +27,7 @@ public class PegGeneratorImpl implements IPegGenerator {
 	 * @see controllers.IPegGenerator#getPeg(java.lang.String)
 	 */
 	@Override
-	public IPeg getPeg(String colour) {
+	public IPeg getPeg(String colour) throws PegGenerationError{
 		// TODO Auto-generated method stub
 		return null;
 	}

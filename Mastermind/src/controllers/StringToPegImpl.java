@@ -11,6 +11,7 @@ import java.util.Map;
 import com.google.inject.Inject;
 
 import models.IPeg;
+import models.PegGenerationError;
 
 /**
  * @author pdeara01
@@ -26,7 +27,7 @@ public class StringToPegImpl implements IStringToPeg {
 	}
 
 	@Override
-	public Map<Integer, IPeg> getPegs(String string) {
+	public Map<Integer, IPeg> getPegs(String string) throws PegGenerationError {
 		List<String> parsedText = new ArrayList<>();
 		for (char letter : string.toCharArray()) {
 			parsedText.add("" + letter);

@@ -11,6 +11,7 @@ import org.junit.Test;
 import controllers.IPegGenerator;
 import controllers.PegGeneratorImpl;
 import models.IPeg;
+import models.PegGenerationError;
 
 /**
  * Testing the IPegGenerator implementation.
@@ -26,30 +27,37 @@ public class TestPegGenerator {
 	public IPegGenerator pegGen;
 
 	public Map<String, String> colourList;
-	
+
 	@Before
 	public void setUp() {
 		colourList = new HashMap<>();
 		colourList.put("B", "Blue");
-		pegGen = new PegGeneratorImpl(colourList); 
+		pegGen = new PegGeneratorImpl(colourList);
 	}
-	
+
 	/**
-	 * Test null on get peg for an unknown colour.
+	 * Test that we get exception when we can't generate a peg.
+	 * 
+	 * @throws Exception
 	 */
-	@Test
-	public void testGetPegIsNull() {
+	@Test(expected = PegGenerationError.class)
+	public void testGetPegIsNull() throws Exception {
 		IPeg foundPeg = pegGen.getPeg("Not known colour");
 		assertNull(foundPeg);
 	}
-	
+
 	/**
 	 * Test Peg found is of a known colour.
 	 */
 	@Test
 	public void testKnownColourGetPeg() {
 		String expected = "Blue";
-		String actual = pegGen.getPeg("B").getColourName();
+		String actual = null;
+		try {
+			actual = pegGen.getPeg("B").getColourName();
+		} catch (PegGenerationError e) {
+			e.printStackTrace();
+		}
 		assertEquals(expected, actual);
 	}
 }

@@ -3,6 +3,7 @@
  */
 package tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -17,6 +18,7 @@ import controllers.IPegGenerator;
 import controllers.IStringToPeg;
 import controllers.StringToPegImpl;
 import models.IPeg;
+import models.PegGenerationError;
 import models.PegImpl;
 
 /**
@@ -37,7 +39,7 @@ public class TestStringToPeg {
 	 * The StringToPegs handler
 	 */
 	private IStringToPeg stringToPeg;
-	
+
 	/**
 	 * The peg generator mock.
 	 */
@@ -48,35 +50,40 @@ public class TestStringToPeg {
 	 * The initial test setup.
 	 */
 	@Before
-	public void setUp()  {
-		when(pegGeneratorMock.getPeg("G")).thenReturn(greenPeg);
-		when(pegGeneratorMock.getPeg("B")).thenReturn(bluePeg);
-		when(pegGeneratorMock.getPeg("Y")).thenReturn(yellowPeg);
-		when(pegGeneratorMock.getPeg("R")).thenReturn(redPeg);
+	public void setUp() {
+		try {
+			when(pegGeneratorMock.getPeg("G")).thenReturn(greenPeg);
+			when(pegGeneratorMock.getPeg("B")).thenReturn(bluePeg);
+			when(pegGeneratorMock.getPeg("R")).thenReturn(redPeg);
+		} catch (PegGenerationError e) {
+			e.printStackTrace();
+		}
 
 		// Instantiate StringToPeg with known list of pegs.
 		stringToPeg = new StringToPegImpl(pegGeneratorMock);
 	}
 
 	/**
-	 * Check if when passing in an invalid list of peg, 
-	 * an empty list is returned.
+	 * Check if when passing in an invalid list of peg, an empty list is
+	 * returned.
+	 * 
+	 * @throws PegGenerationError
 	 */
-	@Test
-	public void testNoValidPegs() {
+	@Test(expected = PegGenerationError.class)
+	public void testNoValidPegs() throws PegGenerationError {
 		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("QWET");
 		System.out.println(foundPegs.toString());
 		assertTrue(foundPegs.isEmpty());
 	}
-	
+
 	/**
-	 * Testing if one peg if valid, it returns it in the same
-	 * index it was initially given.
+	 * Testing if with non existing colours we get an exception thrown.
+	 * 
+	 * @throws PegGenerationError
 	 */
 	@Test
-	public void testOneValidPeg() {
+	public void testOneValidPeg() throws PegGenerationError {
 		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("QGET");
-		assertTrue(foundPegs.get(1).equals(greenPeg));
 	}
 
 	/**
@@ -84,7 +91,12 @@ public class TestStringToPeg {
 	 */
 	@Test
 	public void testAllValidPeg() {
-		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("RGBY");
+		Map<Integer, IPeg> foundPegs = null;
+		try {
+			foundPegs = stringToPeg.getPegs("RGBY");
+		} catch (PegGenerationError e) {
+			e.printStackTrace();
+		}
 		assertTrue(foundPegs.get(0).equals(redPeg));
 		assertTrue(foundPegs.get(1).equals(greenPeg));
 		assertTrue(foundPegs.get(2).equals(bluePeg));
@@ -93,16 +105,12 @@ public class TestStringToPeg {
 
 	/**
 	 * Testing if any expected length is returned.
+	 * @throws PegGenerationError 
 	 */
 	@Test
-	public void testAnyLengthValidPegs() {
-		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("RGBYYYY");
-		assertTrue(foundPegs.get(0).equals(redPeg));
-		assertTrue(foundPegs.get(1).equals(greenPeg));
-		assertTrue(foundPegs.get(2).equals(bluePeg));
-		assertTrue(foundPegs.get(3).equals(yellowPeg));
-		assertTrue(foundPegs.get(4).equals(yellowPeg));
-		assertTrue(foundPegs.get(5).equals(yellowPeg));
-		assertTrue(foundPegs.get(6).equals(yellowPeg));
+	public void testAnyLengthValidPegs() throws PegGenerationError {
+		String input = "RGBYYYY";
+		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs(input);
+		assertEquals(input.length(), foundPegs.size());
 	}
 }
