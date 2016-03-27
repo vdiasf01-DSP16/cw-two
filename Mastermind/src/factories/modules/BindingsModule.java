@@ -3,6 +3,8 @@ package factories.modules;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 
+import classes.Game;
+import classes.GameImpl;
 import controllers.CodeGeneratorImpl;
 import controllers.ColourLoaderImpl;
 import controllers.FlowControllerImpl;
@@ -21,6 +23,7 @@ public class BindingsModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
+		bind(Game.class).to(GameImpl.class);
 		install(new FactoryModuleBuilder()
 				.implement(IPegGenerator.class, PegGeneratorImpl.class)
 				.build(PegGeneratorFactory.class));

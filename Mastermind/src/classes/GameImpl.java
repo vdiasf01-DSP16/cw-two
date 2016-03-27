@@ -20,6 +20,8 @@ public class GameImpl extends GameAbstractImpl {
 
 	@Inject
 	private PegGeneratorFactory pegGeneratorFactory;
+	@Inject
+	private StartTextFactory startTextFactory;
 
 	@Inject
 	public GameImpl(@Named("easy") boolean easy) {
@@ -30,7 +32,6 @@ public class GameImpl extends GameAbstractImpl {
 	public void runGames() {
 
 		// Start text
-		StartTextFactory startTextFactory = new StartTextFactory();
 		IStartText startText = startTextFactory.factoryMethod();
 		startText.show();
 
