@@ -38,9 +38,8 @@ public class CodeGeneratorImpl implements ICodeGenerator {
 		
 		for (int i = 0; i < CODE_LENGTH; i++) {
 			IPeg peg = pegGenerator.getAPeg();
-			if (peg != null) {
-				generatedCodePegs.put(i, peg);
-			}
+			
+			generatedCodePegs.put(i, peg);
 		}
 	}
 
