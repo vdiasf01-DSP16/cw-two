@@ -42,7 +42,6 @@ public class GameImpl extends GameAbstractImpl {
 		// Create peg generator with loaded colours
 		IPegGenerator pegGenerator = pegGeneratorFactory.create(colourLoader.getColours());
 
-		
 		CodeGeneratorFactory codeGeneratorFactory = new CodeGeneratorFactory();
 		ICodeGenerator codeGenerator = codeGeneratorFactory.factoryMethod(pegGenerator);
 		codeGenerator.generateNewCode();
@@ -51,14 +50,15 @@ public class GameImpl extends GameAbstractImpl {
 		IFlowController flowController = flowControllerFactory.factoryMethod();
 
 		TextBeforeGuessFactory textBeforeGuessFactory = new TextBeforeGuessFactory();
+		ITextBeforeGuess textBeforeGuess = textBeforeGuessFactory.factoryMethod();
 		boolean keepGuessing = false;
 		do {
-			ITextBeforeGuess textBeforeGuess = textBeforeGuessFactory.factoryMethod();
-			// textBeforeGuess.show(showCode, codeGenerator.getCodeString());
-			// TODO add guess play to guess history
-
+			textBeforeGuess.show(showCode, codeGenerator.getCodeString());
+			
+			
 			keepGuessing = flowController.isGameFinished();
-		} while (keepGuessing);
+			//TODO change condition for loop
+		} while (false);
 	}
 
 }
