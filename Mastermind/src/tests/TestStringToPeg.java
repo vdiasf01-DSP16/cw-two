@@ -54,6 +54,7 @@ public class TestStringToPeg {
 		try {
 			when(pegGeneratorMock.getPeg("G")).thenReturn(greenPeg);
 			when(pegGeneratorMock.getPeg("B")).thenReturn(bluePeg);
+			when(pegGeneratorMock.getPeg("Y")).thenReturn(yellowPeg);
 			when(pegGeneratorMock.getPeg("R")).thenReturn(redPeg);
 		} catch (PegGenerationError e) {
 			e.printStackTrace();
