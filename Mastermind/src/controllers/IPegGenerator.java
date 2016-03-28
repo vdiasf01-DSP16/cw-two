@@ -1,9 +1,9 @@
 package controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import models.IPeg;
-import models.PegGenerationError;
 
 /**
  * Peg Generator, returning a random peg or a specific Peg given a colour. If
@@ -12,7 +12,8 @@ import models.PegGenerationError;
  * @author Pedro Gordo
  *
  */
-public interface IPegGenerator {
+public interface IPegGenerator
+{
 
 	/**
 	 * For the supplied colour, returns a generated Peg. If the supplied colour
@@ -20,10 +21,10 @@ public interface IPegGenerator {
 	 * 
 	 * @param colour
 	 * @return IPeg
-	 * @throws PegGenerationError
-	 *             when the peg is not found or generated correctly.
+	 * @throws IOException
+	 *             is thrown if the colour doesn't exist
 	 */
-	public IPeg getPeg(String colour) throws PegGenerationError;
+	public IPeg getPeg(String colour) throws IOException;
 
 	/**
 	 * Returns a generated Peg from a known random colour list.

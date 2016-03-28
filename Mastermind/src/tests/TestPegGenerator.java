@@ -1,7 +1,9 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +13,6 @@ import org.junit.Test;
 import controllers.IPegGenerator;
 import controllers.PegGeneratorImpl;
 import models.IPeg;
-import models.PegGenerationError;
 
 /**
  * Testing the IPegGenerator implementation.
@@ -45,7 +46,7 @@ public class TestPegGenerator
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected = PegGenerationError.class)
+	@Test(expected = IOException.class)
 	public void testGetPegIsNull() throws Exception
 	{
 		IPeg foundPeg = pegGen.getPeg("Not known colour");
@@ -54,20 +55,15 @@ public class TestPegGenerator
 
 	/**
 	 * Test Peg found is of a known colour.
+	 * 
+	 * @throws IOException
 	 */
 	@Test
-	public void testKnownColourGetPeg()
+	public void testKnownColourGetPeg() throws IOException
 	{
 		String expected = "Blue";
 		String actual = null;
-		try
-		{
-			actual = pegGen.getPeg("B").getColourName();
-		}
-		catch (PegGenerationError e)
-		{
-			e.printStackTrace();
-		}
+		actual = pegGen.getPeg("B").getColourName();
 		assertEquals(expected, actual);
 	}
 }

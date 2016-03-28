@@ -3,6 +3,7 @@
  */
 package controllers;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,6 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
 import models.IPeg;
-import models.PegGenerationError;
 
 /**
  * @author Pedro Gordo
@@ -36,7 +36,7 @@ public class PegGeneratorImpl implements IPegGenerator
 	 * @see controllers.IPegGenerator#getPeg(java.lang.String)
 	 */
 	@Override
-	public IPeg getPeg(String colour) throws PegGenerationError
+	public IPeg getPeg(String colour) throws IOException
 	{
 		// TODO Auto-generated method stub
 		return null;
