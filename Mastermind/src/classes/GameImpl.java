@@ -16,15 +16,18 @@ import factories.TextBeforeGuessFactory;
 import views.IStartText;
 import views.ITextBeforeGuess;
 
+/**
+ * @author Keith Mannock
+ *
+ */
 public class GameImpl extends GameAbstractImpl {
 
 	@Inject
 	private PegGeneratorFactory pegGeneratorFactory;
 	@Inject
 	private StartTextFactory startTextFactory;
-
 	@Inject
-	public GameImpl(@Named("easy") boolean easy) {
+	private GameImpl(@Named("easy") boolean easy) {
 		super(easy);
 	}
 

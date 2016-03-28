@@ -13,36 +13,50 @@ import models.IPeg;
 import models.PegGenerationError;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public class PegGeneratorImpl implements IPegGenerator {
+public class PegGeneratorImpl implements IPegGenerator
+{
 
+	/**
+	 * Constructor for PegGenerator. It requires the loaded colours list.
+	 * 
+	 * @param colourList
+	 */
 	@Inject
-	public PegGeneratorImpl(@Assisted Map<String, String> colourList) {
+	public PegGeneratorImpl(@Assisted Map<String, String> colourList)
+	{
 		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controllers.IPegGenerator#getPeg(java.lang.String)
 	 */
 	@Override
-	public IPeg getPeg(String colour) throws PegGenerationError{
+	public IPeg getPeg(String colour) throws PegGenerationError
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controllers.IPegGenerator#getAPeg()
 	 */
 	@Override
-	public IPeg getAPeg() {
+	public IPeg getAPeg()
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<IPeg> getPegList(String colors) {
+	public List<IPeg> getPegList(String colors)
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}

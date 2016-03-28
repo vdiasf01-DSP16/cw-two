@@ -8,7 +8,7 @@ import java.util.List;
 import models.IPeg;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
 public class ResultGeneratorImpl implements IResultGenerator {

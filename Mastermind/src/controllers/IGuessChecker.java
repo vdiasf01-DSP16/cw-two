@@ -8,11 +8,18 @@ import java.util.List;
 import models.IPeg;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public interface IGuessChecker {
+public interface IGuessChecker
+{
 
-	List<IPeg> getResultSet(List<IPeg> input);
+	/**
+	 * Returns a list of pegs based on the provided string with the color codes.
+	 * 
+	 * @param input
+	 * @return the list of peg objects
+	 */
+	public List<IPeg> getResultSet(List<IPeg> input);
 
 }

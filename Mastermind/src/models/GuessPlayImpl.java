@@ -6,7 +6,7 @@ package models;
 import java.util.List;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
 public class GuessPlayImpl implements IGuessPlay {

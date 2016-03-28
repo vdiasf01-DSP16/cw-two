@@ -8,16 +8,34 @@ import java.util.List;
 import models.IPeg;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public interface ICodeGenerator {
-
+public interface ICodeGenerator
+{
+	/**
+	 * Creates a new secret code
+	 */
 	void generateNewCode();
 
-	List<IPeg> getCode();
-	
+	/**
+	 * Returns the generated secret code.
+	 * 
+	 * @return the list of pegs representing the secret code.
+	 */
+	public List<IPeg> getCode();
+
+	/**
+	 * Returns a string with a string representation of the generated code.
+	 * 
+	 * @return the secret code string
+	 */
 	public String getCodeString();
-	
+
+	/**
+	 * TODO remove this and set it using DI.
+	 * 
+	 * @param pegGenerator
+	 */
 	public void setPegGenerator(IPegGenerator pegGenerator);
 }

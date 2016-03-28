@@ -1,10 +1,22 @@
 package classes;
 
-public class MastermindDriver {
+/**
+ * @author Keith Mannock
+ *
+ */
+public class MastermindDriver
+{
 
-    // Example - change as you need to...
-    public static void main(String[] args) {
-        Game g = Factory.getInstance();
-        g.runGames();
-    }
+	/**
+	 * Main method, no string arguments should be passed. Every configuration
+	 * should be set in the configuration file.
+	 * 
+	 * @param args
+	 *            argument passed WILL NOT be used
+	 */
+	public static void main(String[] args)
+	{
+		Game g = Factory.getInstance();
+		g.runGames();
+	}
 }

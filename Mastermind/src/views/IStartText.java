@@ -1,9 +1,13 @@
 package views;
 
-public interface IStartText {
-	
+/**
+ * @author Pedro Gordo
+ *
+ */
+public interface IStartText
+{
 	/**
-	 * Shows the text for the object initialised.
+	 * Shows the introduction text for the game. This text is only showed once.
 	 */
 	public void show();
 }

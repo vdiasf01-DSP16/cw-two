@@ -9,7 +9,7 @@ import models.PegGenerationError;
  * Peg Generator, returning a random peg or a specific Peg given a colour. If
  * colour specified is not found, will return null.
  * 
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
 public interface IPegGenerator {
@@ -36,7 +36,7 @@ public interface IPegGenerator {
 	 * Returns a list of pegs based on the input colours.
 	 * 
 	 * @param colors
-	 * @return
+	 * @return generated peg list
 	 */
 	public List<IPeg> getPegList(String colors);
 }

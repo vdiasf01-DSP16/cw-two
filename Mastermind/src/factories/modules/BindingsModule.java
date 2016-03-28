@@ -19,13 +19,19 @@ import views.ITextBeforeGuess;
 import views.StartTextImpl;
 import views.TextBeforeGuessImpl;
 
+/**
+ * Module to be used by Guice indicating the binding between interfaces and
+ * implementations.
+ * 
+ * @author Pedro Gordo
+ *
+ */
 public class BindingsModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
 		bind(Game.class).to(GameImpl.class);
-		install(new FactoryModuleBuilder()
-				.implement(IPegGenerator.class, PegGeneratorImpl.class)
+		install(new FactoryModuleBuilder().implement(IPegGenerator.class, PegGeneratorImpl.class)
 				.build(PegGeneratorFactory.class));
 		bind(IColourLoader.class).to(ColourLoaderImpl.class);
 		bind(IFlowController.class).to(FlowControllerImpl.class);

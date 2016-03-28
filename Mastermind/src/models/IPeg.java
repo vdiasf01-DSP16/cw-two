@@ -3,7 +3,7 @@ package models;
 /**
  * The Peg interface.
  * 
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
 public interface IPeg {

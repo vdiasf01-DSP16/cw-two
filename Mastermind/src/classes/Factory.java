@@ -5,9 +5,24 @@ import com.google.inject.Guice;
 import factories.modules.BindingsModule;
 import factories.modules.PropertiesModule;
 
-public class Factory {
+/**
+ * Factory to create a Game instance.
+ * 
+ * @author Keith Mannock
+ *
+ */
+public class Factory
+{
 
-	public static Game getInstance() {
-		return Guice.createInjector(new PropertiesModule(), new BindingsModule()).getInstance(Game.class);
+	/**
+	 * Creates an instance of Game.
+	 * 
+	 * @return the instance created
+	 */
+	public static Game getInstance()
+	{
+		return Guice
+				.createInjector(new PropertiesModule(), new BindingsModule())
+				.getInstance(Game.class);
 	}
 }

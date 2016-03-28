@@ -3,13 +3,17 @@
  */
 package controllers;
 
-import models.IGuessHistory;
-
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public interface IFlowController {
-	public IGuessHistory getGuessHistory();
+public interface IFlowController
+{
+	/**
+	 * Based on the guess history and number of tries per game, it tells if the
+	 * game is finished or not.
+	 * 
+	 * @return true if game has finished, false otherwise.
+	 */
 	public boolean isGameFinished();
 }

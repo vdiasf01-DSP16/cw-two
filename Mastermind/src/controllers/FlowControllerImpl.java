@@ -10,7 +10,7 @@ import models.GuessHistoryImpl;
 import models.IGuessHistory;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
 public class FlowControllerImpl implements IFlowController {
@@ -26,10 +26,4 @@ public class FlowControllerImpl implements IFlowController {
 	public boolean isGameFinished() {
 		return numberOfPlays - guessHistory.getPlayHistory().size() >= 0;
 	}
-
-	@Override
-	public IGuessHistory getGuessHistory() {
-		return guessHistory;
-	}
-
 }

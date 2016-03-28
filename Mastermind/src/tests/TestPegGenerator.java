@@ -16,20 +16,25 @@ import models.PegGenerationError;
 /**
  * Testing the IPegGenerator implementation.
  * 
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public class TestPegGenerator {
+public class TestPegGenerator
+{
 
 	/**
 	 * The IPegGenerator object handler for test.
 	 */
-	public IPegGenerator pegGen;
+	private IPegGenerator pegGen;
 
-	public Map<String, String> colourList;
+	private Map<String, String> colourList;
 
+	/**
+	 * Sets up a colour list that will be used as a dictionary to generate pegs.
+	 */
 	@Before
-	public void setUp() {
+	public void setUp()
+	{
 		colourList = new HashMap<>();
 		colourList.put("B", "Blue");
 		pegGen = new PegGeneratorImpl(colourList);
@@ -41,7 +46,8 @@ public class TestPegGenerator {
 	 * @throws Exception
 	 */
 	@Test(expected = PegGenerationError.class)
-	public void testGetPegIsNull() throws Exception {
+	public void testGetPegIsNull() throws Exception
+	{
 		IPeg foundPeg = pegGen.getPeg("Not known colour");
 		assertNull(foundPeg);
 	}
@@ -50,12 +56,16 @@ public class TestPegGenerator {
 	 * Test Peg found is of a known colour.
 	 */
 	@Test
-	public void testKnownColourGetPeg() {
+	public void testKnownColourGetPeg()
+	{
 		String expected = "Blue";
 		String actual = null;
-		try {
+		try
+		{
 			actual = pegGen.getPeg("B").getColourName();
-		} catch (PegGenerationError e) {
+		}
+		catch (PegGenerationError e)
+		{
 			e.printStackTrace();
 		}
 		assertEquals(expected, actual);

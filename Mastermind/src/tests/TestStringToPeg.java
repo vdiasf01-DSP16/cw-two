@@ -22,10 +22,11 @@ import models.PegGenerationError;
 import models.PegImpl;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public class TestStringToPeg {
+public class TestStringToPeg
+{
 
 	/**
 	 * List of known pegs.
@@ -50,13 +51,17 @@ public class TestStringToPeg {
 	 * The initial test setup.
 	 */
 	@Before
-	public void setUp() {
-		try {
+	public void setUp()
+	{
+		try
+		{
 			when(pegGeneratorMock.getPeg("G")).thenReturn(greenPeg);
 			when(pegGeneratorMock.getPeg("B")).thenReturn(bluePeg);
 			when(pegGeneratorMock.getPeg("Y")).thenReturn(yellowPeg);
 			when(pegGeneratorMock.getPeg("R")).thenReturn(redPeg);
-		} catch (PegGenerationError e) {
+		}
+		catch (PegGenerationError e)
+		{
 			e.printStackTrace();
 		}
 
@@ -71,7 +76,8 @@ public class TestStringToPeg {
 	 * @throws PegGenerationError
 	 */
 	@Test(expected = PegGenerationError.class)
-	public void testNoValidPegs() throws PegGenerationError {
+	public void testNoValidPegs() throws PegGenerationError
+	{
 		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("QWET");
 		System.out.println(foundPegs.toString());
 		assertTrue(foundPegs.isEmpty());
@@ -82,20 +88,25 @@ public class TestStringToPeg {
 	 * 
 	 * @throws PegGenerationError
 	 */
-	@Test
-	public void testOneValidPeg() throws PegGenerationError {
-		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs("QGET");
+	@Test(expected = PegGenerationError.class)
+	public void testOneValidPeg() throws PegGenerationError
+	{
+		stringToPeg.getPegs("QGET");
 	}
 
 	/**
 	 * Testing if all valid pegs are returned it.
 	 */
 	@Test
-	public void testAllValidPeg() {
+	public void testAllValidPeg()
+	{
 		Map<Integer, IPeg> foundPegs = null;
-		try {
+		try
+		{
 			foundPegs = stringToPeg.getPegs("RGBY");
-		} catch (PegGenerationError e) {
+		}
+		catch (PegGenerationError e)
+		{
 			e.printStackTrace();
 		}
 		assertTrue(foundPegs.get(0).equals(redPeg));
@@ -106,10 +117,12 @@ public class TestStringToPeg {
 
 	/**
 	 * Testing if any expected length is returned.
-	 * @throws PegGenerationError 
+	 * 
+	 * @throws PegGenerationError
 	 */
 	@Test
-	public void testAnyLengthValidPegs() throws PegGenerationError {
+	public void testAnyLengthValidPegs() throws PegGenerationError
+	{
 		String input = "RGBYYYY";
 		Map<Integer, IPeg> foundPegs = stringToPeg.getPegs(input);
 		assertEquals(input.length(), foundPegs.size());

@@ -14,17 +14,24 @@ import com.google.inject.name.Named;
 import models.IPeg;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public class CodeGeneratorImpl implements ICodeGenerator {
+public class CodeGeneratorImpl implements ICodeGenerator
+{
 
 	private IPegGenerator pegGenerator;
 	private final int CODE_LENGTH;
 	private Map<Integer, IPeg> generatedCodePegs;
-	
+
+	/**
+	 * CodeGenerator constructor.
+	 * 
+	 * @param codeLength
+	 */
 	@Inject
-	public CodeGeneratorImpl(@Named("codeLength") int codeLength) {
+	public CodeGeneratorImpl(@Named("codeLength") int codeLength)
+	{
 		super();
 		this.CODE_LENGTH = codeLength;
 	}
@@ -33,41 +40,53 @@ public class CodeGeneratorImpl implements ICodeGenerator {
 	 * @see controllers.ICodeGenerator#generateNewCode()
 	 */
 	@Override
-	public void generateNewCode() {
+	public void generateNewCode()
+	{
 		generatedCodePegs = new HashMap<>();
-		
-		for (int i = 0; i < CODE_LENGTH; i++) {
+
+		for (int i = 0; i < CODE_LENGTH; i++)
+		{
 			IPeg peg = pegGenerator.getAPeg();
-			
+
 			generatedCodePegs.put(i, peg);
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controllers.ICodeGenerator#getCode()
 	 */
 	@Override
-	public List<IPeg> getCode() {
+	public List<IPeg> getCode()
+	{
 		List<IPeg> finalList = new LinkedList<>();
-		for(int index = 0; index < generatedCodePegs.size(); index++ ) {
+		for (int index = 0; index < generatedCodePegs.size(); index++)
+		{
 			finalList.add(generatedCodePegs.get(index));
 		}
 		return finalList;
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.ICodeGenerator#getCodeString()
+	 */
 	@Override
-	public String getCodeString() {
+	public String getCodeString()
+	{
 		String codeString = "";
-		
-		for (IPeg peg : getCode()) {
+
+		for (IPeg peg : getCode())
+		{
 			codeString += peg.getColour();
 		}
-		
+
 		return codeString;
 	}
 
 	@Override
-	public void setPegGenerator(IPegGenerator pegGenerator) {
+	public void setPegGenerator(IPegGenerator pegGenerator)
+	{
 		this.pegGenerator = pegGenerator;
 	}
 }

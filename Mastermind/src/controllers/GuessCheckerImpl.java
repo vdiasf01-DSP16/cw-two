@@ -6,34 +6,36 @@ import java.util.List;
 import models.IPeg;
 import models.PegImpl;
 
-public class GuessCheckerImpl implements IGuessChecker{
-	
-    private final IPeg BLACK_PEG = new PegImpl("B", "Black");
-    private final IPeg WHITE_PEG = new PegImpl("W", "White");
-    
-    private List<IPeg> secretCode;
+/**
+ * Implementation for GuessChecker.
+ * 
+ * @author Pedro Gordo
+ *
+ */
+public class GuessCheckerImpl implements IGuessChecker
+{
+	private final IPeg BLACK_PEG = new PegImpl("B", "Black");
+	private final IPeg WHITE_PEG = new PegImpl("W", "White");
 
-    /**
-     * Constructor requiring the secret code.
-     * 
-     * @param secretCode
-     */
-    public GuessCheckerImpl(List<IPeg> secretCode) {
-    	this.secretCode = secretCode;
-	}
-    
-    /**
-	 * Received a user list guess of pegs and returns a result set of pegs white
-	 * and or black.
+	private List<IPeg> secretCode;
+
+	/**
+	 * Constructor requiring the secret code.
 	 * 
-	 * @param userGuess List Ipeg
-	 * @return List IPeg
+	 * @param secretCode
 	 */
-    @Override
-	public List<IPeg> getResultSet(List<IPeg> userGuess) {
+	public GuessCheckerImpl(List<IPeg> secretCode)
+	{
+		this.secretCode = secretCode;
+	}
+
+	@Override
+	public List<IPeg> getResultSet(List<IPeg> userGuess)
+	{
 		// Validate arguments.
 		if (userGuess.size() != secretCode.size())
-			throw new IllegalArgumentException("Secret code and user guess does not match!");
+			throw new IllegalArgumentException(
+					"Secret code and user guess does not match!");
 
 		List<IPeg> finalList = new LinkedList<>();
 		int blackPegs = 0;
@@ -47,10 +49,13 @@ public class GuessCheckerImpl implements IGuessChecker{
 
 		// All matched colours regardless of index
 		List<IPeg> matchedPegByColour = new LinkedList<>();
-		for (IPeg secretPeg : secretCode) {
+		for (IPeg secretPeg : secretCode)
+		{
 			// Look for user guess pegs that match this secret peg colour
-			for (IPeg guessPeg : userGuess) {
-				if (guessPeg.getColour().equals(secretPeg.getColour())) {
+			for (IPeg guessPeg : userGuess)
+			{
+				if (guessPeg.getColour().equals(secretPeg.getColour()))
+				{
 					matchedPegByColour.add(secretPeg);
 					whitePegs++;
 					break;
@@ -59,22 +64,26 @@ public class GuessCheckerImpl implements IGuessChecker{
 		}
 
 		// Subtract from white count the pegs that also match index.
-		for (int index = 0; index < secretCode.size(); index++) {
+		for (int index = 0; index < secretCode.size(); index++)
+		{
 			IPeg secretPeg = secretCode.get(index);
 			IPeg guessPeg = userGuess.get(index);
 
 			// If index and colour match, it is a black peg and not white
-			if (secretPeg.getColour().equals(guessPeg.getColour())) {
+			if (secretPeg.getColour().equals(guessPeg.getColour()))
+			{
 				blackPegs++;
 				whitePegs--;
 			}
 		}
 
 		// The number of white and black pegs expected in the result.
-		for (int i = 0; i < blackPegs; i++) {
+		for (int i = 0; i < blackPegs; i++)
+		{
 			finalList.add(BLACK_PEG);
 		}
-		for (int i = 0; i < whitePegs; i++) {
+		for (int i = 0; i < whitePegs; i++)
+		{
 			finalList.add(WHITE_PEG);
 		}
 		return finalList;

@@ -1,9 +1,16 @@
 package classes;
 
-public interface Game {
-    /**
-     * Run a one or more game sof mastermind, until the player
-     * quits.
-     */
-    void runGames();
+/**
+ * Interface with the method to start the game.
+ * 
+ * @author Keith Mannock
+ *
+ */
+public interface Game
+{
+
+	/**
+	 * Run a one or more games of Mastermind, until the player quits.
+	 */
+	void runGames();
 }

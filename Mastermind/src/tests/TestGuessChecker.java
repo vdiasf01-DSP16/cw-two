@@ -19,7 +19,8 @@ import models.PegImpl;
  * @author vdiasf01
  *
  */
-public class TestGuessChecker {
+public class TestGuessChecker
+{
 
 	/**
 	 * Pegs to test with.
@@ -50,8 +51,12 @@ public class TestGuessChecker {
 	 */
 	private IGuessChecker guessChecker;
 
+	/**
+	 * Sets up the secret code to which the guess will be matched against.
+	 */
 	@Before
-	public void setUp() {
+	public void setUp()
+	{
 		// The secret code to be guessed.
 		secretCode = new LinkedList<IPeg>();
 		secretCode.add(new PegImpl("G", "Green")); // PEG_1
@@ -59,14 +64,14 @@ public class TestGuessChecker {
 		secretCode.add(new PegImpl("Y", "Yellow")); // PEG_3
 		secretCode.add(new PegImpl("R", "Red")); // PEG_4
 		guessChecker = new GuessCheckerImpl(secretCode);
-
 	}
 
 	/**
 	 * Testing BBBB.
 	 */
 	@Test
-	public void testBBBB() {
+	public void testBBBB()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(PEG_1);
@@ -88,7 +93,8 @@ public class TestGuessChecker {
 	 * Testing BBB.
 	 */
 	@Test
-	public void testBBB() {
+	public void testBBB()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(PEG_1);
@@ -109,7 +115,8 @@ public class TestGuessChecker {
 	 * Testing BB.
 	 */
 	@Test
-	public void testBB() {
+	public void testBB()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(PEG_1);
@@ -129,7 +136,8 @@ public class TestGuessChecker {
 	 * Testing B.
 	 */
 	@Test
-	public void testB() {
+	public void testB()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(NOT_USED_PEG);
@@ -148,7 +156,8 @@ public class TestGuessChecker {
 	 * Testing BBWW.
 	 */
 	@Test
-	public void testBBWW() {
+	public void testBBWW()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(PEG_2);
@@ -170,7 +179,8 @@ public class TestGuessChecker {
 	 * Testing WWWW.
 	 */
 	@Test
-	public void testWWWW() {
+	public void testWWWW()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(PEG_2);
@@ -192,7 +202,8 @@ public class TestGuessChecker {
 	 * Testing WWW.
 	 */
 	@Test
-	public void testWWW() {
+	public void testWWW()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(PEG_2);
@@ -213,7 +224,8 @@ public class TestGuessChecker {
 	 * Testing WW.
 	 */
 	@Test
-	public void testWW() {
+	public void testWW()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(PEG_2);
@@ -233,7 +245,8 @@ public class TestGuessChecker {
 	 * Testing W.
 	 */
 	@Test
-	public void testW() {
+	public void testW()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(PEG_2);
@@ -253,7 +266,8 @@ public class TestGuessChecker {
 	 * pegs (black or white, doesn't matter).
 	 */
 	@Test
-	public void testNoPegs() {
+	public void testNoPegs()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(NOT_USED_PEG);
@@ -273,7 +287,8 @@ public class TestGuessChecker {
 	 * different size than the secret code.
 	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidInput() {
+	public void testInvalidInput()
+	{
 		// The guess peg list.
 		List<IPeg> input = new LinkedList<>();
 		input.add(NOT_USED_PEG);
@@ -295,14 +310,18 @@ public class TestGuessChecker {
 	 * @param foundList
 	 *            IPeg
 	 */
-	private void verifyResultSet(List<IPeg> expectedList, List<IPeg> foundList) {
+	private void verifyResultSet(List<IPeg> expectedList, List<IPeg> foundList)
+	{
 		// List must have same size.
 		assertEquals(expectedList.size(), foundList.size());
 
 		// Check each one in order
-		for (int index = 0; index < expectedList.size(); index++) {
-			assertEquals(expectedList.get(index).getColour(), foundList.get(index).getColour());
-			assertEquals(expectedList.get(index).getColourName(), foundList.get(index).getColourName());
+		for (int index = 0; index < expectedList.size(); index++)
+		{
+			assertEquals(expectedList.get(index).getColour(),
+					foundList.get(index).getColour());
+			assertEquals(expectedList.get(index).getColourName(),
+					foundList.get(index).getColourName());
 		}
 	}
 }

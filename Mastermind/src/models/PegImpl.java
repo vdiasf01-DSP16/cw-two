@@ -3,11 +3,11 @@ package models;
 /**
  * Peg implementation.
  * 
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public class PegImpl implements IPeg {
-	
+public class PegImpl implements IPeg
+{
 	/**
 	 * The Peg colour.
 	 */
@@ -19,19 +19,23 @@ public class PegImpl implements IPeg {
 	private final String colourName;
 
 	/**
-	 * Constructor
+	 * @param colour
+	 *            the colour code (just one letter)
+	 * @param colourName
+	 *            the entire colour name
 	 */
-	public PegImpl(String colour, String colourName) {
+	public PegImpl(String colour, String colourName)
+	{
 		this.colour = colour;
 		this.colourName = colourName;
-
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getColour() {
+	public String getColour()
+	{
 		return colour;
 	}
 
@@ -39,7 +43,8 @@ public class PegImpl implements IPeg {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getColourName() {
+	public String getColourName()
+	{
 		return colourName;
 	}
 

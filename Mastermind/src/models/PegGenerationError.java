@@ -6,7 +6,7 @@ package models;
 /**
  * Throwable used in the case that the peg is not generated correctly.
  * 
- * @author pedro
+ * @author Pedro Gordo
  *
  */
 public class PegGenerationError extends Exception {

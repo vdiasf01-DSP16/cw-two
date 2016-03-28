@@ -8,13 +8,25 @@ import java.util.List;
 import models.IPeg;
 
 /**
- * @author pdeara01
+ * TODO review if this is not a duplicate of GuessChecker
+ * 
+ * @author Pedro Gordo
  *
  */
-public interface IResultGenerator {
+public interface IResultGenerator
+{
 
-	void setGeneratedCode(List<IPeg> generatedCode);
+	/**
+	 * 
+	 * @param generatedCode
+	 */
+	public void setGeneratedCode(List<IPeg> generatedCode);
 
-	List<IPeg> getResult(List<IPeg> guess);
+	/**
+	 * 
+	 * @param guess
+	 * @return list of pegs
+	 */
+	public List<IPeg> getResult(List<IPeg> guess);
 
 }

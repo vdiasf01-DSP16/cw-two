@@ -10,13 +10,23 @@ import factories.modules.BindingsModule;
 import factories.modules.PropertiesModule;
 
 /**
- * @author pedro
+ * Factory for ColourLoader.
+ * 
+ * @author Pedro Gordo
  *
  */
-public class ColourLoaderFactory {
+public class ColourLoaderFactory
+{
 
-	public IColourLoader factoryMethod(){
-		return Guice.createInjector(new PropertiesModule(), new BindingsModule())
+	/**
+	 * Creates an instance of ColourLoader.
+	 * 
+	 * @return the instance created
+	 */
+	public IColourLoader factoryMethod()
+	{
+		return Guice
+				.createInjector(new PropertiesModule(), new BindingsModule())
 				.getInstance(IColourLoader.class);
 	}
 }

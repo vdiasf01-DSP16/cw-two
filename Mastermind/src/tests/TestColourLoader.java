@@ -14,7 +14,7 @@ import controllers.IColourLoader;
 /**
  * Testing the Colour Loader.
  * 
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
 public class TestColourLoader {
