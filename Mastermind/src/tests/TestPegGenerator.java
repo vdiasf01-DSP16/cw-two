@@ -48,8 +48,7 @@ public class TestPegGenerator
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetPegIsNull() throws Exception
 	{
-		IPeg foundPeg = pegGen.getPeg("Not known colour");
-		assertNull(foundPeg);
+		pegGen.getPeg("Not known colour");
 	}
 
 	/**
