@@ -2,7 +2,7 @@ package factories;
 
 import java.util.Map;
 
-import controllers.IPegGenerator;
+import controllers.IPegFactory;
 
 /**
  * @author Pedro Gordo
@@ -16,5 +16,5 @@ public interface PegGeneratorFactory
 	 * @param colourList
 	 * @return the instance created
 	 */
-	public IPegGenerator create(Map<String, String> colourList);
+	public IPegFactory create(Map<String, String> colourList);
 }

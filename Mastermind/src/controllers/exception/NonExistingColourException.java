@@ -1,10 +1,13 @@
+/**
+ * 
+ */
 package controllers.exception;
 
 /**
  * @author Pedro Gordo
  *
  */
-public class GuessHistoryFull extends Exception
+public class NonExistingColourException extends Exception
 {
 
 	/**

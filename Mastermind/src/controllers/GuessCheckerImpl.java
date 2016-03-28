@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import controllers.exception.InvalidGuessInput;
+import controllers.exception.NonExistingColourException;
 import models.IPeg;
 import models.PegImpl;
 
@@ -20,23 +22,23 @@ public class GuessCheckerImpl implements IGuessChecker
 	private final IPeg WHITE_PEG = new PegImpl("W", "White");
 
 	private List<IPeg> secretCode;
-	private IPegGenerator pegGenerator;
+	private IPegFactory pegFactory;
 
 	/**
 	 * Constructor requiring the secret code.
 	 * 
 	 * @param secretCode
-	 * @param pegGenerator
+	 * @param pegFactory
 	 *            TODO Inject it
 	 */
-	public GuessCheckerImpl(List<IPeg> secretCode, IPegGenerator pegGenerator)
+	public GuessCheckerImpl(List<IPeg> secretCode, IPegFactory pegFactory)
 	{
 		this.secretCode = secretCode;
-		this.pegGenerator = pegGenerator;
+		this.pegFactory = pegFactory;
 	}
 
 	@Override
-	public List<IPeg> getResult(String input) throws IllegalArgumentException
+	public List<IPeg> getResult(String input) throws NonExistingColourException, InvalidGuessInput
 	{
 		// parse the user input and return a map where the key is the peg
 		// position
@@ -44,8 +46,7 @@ public class GuessCheckerImpl implements IGuessChecker
 
 		// Validate arguments.
 		if (pegList.size() != secretCode.size())
-			throw new IllegalArgumentException(
-					"The length of the secret code and user guess don't match!");
+			throw new InvalidGuessInput();
 
 		List<IPeg> finalList = new LinkedList<>();
 		int blackPegs = 0;
@@ -100,7 +101,7 @@ public class GuessCheckerImpl implements IGuessChecker
 		return finalList;
 	}
 
-	private List<IPeg> parseUserInput(String input) throws IllegalArgumentException
+	private List<IPeg> parseUserInput(String input) throws NonExistingColourException
 	{
 		// Parse user input and generate pegs
 		List<String> parsedText = new ArrayList<>();
@@ -113,7 +114,7 @@ public class GuessCheckerImpl implements IGuessChecker
 		for (int i = 0; i < parsedText.size(); i++)
 		{
 			String colour = parsedText.get(i);
-			IPeg iPeg = pegGenerator.getPeg(colour);
+			IPeg iPeg = pegFactory.getPeg(colour);
 			if (iPeg != null)
 			{
 				pegList.add(iPeg);

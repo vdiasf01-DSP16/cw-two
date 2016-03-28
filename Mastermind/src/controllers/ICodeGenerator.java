@@ -35,7 +35,7 @@ public interface ICodeGenerator
 	/**
 	 * TODO remove this and set it using DI.
 	 * 
-	 * @param pegGenerator
+	 * @param pegFactory
 	 */
-	public void setPegGenerator(IPegGenerator pegGenerator);
+	public void setPegGenerator(IPegFactory pegFactory);
 }

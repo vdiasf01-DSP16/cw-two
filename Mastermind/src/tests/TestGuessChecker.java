@@ -13,7 +13,9 @@ import org.mockito.Mockito;
 
 import controllers.GuessCheckerImpl;
 import controllers.IGuessChecker;
-import controllers.IPegGenerator;
+import controllers.IPegFactory;
+import controllers.exception.InvalidGuessInput;
+import controllers.exception.NonExistingColourException;
 import models.IPeg;
 import models.PegImpl;
 
@@ -59,12 +61,13 @@ public class TestGuessChecker
 	 * Sets up the secret code to which the guess will be matched against and
 	 * create mock for PegGenerator.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws NonExistingColourException
+	 * 
 	 */
 	@Before
-	public void setUp() throws IllegalArgumentException
+	public void setUp() throws NonExistingColourException
 	{
-		IPegGenerator pegGeneratorMock = Mockito.mock(IPegGenerator.class);
+		IPegFactory pegGeneratorMock = Mockito.mock(IPegFactory.class);
 
 		when(pegGeneratorMock.getPeg("G"))
 				.thenReturn(new PegImpl("G", "Green"));
@@ -86,10 +89,11 @@ public class TestGuessChecker
 	/**
 	 * Testing BBBB.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testBBBB() throws IllegalArgumentException
+	public void testBBBB() throws InvalidGuessInput, NonExistingColourException
 	{
 		String input = PEG_1.getColour() + PEG_2.getColour() + PEG_3.getColour()
 				+ PEG_4.getColour();
@@ -107,10 +111,11 @@ public class TestGuessChecker
 	/**
 	 * Testing BBB.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws NonExistingColourException 
+	 * @throws InvalidGuessInput 
 	 */
 	@Test
-	public void testBBB() throws IllegalArgumentException
+	public void testBBB() throws NonExistingColourException, InvalidGuessInput
 	{
 		// The expected result list
 		List<IPeg> expected = new LinkedList<>();
@@ -129,10 +134,11 @@ public class TestGuessChecker
 	/**
 	 * Testing BB.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testBB() throws IllegalArgumentException
+	public void testBB() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
 		String input = PEG_1.getColour() + PEG_2.getColour()
@@ -149,10 +155,11 @@ public class TestGuessChecker
 	/**
 	 * Testing B.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testB() throws IllegalArgumentException
+	public void testB() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
 		String input = wrongColourPeg.getColour() + wrongColourPeg.getColour()
@@ -168,10 +175,11 @@ public class TestGuessChecker
 	/**
 	 * Testing BBWW.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testBBWW() throws IllegalArgumentException
+	public void testBBWW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
 		String input = PEG_2.getColour() + PEG_1.getColour() + PEG_3.getColour()
@@ -190,10 +198,11 @@ public class TestGuessChecker
 	/**
 	 * Testing WWWW.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testWWWW() throws IllegalArgumentException
+	public void testWWWW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
 		String input = PEG_2.getColour() + PEG_1.getColour() + PEG_4.getColour()
@@ -212,10 +221,11 @@ public class TestGuessChecker
 	/**
 	 * Testing WWW.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testWWW() throws IllegalArgumentException
+	public void testWWW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
 		String input = PEG_2.getColour() + PEG_1.getColour() + PEG_4.getColour()
@@ -233,10 +243,11 @@ public class TestGuessChecker
 	/**
 	 * Testing WW.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testWW() throws IllegalArgumentException
+	public void testWW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
 		String input = PEG_2.getColour() + wrongColourPeg.getColour()
@@ -253,10 +264,11 @@ public class TestGuessChecker
 	/**
 	 * Testing W.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testW() throws IllegalArgumentException
+	public void testW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
 		String input = PEG_2.getColour() + wrongColourPeg.getColour()
@@ -273,10 +285,11 @@ public class TestGuessChecker
 	 * Test if the input list has the same size of a result in which we have 4
 	 * pegs (black or white, doesn't matter).
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testNoPegs() throws IllegalArgumentException
+	public void testNoPegs() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
 		String input = wrongColourPeg.getColour() + wrongColourPeg.getColour()
@@ -293,10 +306,11 @@ public class TestGuessChecker
 	 * Test that the guess checker throws an exception when the input is of a
 	 * different size than the secret code.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidInput() throws IllegalArgumentException
+	@Test(expected = InvalidGuessInput.class)
+	public void testInvalidInput() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
 		String input = wrongColourPeg.getColour() + wrongColourPeg.getColour()
@@ -336,10 +350,11 @@ public class TestGuessChecker
 	 * Testing if we get an exception if the input is of a different size than
 	 * the secret code.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testAnyLengthValidPegs() throws IllegalArgumentException
+	@Test(expected = InvalidGuessInput.class)
+	public void testAnyLengthValidPegs() throws InvalidGuessInput, NonExistingColourException
 	{
 		String input = "RGBYYYY";
 		List<IPeg> foundPegs = guessChecker.getResult(input);
@@ -349,10 +364,11 @@ public class TestGuessChecker
 	/**
 	 * Testing if with non existing colours we get an exception thrown.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testOneValidPeg() throws IllegalArgumentException
+	@Test(expected = InvalidGuessInput.class)
+	public void testOneValidPeg() throws InvalidGuessInput, NonExistingColourException
 	{
 		guessChecker.getResult("QGET");
 	}
@@ -361,10 +377,11 @@ public class TestGuessChecker
 	 * Check if when passing in an invalid list of peg, an empty list is
 	 * returned.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws InvalidGuessInput
+	 * @throws NonExistingColourException 
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testNoValidPegs() throws IllegalArgumentException
+	@Test(expected = InvalidGuessInput.class)
+	public void testNoValidPegs() throws InvalidGuessInput, NonExistingColourException
 	{
 		List<IPeg> foundPegs = guessChecker.getResult("QWET");
 		System.out.println(foundPegs.toString());

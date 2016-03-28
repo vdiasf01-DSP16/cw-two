@@ -6,7 +6,7 @@ import com.google.inject.name.Named;
 import controllers.ICodeGenerator;
 import controllers.IColourLoader;
 import controllers.IFlowController;
-import controllers.IPegGenerator;
+import controllers.IPegFactory;
 import factories.CodeGeneratorFactory;
 import factories.ColourLoaderFactory;
 import factories.FlowControllerFactory;
@@ -48,12 +48,12 @@ public class GameImpl extends GameAbstractImpl
 		IColourLoader colourLoader = colourLoaderFactory.factoryMethod();
 
 		// Create peg generator with loaded colours
-		IPegGenerator pegGenerator = pegGeneratorFactory
+		IPegFactory pegFactory = pegGeneratorFactory
 				.create(colourLoader.getColours());
 
 		CodeGeneratorFactory codeGeneratorFactory = new CodeGeneratorFactory();
 		ICodeGenerator codeGenerator = codeGeneratorFactory
-				.factoryMethod(pegGenerator);
+				.factoryMethod(pegFactory);
 		codeGenerator.generateNewCode();
 
 		FlowControllerFactory flowControllerFactory = new FlowControllerFactory();

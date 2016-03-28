@@ -20,7 +20,7 @@ import models.IPeg;
 public class CodeGeneratorImpl implements ICodeGenerator
 {
 
-	private IPegGenerator pegGenerator;
+	private IPegFactory pegFactory;
 	private final int CODE_LENGTH;
 	private Map<Integer, IPeg> generatedCodePegs;
 
@@ -36,7 +36,9 @@ public class CodeGeneratorImpl implements ICodeGenerator
 		this.CODE_LENGTH = codeLength;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controllers.ICodeGenerator#generateNewCode()
 	 */
 	@Override
@@ -46,8 +48,8 @@ public class CodeGeneratorImpl implements ICodeGenerator
 
 		for (int i = 0; i < CODE_LENGTH; i++)
 		{
-			IPeg peg = pegGenerator.getAPeg();
-
+			IPeg peg = null;
+			peg = pegFactory.getAPeg();
 			generatedCodePegs.put(i, peg);
 		}
 	}
@@ -68,7 +70,9 @@ public class CodeGeneratorImpl implements ICodeGenerator
 		return finalList;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controllers.ICodeGenerator#getCodeString()
 	 */
 	@Override
@@ -85,8 +89,8 @@ public class CodeGeneratorImpl implements ICodeGenerator
 	}
 
 	@Override
-	public void setPegGenerator(IPegGenerator pegGenerator)
+	public void setPegGenerator(IPegFactory pegFactory)
 	{
-		this.pegGenerator = pegGenerator;
+		this.pegFactory = pegFactory;
 	}
 }

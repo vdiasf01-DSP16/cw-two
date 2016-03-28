@@ -5,6 +5,8 @@ package controllers;
 
 import java.util.List;
 
+import controllers.exception.InvalidGuessInput;
+import controllers.exception.NonExistingColourException;
 import models.IPeg;
 
 /**
@@ -19,10 +21,13 @@ public interface IGuessChecker
 	 * 
 	 * @param input
 	 * @return the list of peg objects
-	 * @throws IllegalArgumentException
-	 *             when the user input is not valid, for example if the colour
-	 *             doesn't exist or the guess is the wrong length TODO make sure
-	 *             there's a test for each of these cases
+	 * @throws NonExistingColourException
+	 *             when the colour doesn't exist
+	 * @throws InvalidGuessInput
+	 *             when the user input is not valid, for example if the guess is
+	 *             the wrong length TODO make sure there's a test for each of
+	 *             these cases
 	 */
-	public List<IPeg> getResult(String input) throws IllegalArgumentException;
+	public List<IPeg> getResult(String input)
+			throws NonExistingColourException, InvalidGuessInput;
 }
