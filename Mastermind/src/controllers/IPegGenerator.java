@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.IOException;
 import java.util.List;
 
 import models.IPeg;
@@ -21,10 +20,10 @@ public interface IPegGenerator
 	 * 
 	 * @param colour
 	 * @return IPeg
-	 * @throws IOException
+	 * @throws IllegalArgumentException
 	 *             is thrown if the colour doesn't exist
 	 */
-	public IPeg getPeg(String colour) throws IOException;
+	public IPeg getPeg(String colour) throws IllegalArgumentException;
 
 	/**
 	 * Returns a generated Peg from a known random colour list.

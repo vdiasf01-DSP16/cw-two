@@ -3,7 +3,6 @@
  */
 package controllers;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +35,7 @@ public class PegGeneratorImpl implements IPegGenerator
 	 * @see controllers.IPegGenerator#getPeg(java.lang.String)
 	 */
 	@Override
-	public IPeg getPeg(String colour) throws IOException
+	public IPeg getPeg(String colour) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		return null;

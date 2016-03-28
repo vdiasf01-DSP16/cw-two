@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,22 +26,26 @@ public class GuessCheckerImpl implements IGuessChecker
 	 * Constructor requiring the secret code.
 	 * 
 	 * @param secretCode
+	 * @param pegGenerator
+	 *            TODO Inject it
 	 */
-	public GuessCheckerImpl(List<IPeg> secretCode)
+	public GuessCheckerImpl(List<IPeg> secretCode, IPegGenerator pegGenerator)
 	{
 		this.secretCode = secretCode;
+		this.pegGenerator = pegGenerator;
 	}
 
 	@Override
-	public List<IPeg> getResult(String input) throws IOException
+	public List<IPeg> getResult(String input) throws IllegalArgumentException
 	{
-		// parse the user input and return a map where the key is the peg position
+		// parse the user input and return a map where the key is the peg
+		// position
 		List<IPeg> pegList = parseUserInput(input);
-		
+
 		// Validate arguments.
 		if (pegList.size() != secretCode.size())
 			throw new IllegalArgumentException(
-					"Secret code and user guess does not match!");
+					"The length of the secret code and user guess don't match!");
 
 		List<IPeg> finalList = new LinkedList<>();
 		int blackPegs = 0;
@@ -97,7 +100,7 @@ public class GuessCheckerImpl implements IGuessChecker
 		return finalList;
 	}
 
-	private List<IPeg> parseUserInput(String input) throws IOException
+	private List<IPeg> parseUserInput(String input) throws IllegalArgumentException
 	{
 		// Parse user input and generate pegs
 		List<String> parsedText = new ArrayList<>();

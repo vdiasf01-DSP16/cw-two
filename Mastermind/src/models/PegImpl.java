@@ -48,4 +48,19 @@ public class PegImpl implements IPeg
 		return colourName;
 	}
 
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof IPeg))
+			return false;
+		if (obj == this)
+			return true;
+
+		IPeg otherPeg = (IPeg) obj;
+
+		boolean colourCodeMatch = this.getColour().equals(otherPeg.getColour());
+		boolean colourNameMatch = this.getColourName()
+				.equals(otherPeg.getColourName());
+		return colourCodeMatch && colourNameMatch;
+	}
 }

@@ -3,7 +3,6 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +45,7 @@ public class TestPegGenerator
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected = IOException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testGetPegIsNull() throws Exception
 	{
 		IPeg foundPeg = pegGen.getPeg("Not known colour");
@@ -56,10 +55,10 @@ public class TestPegGenerator
 	/**
 	 * Test Peg found is of a known colour.
 	 * 
-	 * @throws IOException
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testKnownColourGetPeg() throws IOException
+	public void testKnownColourGetPeg() throws IllegalArgumentException
 	{
 		String expected = "Blue";
 		String actual = null;

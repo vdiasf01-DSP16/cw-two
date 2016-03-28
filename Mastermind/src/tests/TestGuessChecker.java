@@ -2,16 +2,18 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import controllers.GuessCheckerImpl;
 import controllers.IGuessChecker;
+import controllers.IPegGenerator;
 import models.IPeg;
 import models.PegImpl;
 
@@ -41,7 +43,7 @@ public class TestGuessChecker
 	/**
 	 * Any other peg not in the expected secret peg code.
 	 */
-	private final IPeg NOT_USED_PEG = new PegImpl("T", "Tanso");
+	private final IPeg wrongColourPeg = new PegImpl("P", "Pink");
 
 	/**
 	 * The secret code to be guessed.
@@ -54,26 +56,40 @@ public class TestGuessChecker
 	private IGuessChecker guessChecker;
 
 	/**
-	 * Sets up the secret code to which the guess will be matched against.
+	 * Sets up the secret code to which the guess will be matched against and
+	 * create mock for PegGenerator.
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Before
-	public void setUp()
+	public void setUp() throws IllegalArgumentException
 	{
+		IPegGenerator pegGeneratorMock = Mockito.mock(IPegGenerator.class);
+
+		when(pegGeneratorMock.getPeg("G"))
+				.thenReturn(new PegImpl("G", "Green"));
+		when(pegGeneratorMock.getPeg("B")).thenReturn(new PegImpl("B", "Blue"));
+		when(pegGeneratorMock.getPeg("Y"))
+				.thenReturn(new PegImpl("Y", "Yellow"));
+		when(pegGeneratorMock.getPeg("R")).thenReturn(new PegImpl("R", "Red"));
+		when(pegGeneratorMock.getPeg("P")).thenReturn(new PegImpl("P", "Pink"));
+
 		// The secret code to be guessed.
 		secretCode = new LinkedList<IPeg>();
-		secretCode.add(new PegImpl("G", "Green")); // PEG_1
-		secretCode.add(new PegImpl("B", "Blue")); // PEG_2
-		secretCode.add(new PegImpl("Y", "Yellow")); // PEG_3
-		secretCode.add(new PegImpl("R", "Red")); // PEG_4
-		guessChecker = new GuessCheckerImpl(secretCode);
+		secretCode.add(pegGeneratorMock.getPeg("G")); // PEG_1
+		secretCode.add(pegGeneratorMock.getPeg("B")); // PEG_2
+		secretCode.add(pegGeneratorMock.getPeg("Y")); // PEG_3
+		secretCode.add(pegGeneratorMock.getPeg("R")); // PEG_4
+		guessChecker = new GuessCheckerImpl(secretCode, pegGeneratorMock);
 	}
 
 	/**
 	 * Testing BBBB.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testBBBB() throws IOException
+	public void testBBBB() throws IllegalArgumentException
 	{
 		String input = PEG_1.getColour() + PEG_2.getColour() + PEG_3.getColour()
 				+ PEG_4.getColour();
@@ -90,34 +106,37 @@ public class TestGuessChecker
 
 	/**
 	 * Testing BBB.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testBBB() throws IOException
+	public void testBBB() throws IllegalArgumentException
 	{
+		// The expected result list
+		List<IPeg> expected = new LinkedList<>();
+		expected.add(BLACK_PEG);
+		expected.add(BLACK_PEG);
+		expected.add(BLACK_PEG);
+
 		// The guess peg list.
 		String input = PEG_1.getColour() + PEG_2.getColour() + PEG_3.getColour()
-				+ NOT_USED_PEG.getColour();
+				+ wrongColourPeg.getColour();
+		List<IPeg> actual = guessChecker.getResult(input);
 
-		// The expected result list
-		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(BLACK_PEG);
-		resultList.add(BLACK_PEG);
-		resultList.add(BLACK_PEG);
-
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		assertEquals(expected, actual);
 	}
 
 	/**
 	 * Testing BB.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testBB() throws IOException
+	public void testBB() throws IllegalArgumentException
 	{
 		// The guess peg list.
 		String input = PEG_1.getColour() + PEG_2.getColour()
-				+ NOT_USED_PEG.getColour() + NOT_USED_PEG.getColour();
+				+ wrongColourPeg.getColour() + wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
@@ -129,14 +148,15 @@ public class TestGuessChecker
 
 	/**
 	 * Testing B.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testB() throws IOException
+	public void testB() throws IllegalArgumentException
 	{
 		// The guess peg list.
-		String input = NOT_USED_PEG.getColour() + NOT_USED_PEG.getColour()
-				+ NOT_USED_PEG.getColour() + PEG_4.getColour();
+		String input = wrongColourPeg.getColour() + wrongColourPeg.getColour()
+				+ wrongColourPeg.getColour() + PEG_4.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
@@ -147,10 +167,11 @@ public class TestGuessChecker
 
 	/**
 	 * Testing BBWW.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testBBWW() throws IOException
+	public void testBBWW() throws IllegalArgumentException
 	{
 		// The guess peg list.
 		String input = PEG_2.getColour() + PEG_1.getColour() + PEG_3.getColour()
@@ -168,10 +189,11 @@ public class TestGuessChecker
 
 	/**
 	 * Testing WWWW.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testWWWW() throws IOException
+	public void testWWWW() throws IllegalArgumentException
 	{
 		// The guess peg list.
 		String input = PEG_2.getColour() + PEG_1.getColour() + PEG_4.getColour()
@@ -189,14 +211,15 @@ public class TestGuessChecker
 
 	/**
 	 * Testing WWW.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testWWW() throws IOException
+	public void testWWW() throws IllegalArgumentException
 	{
 		// The guess peg list.
 		String input = PEG_2.getColour() + PEG_1.getColour() + PEG_4.getColour()
-				+ NOT_USED_PEG.getColour();
+				+ wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
@@ -209,14 +232,15 @@ public class TestGuessChecker
 
 	/**
 	 * Testing WW.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testWW() throws IOException
+	public void testWW() throws IllegalArgumentException
 	{
 		// The guess peg list.
-		String input = PEG_2.getColour() + NOT_USED_PEG.getColour()
-				+ PEG_4.getColour() + NOT_USED_PEG.getColour();
+		String input = PEG_2.getColour() + wrongColourPeg.getColour()
+				+ PEG_4.getColour() + wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
@@ -228,14 +252,15 @@ public class TestGuessChecker
 
 	/**
 	 * Testing W.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testW() throws IOException
+	public void testW() throws IllegalArgumentException
 	{
 		// The guess peg list.
-		String input = PEG_2.getColour() + NOT_USED_PEG.getColour()
-				+ NOT_USED_PEG.getColour() + NOT_USED_PEG.getColour();
+		String input = PEG_2.getColour() + wrongColourPeg.getColour()
+				+ wrongColourPeg.getColour() + wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
@@ -247,14 +272,15 @@ public class TestGuessChecker
 	/**
 	 * Test if the input list has the same size of a result in which we have 4
 	 * pegs (black or white, doesn't matter).
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testNoPegs() throws IOException
+	public void testNoPegs() throws IllegalArgumentException
 	{
 		// The guess peg list.
-		String input = NOT_USED_PEG.getColour() + NOT_USED_PEG.getColour()
-				+ NOT_USED_PEG.getColour() + NOT_USED_PEG.getColour();
+		String input = wrongColourPeg.getColour() + wrongColourPeg.getColour()
+				+ wrongColourPeg.getColour() + wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
@@ -266,14 +292,15 @@ public class TestGuessChecker
 	/**
 	 * Test that the guess checker throws an exception when the input is of a
 	 * different size than the secret code.
-	 * @throws IOException 
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidInput() throws IOException
+	public void testInvalidInput() throws IllegalArgumentException
 	{
 		// The guess peg list.
-		String input = NOT_USED_PEG.getColour() + NOT_USED_PEG.getColour()
-				+ NOT_USED_PEG.getColour();
+		String input = wrongColourPeg.getColour() + wrongColourPeg.getColour()
+				+ wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
@@ -306,12 +333,13 @@ public class TestGuessChecker
 	}
 
 	/**
-	 * Testing if any expected length is returned. TODO review this test
+	 * Testing if we get an exception if the input is of a different size than
+	 * the secret code.
 	 * 
-	 * @throws IOException
+	 * @throws IllegalArgumentException
 	 */
-	@Test
-	public void testAnyLengthValidPegs() throws IOException
+	@Test(expected = IllegalArgumentException.class)
+	public void testAnyLengthValidPegs() throws IllegalArgumentException
 	{
 		String input = "RGBYYYY";
 		List<IPeg> foundPegs = guessChecker.getResult(input);
@@ -319,27 +347,12 @@ public class TestGuessChecker
 	}
 
 	/**
-	 * Testing if all valid pegs are returned it.
-	 * 
-	 * @throws IOException
-	 */
-	@Test
-	public void testAllValidPeg() throws IOException
-	{
-		List<IPeg> foundPegs = guessChecker.getResult("RGBY");
-		assertTrue(foundPegs.get(0).equals(PEG_1));
-		assertTrue(foundPegs.get(1).equals(PEG_2));
-		assertTrue(foundPegs.get(2).equals(PEG_3));
-		assertTrue(foundPegs.get(3).equals(PEG_4));
-	}
-
-	/**
 	 * Testing if with non existing colours we get an exception thrown.
 	 * 
-	 * @throws IOException
+	 * @throws IllegalArgumentException
 	 */
-	@Test(expected = IOException.class)
-	public void testOneValidPeg() throws IOException
+	@Test(expected = IllegalArgumentException.class)
+	public void testOneValidPeg() throws IllegalArgumentException
 	{
 		guessChecker.getResult("QGET");
 	}
@@ -348,10 +361,10 @@ public class TestGuessChecker
 	 * Check if when passing in an invalid list of peg, an empty list is
 	 * returned.
 	 * 
-	 * @throws IOException
+	 * @throws IllegalArgumentException
 	 */
-	@Test(expected = IOException.class)
-	public void testNoValidPegs() throws IOException
+	@Test(expected = IllegalArgumentException.class)
+	public void testNoValidPegs() throws IllegalArgumentException
 	{
 		List<IPeg> foundPegs = guessChecker.getResult("QWET");
 		System.out.println(foundPegs.toString());

@@ -3,7 +3,6 @@
  */
 package controllers;
 
-import java.io.IOException;
 import java.util.List;
 
 import models.IPeg;
@@ -20,10 +19,10 @@ public interface IGuessChecker
 	 * 
 	 * @param input
 	 * @return the list of peg objects
-	 * @throws IOException
+	 * @throws IllegalArgumentException
 	 *             when the user input is not valid, for example if the colour
 	 *             doesn't exist or the guess is the wrong length TODO make sure
 	 *             there's a test for each of these cases
 	 */
-	public List<IPeg> getResult(String input) throws IOException;
+	public List<IPeg> getResult(String input) throws IllegalArgumentException;
 }
