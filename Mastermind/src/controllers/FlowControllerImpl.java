@@ -3,27 +3,53 @@
  */
 package controllers;
 
-import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
+import controllers.exception.GuessHistoryFull;
 import models.GuessHistoryImpl;
 import models.IGuessHistory;
+import models.IGuessPlay;
 
 /**
  * @author Pedro Gordo
  *
  */
-public class FlowControllerImpl implements IFlowController {
-
-	private IGuessHistory guessHistory = new GuessHistoryImpl();
-	@Inject @Named(value = "numberOfPlays")
+public class FlowControllerImpl implements IFlowController
+{
+	private IGuessHistory guessHistory;
 	private int numberOfPlays;
-	
-	/* (non-Javadoc)
+
+	/**
+	 * Creates a new FlowController. One GuessHistory is created upon calling
+	 * this constructor.
+	 * 
+	 * @param numberOfPlays
+	 */
+	public FlowControllerImpl(@Named(value = "numberOfPlays") int numberOfPlays)
+	{
+		super();
+		this.guessHistory = new GuessHistoryImpl();
+		this.numberOfPlays = numberOfPlays;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controllers.IFlowController#isGameFinished()
 	 */
 	@Override
-	public boolean isGameFinished() {
-		return numberOfPlays - guessHistory.getPlayHistory().size() >= 0;
+	public boolean isGameFinished()
+	{
+		return numberOfPlays - guessHistory.getPlayHistory().size() == 0;
+	}
+
+	@Override
+	public void addGuessPlay(IGuessPlay guessPlay) throws GuessHistoryFull
+	{
+		if (guessHistory.getPlayHistory().size()==numberOfPlays)
+		{
+			throw new GuessHistoryFull();
+		}
+		guessHistory.addGuessPlay(guessPlay);
 	}
 }
