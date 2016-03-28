@@ -3,6 +3,7 @@
  */
 package controllers;
 
+import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 import controllers.exception.GuessHistoryFull;
@@ -25,6 +26,7 @@ public class FlowControllerImpl implements IFlowController
 	 * 
 	 * @param numberOfPlays
 	 */
+	@Inject
 	public FlowControllerImpl(@Named(value = "numberOfPlays") int numberOfPlays)
 	{
 		super();

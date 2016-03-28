@@ -12,9 +12,9 @@ import factories.ColourLoaderFactory;
 import factories.FlowControllerFactory;
 import factories.PegGeneratorFactory;
 import factories.StartTextFactory;
-import factories.TextBeforeGuessFactory;
 import views.IStartText;
 import views.ITextBeforeGuess;
+import views.TextBeforeGuessFactory;
 
 /**
  * @author Keith Mannock
@@ -22,11 +22,12 @@ import views.ITextBeforeGuess;
  */
 public class GameImpl extends GameAbstractImpl
 {
-
 	@Inject
 	private PegGeneratorFactory pegGeneratorFactory;
 	@Inject
 	private StartTextFactory startTextFactory;
+	@Inject
+	private TextBeforeGuessFactory textBeforeGuessFactory;
 
 	@Inject
 	private GameImpl(@Named("easy") boolean easy)
@@ -58,9 +59,8 @@ public class GameImpl extends GameAbstractImpl
 		FlowControllerFactory flowControllerFactory = new FlowControllerFactory();
 		IFlowController flowController = flowControllerFactory.factoryMethod();
 
-		TextBeforeGuessFactory textBeforeGuessFactory = new TextBeforeGuessFactory();
 		ITextBeforeGuess textBeforeGuess = textBeforeGuessFactory
-				.factoryMethod();
+				.create(codeGenerator.getCodeString());
 
 		/*
 		 * This variable is used to know if the number of tries has finished or
@@ -69,7 +69,7 @@ public class GameImpl extends GameAbstractImpl
 		boolean keepGuessing = false;
 		do
 		{
-			textBeforeGuess.show(showCode, codeGenerator.getCodeString());
+			textBeforeGuess.show();
 
 			keepGuessing = flowController.isGameFinished();
 			// TODO change condition for loop

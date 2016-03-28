@@ -17,6 +17,7 @@ import factories.PegGeneratorFactory;
 import views.IStartText;
 import views.ITextBeforeGuess;
 import views.StartTextImpl;
+import views.TextBeforeGuessFactory;
 import views.TextBeforeGuessImpl;
 
 /**
@@ -26,18 +27,29 @@ import views.TextBeforeGuessImpl;
  * @author Pedro Gordo
  *
  */
-public class BindingsModule extends AbstractModule {
+public class BindingsModule extends AbstractModule
+{
 
 	@Override
-	protected void configure() {
+	protected void configure()
+	{
 		bind(Game.class).to(GameImpl.class);
-		install(new FactoryModuleBuilder().implement(IPegGenerator.class, PegGeneratorImpl.class)
+
+		install(new FactoryModuleBuilder()
+				.implement(IPegGenerator.class, PegGeneratorImpl.class)
 				.build(PegGeneratorFactory.class));
+
 		bind(IColourLoader.class).to(ColourLoaderImpl.class);
+
 		bind(IFlowController.class).to(FlowControllerImpl.class);
+
 		bind(ICodeGenerator.class).to(CodeGeneratorImpl.class);
+
 		bind(IStartText.class).to(StartTextImpl.class);
-		bind(ITextBeforeGuess.class).to(TextBeforeGuessImpl.class);
+
+		install(new FactoryModuleBuilder()
+				.implement(ITextBeforeGuess.class, TextBeforeGuessImpl.class)
+				.build(TextBeforeGuessFactory.class));
 	}
 
 }

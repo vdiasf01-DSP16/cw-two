@@ -22,7 +22,7 @@ public class PropertiesModule extends AbstractModule
 			Properties props = new Properties();
 			// TODO replace by relative path
 			props.load(new FileInputStream(
-					"/home/Pedro Gordo/git/cwtwo/Mastermind/resources/config.properties"));
+					"/home/pedro/git/cwtwo/Mastermind/resources/config.properties"));
 			Names.bindProperties(binder(), props);
 		}
 		catch (IOException e)
