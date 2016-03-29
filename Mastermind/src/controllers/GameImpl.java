@@ -45,9 +45,9 @@ class GameImpl extends GameAbstractImpl
 		 * Get reusable objects from factories (they are still immutable though...)
 		 */
 		ICodeGenerator codeGenerator = CodeGeneratorFactory.create();
-		IStartText startText = StartTextFactory.factoryMethod();
+		IStartText startText = StartTextFactory.create();
 		ICaptureUserGuess captureUserGuess = CaptureUserGuessFactory
-				.factoryMethod();
+				.create();
 		IGuessChecker guessChecker = GuessCheckerFactory.create();
 		IPrintSecretCode printSecretCode = PrintSecretCodeFactory.create();
 		IPrintHistory printHistory = PrintHistoryFactory.create();
@@ -67,7 +67,7 @@ class GameImpl extends GameAbstractImpl
 			// initialise these at each new game iteration
 			List<IPeg> secretCode = codeGenerator.generateNewCode();
 			IFlowController flowController = FlowControllerFactory
-					.factoryMethod();
+					.create();
 
 			do
 			{

@@ -13,7 +13,7 @@ public class StartTextFactory
 	 * 
 	 * @return the instance created
 	 */
-	public static IStartText factoryMethod()
+	public static IStartText create()
 	{
 		return Guice
 				.createInjector(new ViewsModule())
