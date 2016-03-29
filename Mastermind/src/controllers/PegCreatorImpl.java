@@ -36,21 +36,21 @@ public class PegCreatorImpl implements IPegCreator
 	@Override
 	public IPeg createPeg(String colourCode) throws NonExistingColourException
 	{
-		if (colours.containsKey(colourCode) == false)
+		if (this.colours.containsKey(colourCode) == false)
 		{
 			throw new NonExistingColourException();
 		}
 
-		return new PegImpl(colourCode, colours.get(colourCode));
+		return new PegImpl(colourCode, this.colours.get(colourCode));
 	}
 
 	@Override
 	public IPeg createRandomPeg()
 	{
-		Set<String> keySet = colours.keySet();
+		Set<String> keySet = this.colours.keySet();
 		int size = keySet.size();
 		int random = new Random().nextInt(size);
-		String colourCode = "";
+		String colourCode = new String();
 
 		int i = 0;
 		for (String key : keySet)

@@ -48,13 +48,13 @@ public class CodeGeneratorImpl implements ICodeGenerator
 	@Override
 	public void generateNewCode()
 	{
-		generatedCodePegs = new HashMap<>();
+		this.generatedCodePegs = new HashMap<>();
 
-		for (int i = 0; i < CODE_LENGTH; i++)
+		for (int i = 0; i < this.CODE_LENGTH; i++)
 		{
 			IPeg peg = null;
-			peg = pegCreator.createRandomPeg();
-			generatedCodePegs.put(i, peg);
+			peg = this.pegCreator.createRandomPeg();
+			this.generatedCodePegs.put(new Integer(i), peg);
 		}
 	}
 
@@ -67,9 +67,9 @@ public class CodeGeneratorImpl implements ICodeGenerator
 	public List<IPeg> getCode()
 	{
 		List<IPeg> finalList = new LinkedList<>();
-		for (int index = 0; index < generatedCodePegs.size(); index++)
+		for (int index = 0; index < this.generatedCodePegs.size(); index++)
 		{
-			finalList.add(generatedCodePegs.get(index));
+			finalList.add(this.generatedCodePegs.get(new Integer(index)));
 		}
 		return finalList;
 	}
@@ -82,7 +82,7 @@ public class CodeGeneratorImpl implements ICodeGenerator
 	@Override
 	public String getCodeString()
 	{
-		String codeString = "";
+		String codeString = new String();
 
 		for (IPeg peg : getCode())
 		{

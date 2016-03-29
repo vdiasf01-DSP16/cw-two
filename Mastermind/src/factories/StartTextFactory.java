@@ -17,7 +17,7 @@ public class StartTextFactory
 	 * 
 	 * @return the instance created
 	 */
-	public IStartText factoryMethod()
+	public static IStartText factoryMethod()
 	{
 		return Guice
 				.createInjector(new PropertiesModule(), new BindingsModule())

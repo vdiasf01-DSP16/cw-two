@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,21 +32,21 @@ public class TestGuessChecker
 	/**
 	 * Pegs to test with.
 	 */
-	private final IPeg PEG_1 = new PegImpl("G", "Green");
-	private final IPeg PEG_2 = new PegImpl("B", "Blue");
-	private final IPeg PEG_3 = new PegImpl("Y", "Yellow");
-	private final IPeg PEG_4 = new PegImpl("R", "Red");
+	private final IPeg PEG_1 = new PegImpl("G", "Green"); //$NON-NLS-1$ //$NON-NLS-2$
+	private final IPeg PEG_2 = new PegImpl("B", "Blue"); //$NON-NLS-1$ //$NON-NLS-2$
+	private final IPeg PEG_3 = new PegImpl("Y", "Yellow"); //$NON-NLS-1$ //$NON-NLS-2$
+	private final IPeg PEG_4 = new PegImpl("R", "Red"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The result set pegs.
 	 */
-	private final IPeg BLACK_PEG = new PegImpl("B", "Black");
-	private final IPeg WHITE_PEG = new PegImpl("W", "White");
+	private final IPeg BLACK_PEG = new PegImpl("B", "Black"); //$NON-NLS-1$ //$NON-NLS-2$
+	private final IPeg WHITE_PEG = new PegImpl("W", "White"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * Any other peg not in the expected secret peg code.
 	 */
-	private final IPeg wrongColourPeg = new PegImpl("P", "Pink");
+	private final IPeg wrongColourPeg = new PegImpl("P", "Pink"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The secret code to be guessed.
@@ -69,21 +70,21 @@ public class TestGuessChecker
 	{
 		IPegCreator pegGeneratorMock = Mockito.mock(IPegCreator.class);
 
-		when(pegGeneratorMock.createPeg("G"))
-				.thenReturn(new PegImpl("G", "Green"));
-		when(pegGeneratorMock.createPeg("B")).thenReturn(new PegImpl("B", "Blue"));
-		when(pegGeneratorMock.createPeg("Y"))
-				.thenReturn(new PegImpl("Y", "Yellow"));
-		when(pegGeneratorMock.createPeg("R")).thenReturn(new PegImpl("R", "Red"));
-		when(pegGeneratorMock.createPeg("P")).thenReturn(new PegImpl("P", "Pink"));
+		when(pegGeneratorMock.createPeg("G")) //$NON-NLS-1$
+				.thenReturn(new PegImpl("G", "Green")); //$NON-NLS-1$ //$NON-NLS-2$
+		when(pegGeneratorMock.createPeg("B")).thenReturn(new PegImpl("B", "Blue")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		when(pegGeneratorMock.createPeg("Y")) //$NON-NLS-1$
+				.thenReturn(new PegImpl("Y", "Yellow")); //$NON-NLS-1$ //$NON-NLS-2$
+		when(pegGeneratorMock.createPeg("R")).thenReturn(new PegImpl("R", "Red")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		when(pegGeneratorMock.createPeg("P")).thenReturn(new PegImpl("P", "Pink")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		// The secret code to be guessed.
-		secretCode = new LinkedList<IPeg>();
-		secretCode.add(pegGeneratorMock.createPeg("G")); // PEG_1
-		secretCode.add(pegGeneratorMock.createPeg("B")); // PEG_2
-		secretCode.add(pegGeneratorMock.createPeg("Y")); // PEG_3
-		secretCode.add(pegGeneratorMock.createPeg("R")); // PEG_4
-		guessChecker = new GuessCheckerImpl(secretCode, pegGeneratorMock);
+		this.secretCode = new ArrayList<>();
+		this.secretCode.add(pegGeneratorMock.createPeg("G")); // PEG_1 //$NON-NLS-1$
+		this.secretCode.add(pegGeneratorMock.createPeg("B")); // PEG_2 //$NON-NLS-1$
+		this.secretCode.add(pegGeneratorMock.createPeg("Y")); // PEG_3 //$NON-NLS-1$
+		this.secretCode.add(pegGeneratorMock.createPeg("R")); // PEG_4 //$NON-NLS-1$
+		this.guessChecker = new GuessCheckerImpl(this.secretCode, pegGeneratorMock);
 	}
 
 	/**
@@ -95,17 +96,17 @@ public class TestGuessChecker
 	@Test
 	public void testBBBB() throws InvalidGuessInput, NonExistingColourException
 	{
-		String input = PEG_1.getColour() + PEG_2.getColour() + PEG_3.getColour()
-				+ PEG_4.getColour();
+		String input = this.PEG_1.getColour() + this.PEG_2.getColour() + this.PEG_3.getColour()
+				+ this.PEG_4.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(BLACK_PEG);
-		resultList.add(BLACK_PEG);
-		resultList.add(BLACK_PEG);
-		resultList.add(BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
 
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -119,14 +120,14 @@ public class TestGuessChecker
 	{
 		// The expected result list
 		List<IPeg> expected = new LinkedList<>();
-		expected.add(BLACK_PEG);
-		expected.add(BLACK_PEG);
-		expected.add(BLACK_PEG);
+		expected.add(this.BLACK_PEG);
+		expected.add(this.BLACK_PEG);
+		expected.add(this.BLACK_PEG);
 
 		// The guess peg list.
-		String input = PEG_1.getColour() + PEG_2.getColour() + PEG_3.getColour()
-				+ wrongColourPeg.getColour();
-		List<IPeg> actual = guessChecker.getResult(input);
+		String input = this.PEG_1.getColour() + this.PEG_2.getColour() + this.PEG_3.getColour()
+				+ this.wrongColourPeg.getColour();
+		List<IPeg> actual = this.guessChecker.getResult(input);
 
 		assertEquals(expected, actual);
 	}
@@ -141,15 +142,15 @@ public class TestGuessChecker
 	public void testBB() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
-		String input = PEG_1.getColour() + PEG_2.getColour()
-				+ wrongColourPeg.getColour() + wrongColourPeg.getColour();
+		String input = this.PEG_1.getColour() + this.PEG_2.getColour()
+				+ this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(BLACK_PEG);
-		resultList.add(BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
 
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -162,14 +163,14 @@ public class TestGuessChecker
 	public void testB() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
-		String input = wrongColourPeg.getColour() + wrongColourPeg.getColour()
-				+ wrongColourPeg.getColour() + PEG_4.getColour();
+		String input = this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour()
+				+ this.wrongColourPeg.getColour() + this.PEG_4.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
 
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -182,17 +183,17 @@ public class TestGuessChecker
 	public void testBBWW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
-		String input = PEG_2.getColour() + PEG_1.getColour() + PEG_3.getColour()
-				+ PEG_4.getColour();
+		String input = this.PEG_2.getColour() + this.PEG_1.getColour() + this.PEG_3.getColour()
+				+ this.PEG_4.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(BLACK_PEG);
-		resultList.add(BLACK_PEG);
-		resultList.add(WHITE_PEG);
-		resultList.add(WHITE_PEG);
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
 
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -205,17 +206,17 @@ public class TestGuessChecker
 	public void testWWWW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
-		String input = PEG_2.getColour() + PEG_1.getColour() + PEG_4.getColour()
-				+ PEG_3.getColour();
+		String input = this.PEG_2.getColour() + this.PEG_1.getColour() + this.PEG_4.getColour()
+				+ this.PEG_3.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(WHITE_PEG);
-		resultList.add(WHITE_PEG);
-		resultList.add(WHITE_PEG);
-		resultList.add(WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
 
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -228,16 +229,16 @@ public class TestGuessChecker
 	public void testWWW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
-		String input = PEG_2.getColour() + PEG_1.getColour() + PEG_4.getColour()
-				+ wrongColourPeg.getColour();
+		String input = this.PEG_2.getColour() + this.PEG_1.getColour() + this.PEG_4.getColour()
+				+ this.wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(WHITE_PEG);
-		resultList.add(WHITE_PEG);
-		resultList.add(WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
 
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -250,15 +251,15 @@ public class TestGuessChecker
 	public void testWW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
-		String input = PEG_2.getColour() + wrongColourPeg.getColour()
-				+ PEG_4.getColour() + wrongColourPeg.getColour();
+		String input = this.PEG_2.getColour() + this.wrongColourPeg.getColour()
+				+ this.PEG_4.getColour() + this.wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(WHITE_PEG);
-		resultList.add(WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
 
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -271,14 +272,14 @@ public class TestGuessChecker
 	public void testW() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
-		String input = PEG_2.getColour() + wrongColourPeg.getColour()
-				+ wrongColourPeg.getColour() + wrongColourPeg.getColour();
+		String input = this.PEG_2.getColour() + this.wrongColourPeg.getColour()
+				+ this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
 
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -292,14 +293,14 @@ public class TestGuessChecker
 	public void testNoPegs() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
-		String input = wrongColourPeg.getColour() + wrongColourPeg.getColour()
-				+ wrongColourPeg.getColour() + wrongColourPeg.getColour();
+		String input = this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour()
+				+ this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
 
-		assertEquals(0, guessChecker.getResult(input).size());
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		assertEquals(0, this.guessChecker.getResult(input).size());
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -313,14 +314,14 @@ public class TestGuessChecker
 	public void testInvalidInput() throws InvalidGuessInput, NonExistingColourException
 	{
 		// The guess peg list.
-		String input = wrongColourPeg.getColour() + wrongColourPeg.getColour()
-				+ wrongColourPeg.getColour();
+		String input = this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour()
+				+ this.wrongColourPeg.getColour();
 
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
 
-		assertEquals(0, guessChecker.getResult(input).size());
-		verifyResultSet(resultList, guessChecker.getResult(input));
+		assertEquals(0, this.guessChecker.getResult(input).size());
+		verifyResultSet(resultList, this.guessChecker.getResult(input));
 	}
 
 	/**
@@ -331,7 +332,7 @@ public class TestGuessChecker
 	 * @param foundList
 	 *            IPeg
 	 */
-	private void verifyResultSet(List<IPeg> expectedList, List<IPeg> foundList)
+	private static void verifyResultSet(List<IPeg> expectedList, List<IPeg> foundList)
 	{
 		// List must have same size.
 		assertEquals(expectedList.size(), foundList.size());
@@ -356,8 +357,8 @@ public class TestGuessChecker
 	@Test(expected = InvalidGuessInput.class)
 	public void testAnyLengthValidPegs() throws InvalidGuessInput, NonExistingColourException
 	{
-		String input = "RGBYYYY";
-		List<IPeg> foundPegs = guessChecker.getResult(input);
+		String input = "RGBYYYY"; //$NON-NLS-1$
+		List<IPeg> foundPegs = this.guessChecker.getResult(input);
 		assertEquals(input.length(), foundPegs.size());
 	}
 
@@ -370,7 +371,7 @@ public class TestGuessChecker
 	@Test(expected = InvalidGuessInput.class)
 	public void testOneValidPeg() throws InvalidGuessInput, NonExistingColourException
 	{
-		guessChecker.getResult("QGET");
+		this.guessChecker.getResult("QGET"); //$NON-NLS-1$
 	}
 
 	/**
@@ -383,7 +384,7 @@ public class TestGuessChecker
 	@Test(expected = InvalidGuessInput.class)
 	public void testNoValidPegs() throws InvalidGuessInput, NonExistingColourException
 	{
-		List<IPeg> foundPegs = guessChecker.getResult("QWET");
+		List<IPeg> foundPegs = this.guessChecker.getResult("QWET"); //$NON-NLS-1$
 		System.out.println(foundPegs.toString());
 		assertTrue(foundPegs.isEmpty());
 	}

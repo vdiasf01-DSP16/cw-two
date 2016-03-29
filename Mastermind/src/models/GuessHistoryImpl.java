@@ -19,12 +19,12 @@ public class GuessHistoryImpl implements IGuessHistory
 	@Override
 	public List<IGuessPlay> getPlayHistory()
 	{
-		return playedList;
+		return this.playedList;
 	}
 
 	@Override
 	public void addGuessPlay(IGuessPlay guessPlay)
 	{
-		playedList.add(guessPlay);
+		this.playedList.add(guessPlay);
 	}
 }

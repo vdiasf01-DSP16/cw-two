@@ -23,7 +23,7 @@ public class ColourLoaderFactory
 	 * 
 	 * @return the instance created
 	 */
-	public IColourLoader factoryMethod()
+	public static IColourLoader factoryMethod()
 	{
 		return Guice
 				.createInjector(new PropertiesModule(), new BindingsModule())

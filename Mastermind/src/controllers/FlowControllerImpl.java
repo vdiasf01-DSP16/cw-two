@@ -42,16 +42,16 @@ public class FlowControllerImpl implements IFlowController
 	@Override
 	public boolean isGameFinished()
 	{
-		return numberOfPlays - guessHistory.getPlayHistory().size() == 0;
+		return this.numberOfPlays - this.guessHistory.getPlayHistory().size() == 0;
 	}
 
 	@Override
 	public void addGuessPlay(IGuessPlay guessPlay) throws GuessHistoryFull
 	{
-		if (guessHistory.getPlayHistory().size()==numberOfPlays)
+		if (this.guessHistory.getPlayHistory().size()==this.numberOfPlays)
 		{
 			throw new GuessHistoryFull();
 		}
-		guessHistory.addGuessPlay(guessPlay);
+		this.guessHistory.addGuessPlay(guessPlay);
 	}
 }

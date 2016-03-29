@@ -24,6 +24,6 @@ public abstract class GameAbstractImpl implements Game
 	 */
 	public GameAbstractImpl(boolean easy)
 	{
-		showCode = easy;
+		this.showCode = easy;
 	}
 }

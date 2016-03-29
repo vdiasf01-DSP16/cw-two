@@ -35,9 +35,9 @@ public class TestPegFactory
 	@Before
 	public void setUp()
 	{
-		colourList = new HashMap<>();
-		colourList.put("B", "Blue");
-		pegCreator = new PegCreatorImpl(colourList);
+		this.colourList = new HashMap<>();
+		this.colourList.put("B", "Blue"); //$NON-NLS-1$ //$NON-NLS-2$
+		this.pegCreator = new PegCreatorImpl(this.colourList);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class TestPegFactory
 	@Test(expected = NonExistingColourException.class)
 	public void testExceptionWithNonExistingColour() throws InvalidGuessInput, NonExistingColourException
 	{
-		pegCreator.createPeg("Not known colour");
+		this.pegCreator.createPeg("Not known colour"); //$NON-NLS-1$
 	}
 
 	/**
@@ -61,9 +61,9 @@ public class TestPegFactory
 	@Test
 	public void testKnownColourGetPeg() throws InvalidGuessInput, NonExistingColourException
 	{
-		String expected = "Blue";
+		String expected = "Blue"; //$NON-NLS-1$
 		String actual = null;
-		actual = pegCreator.createPeg("B").getColourName();
+		actual = this.pegCreator.createPeg("B").getColourName(); //$NON-NLS-1$
 		assertEquals(expected, actual);
 	}
 	
@@ -73,6 +73,6 @@ public class TestPegFactory
 	@Test
 	public void testGetAPeg()
 	{
-		assertNotNull(pegCreator.createRandomPeg());
+		assertNotNull(this.pegCreator.createRandomPeg());
 	}
 }

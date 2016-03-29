@@ -23,12 +23,13 @@ public class StartTextImpl implements IStartText
 			@Named("codeLength") int codeLength,
 			@Named("numberOfPlays") int numberOfPlays)
 	{
-		this.startText = String.format(startText, codeLength, numberOfPlays);
+		this.startText = String.format(startText, new Integer(codeLength),
+				new Integer(numberOfPlays));
 	}
 
 	@Override
 	public void show()
 	{
-		System.out.println(startText);
+		System.out.println(this.startText);
 	}
 }

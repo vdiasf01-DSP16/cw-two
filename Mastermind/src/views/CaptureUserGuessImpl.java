@@ -11,15 +11,25 @@ import java.util.Scanner;
  */
 public class CaptureUserGuessImpl implements ICaptureUserGuess
 {
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see views.ICaptureUserGuess#captureGuess()
 	 */
 	@Override
 	public String captureGuess()
 	{
-		Scanner reader = new Scanner(System.in);
-		String userGuess = reader.nextLine();
-		reader.close();
+		String userGuess = new String();
+		try (Scanner reader = new Scanner(System.in))
+		{
+			reader.nextLine();
+			reader.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			System.exit(1);
+		}
 		return userGuess;
 	}
 }

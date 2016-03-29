@@ -18,42 +18,39 @@ import com.google.inject.Inject;
 public class ColourLoaderImpl implements IColourLoader
 {
 	private final Map<String, String> colours;
-	
+
 	/**
 	 * Constructor to create an instance of ColourLoader.
 	 */
 	@Inject
 	public ColourLoaderImpl()
 	{
-		File f = new File("resources/pegColours");
-		Scanner r = null;
-		try
+		this.colours = new HashMap<>();
+		
+		File f = new File("resources/pegColours"); //$NON-NLS-1$
+		try (Scanner r = new Scanner(f))
 		{
-			r = new Scanner(f);
+
+			String scan;
+			while (r.hasNextLine())
+			{
+				scan = r.nextLine();
+				String colourCode = scan.split(",")[0]; //$NON-NLS-1$
+				String colourName = scan.split(",")[1]; //$NON-NLS-1$
+				this.colours.put(colourCode, colourName);
+			}
 		}
 		catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
 			System.exit(1);
 		}
-		
-		colours = new HashMap<>();
-		
-		String scan;
-		while (r.hasNextLine())
-		{
-			scan = r.nextLine();
-			String colourCode = scan.split(",")[0];
-			String colourName = scan.split(",")[1];
-			colours.put(colourCode, colourName);
-		}
 	}
-
 
 	@Override
 	public Map<String, String> getColours()
 	{
-		return colours;
+		return this.colours;
 	}
 
 }

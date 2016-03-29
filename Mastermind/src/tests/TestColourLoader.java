@@ -38,15 +38,15 @@ public class TestColourLoader
 	{
 		// Initialises the loaded with this implementation and loads colours
 		// from file.
-		loader = new ColourLoaderImpl();
+		this.loader = new ColourLoaderImpl();
 
-		expected = new LinkedHashMap<>();
-		expected.put("B", "blue");
-		expected.put("G", "green");
-		expected.put("O", "orange");
-		expected.put("P", "purple");
-		expected.put("R", "red");
-		expected.put("Y", "yellow");
+		this.expected = new LinkedHashMap<>();
+		this.expected.put("B", "blue"); //$NON-NLS-1$ //$NON-NLS-2$
+		this.expected.put("G", "green"); //$NON-NLS-1$ //$NON-NLS-2$
+		this.expected.put("O", "orange"); //$NON-NLS-1$ //$NON-NLS-2$
+		this.expected.put("P", "purple"); //$NON-NLS-1$ //$NON-NLS-2$
+		this.expected.put("R", "red"); //$NON-NLS-1$ //$NON-NLS-2$
+		this.expected.put("Y", "yellow"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class TestColourLoader
 	@Test
 	public void testIsNotEmpty()
 	{
-		Map<String, String> loadedColours = loader.getColours();
+		Map<String, String> loadedColours = this.loader.getColours();
 		assertFalse(loadedColours.isEmpty());
 	}
 
@@ -65,8 +65,8 @@ public class TestColourLoader
 	@Test
 	public void testIsSameSize()
 	{
-		Map<String, String> loadedColours = loader.getColours();
-		assertTrue(expected.size() == loadedColours.size());
+		Map<String, String> loadedColours = this.loader.getColours();
+		assertTrue(this.expected.size() == loadedColours.size());
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class TestColourLoader
 	@Test
 	public void testSameElements()
 	{
-		Map<String, String> actual = loader.getColours();
-		assertEquals(expected, actual);
+		Map<String, String> actual = this.loader.getColours();
+		assertEquals(this.expected, actual);
 	}
 }

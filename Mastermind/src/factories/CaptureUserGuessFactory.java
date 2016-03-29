@@ -16,7 +16,7 @@ public class CaptureUserGuessFactory
 	 * 
 	 * @return the instance created
 	 */
-	public ICaptureUserGuess factoryMethod()
+	public static ICaptureUserGuess factoryMethod()
 	{
 		return Guice.createInjector(new ViewsModule())
 				.getInstance(ICaptureUserGuess.class);

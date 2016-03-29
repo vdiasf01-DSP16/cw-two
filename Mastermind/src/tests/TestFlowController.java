@@ -28,7 +28,7 @@ public class TestFlowController
 	@Before
 	public void setUp()
 	{
-		flowController = new FlowControllerImpl(numberOfPlays);
+		this.flowController = new FlowControllerImpl(this.numberOfPlays);
 	}
 
 	/**
@@ -40,11 +40,11 @@ public class TestFlowController
 	@Test
 	public void testGameIsFinished() throws GuessHistoryFull
 	{
-		for (int i = 0; i < numberOfPlays; i++)
+		for (int i = 0; i < this.numberOfPlays; i++)
 		{
-			flowController.addGuessPlay(null);
+			this.flowController.addGuessPlay(null);
 		}
-		assertTrue(flowController.isGameFinished());
+		assertTrue(this.flowController.isGameFinished());
 	}
 
 	/**
@@ -57,9 +57,9 @@ public class TestFlowController
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			flowController.addGuessPlay(null);
+			this.flowController.addGuessPlay(null);
 		}
-		assertFalse(flowController.isGameFinished());
+		assertFalse(this.flowController.isGameFinished());
 	}
 
 	/**
@@ -71,11 +71,11 @@ public class TestFlowController
 	@Test
 	public void testGameIsNotFinishedOnLastTry() throws GuessHistoryFull
 	{
-		for (int i = 0; i < numberOfPlays - 1; i++)
+		for (int i = 0; i < this.numberOfPlays - 1; i++)
 		{
-			flowController.addGuessPlay(null);
+			this.flowController.addGuessPlay(null);
 		}
-		assertFalse(flowController.isGameFinished());
+		assertFalse(this.flowController.isGameFinished());
 	}
 
 	/**
@@ -85,9 +85,9 @@ public class TestFlowController
 	@Test(expected = GuessHistoryFull.class)
 	public void testAddGamePlayToFullHistory() throws GuessHistoryFull
 	{
-		for (int i = 0; i < numberOfPlays + 1; i++)
+		for (int i = 0; i < this.numberOfPlays + 1; i++)
 		{
-			flowController.addGuessPlay(null);
+			this.flowController.addGuessPlay(null);
 		}
 	}
 }

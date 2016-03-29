@@ -17,11 +17,12 @@ public class PropertiesModule extends AbstractModule
 	@Override
 	protected void configure()
 	{
-		try
+		Properties props = new Properties();
+		try (FileInputStream inputStream = new FileInputStream(
+				"resources/config.properties")) //$NON-NLS-1$
 		{
-			Properties props = new Properties();
-			props.load(new FileInputStream(
-					"resources/config.properties"));
+			props.load(inputStream);
+			inputStream.close();
 			Names.bindProperties(binder(), props);
 		}
 		catch (IOException e)

@@ -36,7 +36,8 @@ public class TextBeforeGuessImpl implements ITextBeforeGuess
 	{
 		super();
 		this.easy = easy;
-		this.textBeforeGuess = String.format(textBeforeGuess, numberOfPlays);
+		this.textBeforeGuess = String.format(textBeforeGuess,
+				new Integer(numberOfPlays));
 		this.secretCodeText = secretCodeText;
 		this.secretCodeValue = secretCodeValue;
 	}
@@ -44,11 +45,11 @@ public class TextBeforeGuessImpl implements ITextBeforeGuess
 	@Override
 	public void show()
 	{
-		if (easy)
+		if (this.easy)
 		{
-			System.out.println(String.format(secretCodeText, secretCodeValue));
+			System.out.println(String.format(this.secretCodeText, this.secretCodeValue));
 		}
-		System.out.print(textBeforeGuess);
+		System.out.print(this.textBeforeGuess);
 	}
 
 }

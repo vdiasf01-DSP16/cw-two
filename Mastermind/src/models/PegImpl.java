@@ -36,7 +36,7 @@ public class PegImpl implements IPeg
 	@Override
 	public String getColour()
 	{
-		return colour;
+		return this.colour;
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class PegImpl implements IPeg
 	@Override
 	public String getColourName()
 	{
-		return colourName;
+		return this.colourName;
 	}
 
 	@Override
@@ -62,5 +62,11 @@ public class PegImpl implements IPeg
 		boolean colourNameMatch = this.getColourName()
 				.equals(otherPeg.getColourName());
 		return colourCodeMatch && colourNameMatch;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 }

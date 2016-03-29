@@ -37,7 +37,7 @@ public class GuessPlayImpl implements IGuessPlay {
 	 */
 	@Override
 	public List<IPeg> getGuessSet() {
-		return guessSet;
+		return this.guessSet;
 	}
 
 	/**
@@ -45,6 +45,6 @@ public class GuessPlayImpl implements IGuessPlay {
 	 */
 	@Override
 	public List<IPeg> getResultSet() {
-		return resultSet;
+		return this.resultSet;
 	}
 }

@@ -33,7 +33,7 @@ public class TestCodeGenerator
 	/**
 	 * List of known pegs.
 	 */
-	private IPeg greenPeg = new PegImpl("G", "Green");
+	private IPeg greenPeg = new PegImpl("G", "Green"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The peg generator mock.
@@ -48,8 +48,8 @@ public class TestCodeGenerator
 	@Before
 	public void setUp() throws NonExistingColourException
 	{
-		when(pegGeneratorMock.createRandomPeg()).thenReturn(greenPeg);
-		codeGenerator = new CodeGeneratorImpl(CODE_LENGTH, pegGeneratorMock);
+		when(this.pegGeneratorMock.createRandomPeg()).thenReturn(this.greenPeg);
+		this.codeGenerator = new CodeGeneratorImpl(CODE_LENGTH, this.pegGeneratorMock);
 	}
 
 	/**
@@ -59,8 +59,8 @@ public class TestCodeGenerator
 	@Test
 	public void testIsNotNull()
 	{
-		codeGenerator.generateNewCode();
-		assertNotNull(codeGenerator.getCode());
+		this.codeGenerator.generateNewCode();
+		assertNotNull(this.codeGenerator.getCode());
 	}
 
 	/**
@@ -70,8 +70,8 @@ public class TestCodeGenerator
 	@Test
 	public void testGeneratedCodeSize()
 	{
-		codeGenerator.generateNewCode();
-		int actual = codeGenerator.getCode().size();
+		this.codeGenerator.generateNewCode();
+		int actual = this.codeGenerator.getCode().size();
 		assertEquals(CODE_LENGTH, actual);
 	}
 }

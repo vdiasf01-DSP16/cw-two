@@ -27,8 +27,6 @@ public class GameImpl extends GameAbstractImpl
 	@Inject
 	private PegCreatorFactory pegCreatorFactory;
 	@Inject
-	private StartTextFactory startTextFactory;
-	@Inject
 	private TextBeforeGuessFactory textBeforeGuessFactory;
 	@Inject
 	private CodeGeneratorFactory codeGeneratorFactory;
@@ -45,25 +43,22 @@ public class GameImpl extends GameAbstractImpl
 		/*
 		 * Initialise factories, load properties and colours configuration
 		 */
-		ColourLoaderFactory colourLoaderFactory = new ColourLoaderFactory();
-		IColourLoader colourLoader = colourLoaderFactory.factoryMethod();
-		IPegCreator pegCreator = pegCreatorFactory
+		IColourLoader colourLoader = ColourLoaderFactory.factoryMethod();
+		IPegCreator pegCreator = this.pegCreatorFactory
 				.create(colourLoader.getColours());
-		FlowControllerFactory flowControllerFactory = new FlowControllerFactory();
-		ICodeGenerator codeGenerator = codeGeneratorFactory.create(pegCreator);
-		IStartText startText = startTextFactory.factoryMethod();
-		CaptureUserGuessFactory captureUserGuessFactory = new CaptureUserGuessFactory();
+		ICodeGenerator codeGenerator = this.codeGeneratorFactory.create(pegCreator);
+		IStartText startText = StartTextFactory.factoryMethod();
 
 		/*
 		 * Start the game run
 		 */
 		startText.show();
 		codeGenerator.generateNewCode();
-		IFlowController flowController = flowControllerFactory.factoryMethod();
-		ICaptureUserGuess captureUserGuess = captureUserGuessFactory
+		IFlowController flowController = FlowControllerFactory.factoryMethod();
+		ICaptureUserGuess captureUserGuess = CaptureUserGuessFactory
 				.factoryMethod();
 
-		ITextBeforeGuess textBeforeGuess = textBeforeGuessFactory
+		ITextBeforeGuess textBeforeGuess = this.textBeforeGuessFactory
 				.create(codeGenerator.getCodeString());
 
 		/*
@@ -75,7 +70,6 @@ public class GameImpl extends GameAbstractImpl
 		{
 			textBeforeGuess.show();
 			String userGuess = captureUserGuess.captureGuess();
-			System.out.println("#### CAPTURED: " + userGuess);
 
 			keepGuessing = flowController.isGameFinished();
 		} while (keepGuessing);

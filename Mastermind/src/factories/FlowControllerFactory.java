@@ -22,7 +22,7 @@ public class FlowControllerFactory
 	 * @return the instance created
 	 */
 	@Inject
-	public IFlowController factoryMethod()
+	public static IFlowController factoryMethod()
 	{
 		return Guice
 				.createInjector(new PropertiesModule(), new BindingsModule())
