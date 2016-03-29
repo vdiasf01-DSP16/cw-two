@@ -33,4 +33,13 @@ public interface IGuessChecker
 	public List<IPeg> getResult(List<IPeg> secretCode, String input)
 			throws NonExistingColourException, InvalidGuessSizeInput;
 
+	/**
+	 * Parse the user input and return a list of pegs.
+	 * 
+	 * @param input
+	 * @return the list of pegs from the user input
+	 * @throws NonExistingColourException
+	 */
+	public List<IPeg> parseUserInput(String input)
+			throws NonExistingColourException;
 }

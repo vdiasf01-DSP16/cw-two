@@ -43,6 +43,8 @@ class PrintHistoryImpl implements IPrintHistory
 	@Override
 	public void print(IGuessHistory guessHistory)
 	{
+		System.out.println();
+
 		// print first line of history (e.g. ".... Secret Code")
 		String hidden = new String();
 		for (int i = 0; i < this.codeLength; i++)
@@ -74,7 +76,8 @@ class PrintHistoryImpl implements IPrintHistory
 				}
 			}
 
-			System.out.print(guess + this.middleOfGuessHistory + result);
+			System.out
+					.println(guess + " " + this.middleOfGuessHistory + result); //$NON-NLS-1$
 		}
 
 		// print lines for missing tries
@@ -82,6 +85,8 @@ class PrintHistoryImpl implements IPrintHistory
 		{
 			System.out.println(hidden);
 		}
+		
+		System.out.println();
 	}
 
 }

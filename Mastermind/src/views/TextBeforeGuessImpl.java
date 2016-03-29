@@ -3,12 +3,8 @@
  */
 package views;
 
-import java.util.List;
-
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-
-import models.IPeg;
 
 /**
  * @author Pedro Gordo
@@ -33,9 +29,8 @@ class TextBeforeGuessImpl implements ITextBeforeGuess
 	}
 
 	@Override
-	public void show(List<IPeg> secretCode)
+	public void show()
 	{
-
 		System.out.print(this.textBeforeGuess);
 	}
 

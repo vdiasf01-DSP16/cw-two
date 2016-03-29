@@ -4,6 +4,7 @@
 package controllers;
 
 import controllers.exception.GuessHistoryFull;
+import models.IGuessHistory;
 import models.IGuessPlay;
 
 /**
@@ -29,4 +30,9 @@ public interface IFlowController
 	 *             full based on the allowed number of plays
 	 */
 	public void addGuessPlay(IGuessPlay guessPlay) throws GuessHistoryFull;
+
+	/**
+	 * @return the guess history
+	 */
+	public IGuessHistory getHistory();
 }

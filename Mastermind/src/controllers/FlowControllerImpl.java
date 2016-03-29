@@ -34,11 +34,6 @@ class FlowControllerImpl implements IFlowController
 		this.numberOfPlays = numberOfPlays;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see controllers.IFlowController#isGameFinished()
-	 */
 	@Override
 	public boolean isGameFinished()
 	{
@@ -53,5 +48,11 @@ class FlowControllerImpl implements IFlowController
 			throw new GuessHistoryFull();
 		}
 		this.guessHistory.addGuessPlay(guessPlay);
+	}
+
+	@Override
+	public IGuessHistory getHistory()
+	{
+		return this.guessHistory;
 	}
 }
