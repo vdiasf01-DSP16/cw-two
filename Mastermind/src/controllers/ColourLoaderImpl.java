@@ -21,14 +21,11 @@ public class ColourLoaderImpl implements IColourLoader
 	
 	/**
 	 * Constructor to create an instance of ColourLoader.
-	 * 
-	 * @param path
-	 *            to the file with the colours configuration
 	 */
 	@Inject
-	public ColourLoaderImpl(String path)
+	public ColourLoaderImpl()
 	{
-		File f = new File(path);
+		File f = new File("resources/pegColours");
 		Scanner r = null;
 		try
 		{

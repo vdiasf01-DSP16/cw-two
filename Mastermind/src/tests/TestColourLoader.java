@@ -43,7 +43,7 @@ public class TestColourLoader
 	{
 		// Initialises the loaded with this implementation and loads colours
 		// from file.
-		loader = new ColourLoaderImpl(PATH);
+		loader = new ColourLoaderImpl();
 
 		expected = new LinkedHashMap<>();
 		expected.put("B", "blue");
