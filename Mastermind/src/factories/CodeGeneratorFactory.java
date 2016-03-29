@@ -18,7 +18,7 @@ public class CodeGeneratorFactory
 	/**
 	 * Creates a CodeGenerator instance.
 	 * 
-	 * @param pegFactory
+	 * @param pegFactory //TODO inject this
 	 * @return instance of CodeGenerator
 	 */
 	public ICodeGenerator factoryMethod(IPegFactory pegFactory)

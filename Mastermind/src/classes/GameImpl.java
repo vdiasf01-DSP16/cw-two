@@ -7,11 +7,13 @@ import controllers.ICodeGenerator;
 import controllers.IColourLoader;
 import controllers.IFlowController;
 import controllers.IPegFactory;
+import factories.CaptureUserGuessFactory;
 import factories.CodeGeneratorFactory;
 import factories.ColourLoaderFactory;
 import factories.FlowControllerFactory;
 import factories.PegGeneratorFactory;
 import factories.StartTextFactory;
+import views.ICaptureUserGuess;
 import views.IStartText;
 import views.ITextBeforeGuess;
 import views.TextBeforeGuessFactory;
@@ -38,26 +40,28 @@ public class GameImpl extends GameAbstractImpl
 	@Override
 	public void runGames()
 	{
-
-		// Start text
-		IStartText startText = startTextFactory.factoryMethod();
-		startText.show();
-
-		// Load colours from file
+		/*
+		 * Initialise factories, load properties and colours configuration
+		 */
 		ColourLoaderFactory colourLoaderFactory = new ColourLoaderFactory();
 		IColourLoader colourLoader = colourLoaderFactory.factoryMethod();
-
-		// Create peg generator with loaded colours
 		IPegFactory pegFactory = pegGeneratorFactory
 				.create(colourLoader.getColours());
-
 		CodeGeneratorFactory codeGeneratorFactory = new CodeGeneratorFactory();
+		FlowControllerFactory flowControllerFactory = new FlowControllerFactory();
 		ICodeGenerator codeGenerator = codeGeneratorFactory
 				.factoryMethod(pegFactory);
-		codeGenerator.generateNewCode();
+		IStartText startText = startTextFactory.factoryMethod();
+		CaptureUserGuessFactory captureUserGuessFactory = new CaptureUserGuessFactory();
 
-		FlowControllerFactory flowControllerFactory = new FlowControllerFactory();
+		/*
+		 * Start the game run
+		 */
+		startText.show();
+		codeGenerator.generateNewCode();
 		IFlowController flowController = flowControllerFactory.factoryMethod();
+		ICaptureUserGuess captureUserGuess = captureUserGuessFactory
+				.factoryMethod();
 
 		ITextBeforeGuess textBeforeGuess = textBeforeGuessFactory
 				.create(codeGenerator.getCodeString());
@@ -70,6 +74,8 @@ public class GameImpl extends GameAbstractImpl
 		do
 		{
 			textBeforeGuess.show();
+			String userGuess = captureUserGuess.captureGuess();
+			System.out.println("#### CAPTURED: " + userGuess);
 
 			keepGuessing = flowController.isGameFinished();
 			// TODO change condition for loop

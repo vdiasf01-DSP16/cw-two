@@ -48,7 +48,7 @@ public class TextBeforeGuessImpl implements ITextBeforeGuess
 		{
 			System.out.println(String.format(secretCodeText, secretCodeValue));
 		}
-		System.out.println(textBeforeGuess);
+		System.out.print(textBeforeGuess);
 	}
 
 }
