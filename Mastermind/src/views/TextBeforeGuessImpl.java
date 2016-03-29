@@ -3,8 +3,12 @@
  */
 package views;
 
+import java.util.List;
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+
+import models.IPeg;
 
 /**
  * @author Pedro Gordo
@@ -38,11 +42,18 @@ class TextBeforeGuessImpl implements ITextBeforeGuess
 	}
 
 	@Override
-	public void show(String secretCode)
+	public void show(List<IPeg> secretCode)
 	{
 		if (this.easy)
 		{
-			System.out.println(String.format(this.secretCodeText, secretCode));
+			String secretCodeString = new String();
+			
+			for (IPeg peg : secretCode)
+			{
+				secretCodeString += peg.getColour();
+			}
+			
+			System.out.println(String.format(this.secretCodeText, secretCodeString));
 		}
 		System.out.print(this.textBeforeGuess);
 	}

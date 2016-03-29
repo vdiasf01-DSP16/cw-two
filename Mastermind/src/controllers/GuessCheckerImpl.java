@@ -5,8 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
-import controllers.exception.InvalidGuessInput;
+import controllers.exception.InvalidGuessSizeInput;
 import controllers.exception.NonExistingColourException;
 import models.IPeg;
 import models.PegImpl;
@@ -23,31 +24,36 @@ class GuessCheckerImpl implements IGuessChecker
 	private final IPeg BLACK_PEG = new PegImpl("B", "Black"); //$NON-NLS-1$ //$NON-NLS-2$
 	private final IPeg WHITE_PEG = new PegImpl("W", "White"); //$NON-NLS-1$//$NON-NLS-2$
 
-	private List<IPeg> secretCode;
 	private IPegCreator pegCreator;
+
+	private String errorForInvalidGuessSize;
 
 	/**
 	 * Constructor requiring the secret code.
+	 * 
 	 * @param pegCreator
 	 *            TODO Inject it
+	 * @param errorForInvalidGuessSize 
 	 */
 	@Inject
-	public GuessCheckerImpl(IPegCreator pegCreator)
+	public GuessCheckerImpl(IPegCreator pegCreator,
+			@Named("errorForInvalidGuessSize") String errorForInvalidGuessSize)
 	{
 		this.pegCreator = pegCreator;
+		this.errorForInvalidGuessSize = errorForInvalidGuessSize;
 	}
 
 	@Override
-	public List<IPeg> getResult(String input)
-			throws NonExistingColourException, InvalidGuessInput
+	public List<IPeg> getResult(List<IPeg> secretCode, String input)
+			throws NonExistingColourException, InvalidGuessSizeInput
 	{
 		// parse the user input and return a map where the key is the peg
 		// position
 		List<IPeg> pegList = parseUserInput(input);
 
 		// Validate arguments.
-		if (pegList.size() != this.secretCode.size())
-			throw new InvalidGuessInput();
+		if (pegList.size() != secretCode.size())
+			throw new InvalidGuessSizeInput(this.errorForInvalidGuessSize);
 
 		List<IPeg> finalList = new LinkedList<>();
 		int blackPegs = 0;
@@ -62,7 +68,7 @@ class GuessCheckerImpl implements IGuessChecker
 
 		// All matched colours regardless of index
 		List<IPeg> matchedPegByColour = new LinkedList<>();
-		for (IPeg secretPeg : this.secretCode)
+		for (IPeg secretPeg : secretCode)
 		{
 			// Look for user guess pegs that match this secret peg colour
 			for (IPeg guessPeg : pegList)
@@ -77,9 +83,9 @@ class GuessCheckerImpl implements IGuessChecker
 		}
 
 		// Subtract from white count the pegs that also match index.
-		for (int index = 0; index < this.secretCode.size(); index++)
+		for (int index = 0; index < secretCode.size(); index++)
 		{
-			IPeg secretPeg = this.secretCode.get(index);
+			IPeg secretPeg = secretCode.get(index);
 			IPeg guessPeg = pegList.get(index);
 
 			// If index and colour match, it is a black peg and not white
@@ -99,6 +105,7 @@ class GuessCheckerImpl implements IGuessChecker
 		{
 			finalList.add(this.WHITE_PEG);
 		}
+
 		return finalList;
 	}
 
@@ -125,9 +132,4 @@ class GuessCheckerImpl implements IGuessChecker
 		return pegList;
 	}
 
-	@Override
-	public void setNewSecretCode(List<IPeg> secretCode)
-	{
-		this.secretCode = secretCode;
-	}
 }

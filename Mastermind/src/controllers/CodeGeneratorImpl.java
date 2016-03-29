@@ -3,10 +3,8 @@
  */
 package controllers;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -22,7 +20,6 @@ class CodeGeneratorImpl implements ICodeGenerator
 
 	private IPegCreator pegCreator;
 	private final int CODE_LENGTH;
-	private Map<Integer, IPeg> generatedCodePegs;
 
 	/**
 	 * CodeGenerator constructor.
@@ -38,55 +35,18 @@ class CodeGeneratorImpl implements ICodeGenerator
 		this.pegCreator = pegCreator;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see controllers.ICodeGenerator#generateNewCode()
-	 */
 	@Override
-	public void generateNewCode()
+	public List<IPeg> generateNewCode()
 	{
-		this.generatedCodePegs = new HashMap<>();
+		List<IPeg> generatedCodePegs = new LinkedList<>();
 
 		for (int i = 0; i < this.CODE_LENGTH; i++)
 		{
 			IPeg peg = null;
 			peg = this.pegCreator.createRandomPeg();
-			this.generatedCodePegs.put(new Integer(i), peg);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see controllers.ICodeGenerator#getCode()
-	 */
-	@Override
-	public List<IPeg> getCode()
-	{
-		List<IPeg> finalList = new LinkedList<>();
-		for (int index = 0; index < this.generatedCodePegs.size(); index++)
-		{
-			finalList.add(this.generatedCodePegs.get(new Integer(index)));
-		}
-		return finalList;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see controllers.ICodeGenerator#getCodeString()
-	 */
-	@Override
-	public String getCodeString()
-	{
-		String codeString = new String();
-
-		for (IPeg peg : getCode())
-		{
-			codeString += peg.getColour();
+			generatedCodePegs.add(peg);
 		}
 
-		return codeString;
+		return generatedCodePegs;
 	}
 }

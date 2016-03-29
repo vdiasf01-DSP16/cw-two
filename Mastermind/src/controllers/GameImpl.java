@@ -1,8 +1,13 @@
 package controllers;
 
+import java.util.List;
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
+import controllers.exception.InvalidGuessSizeInput;
+import controllers.exception.NonExistingColourException;
+import models.IPeg;
 import views.CaptureUserGuessFactory;
 import views.ICaptureUserGuess;
 import views.IStartText;
@@ -33,17 +38,15 @@ class GameImpl extends GameAbstractImpl
 		ICaptureUserGuess captureUserGuess = CaptureUserGuessFactory
 				.factoryMethod();
 		IGuessChecker guessChecker = GuessCheckerFactory.create();
-		
+
 		/*
 		 * Start the game run
 		 */
 		startText.show();
-		codeGenerator.generateNewCode();
-		guessChecker.setNewSecretCode(codeGenerator.getCode());
+		List<IPeg> secretCode = codeGenerator.generateNewCode();
 		IFlowController flowController = FlowControllerFactory.factoryMethod();
 
-		ITextBeforeGuess textBeforeGuess = TextBeforeGuessFactory
-				.create();
+		ITextBeforeGuess textBeforeGuess = TextBeforeGuessFactory.create();
 
 		/*
 		 * This variable is used to know if the number of tries has finished or
@@ -52,9 +55,22 @@ class GameImpl extends GameAbstractImpl
 		boolean keepGuessing = false;
 		do
 		{
-			textBeforeGuess.show(codeGenerator.getCodeString());
-			String userGuess = captureUserGuess.captureGuess();
-			
+			boolean userInputIsValid = false;
+			do
+			{
+				try
+				{
+					textBeforeGuess.show(secretCode);
+					String userGuess = captureUserGuess.captureGuess();
+					guessChecker.getResult(secretCode, userGuess);
+					userInputIsValid = true;
+				}
+				catch (NonExistingColourException | InvalidGuessSizeInput e)
+				{
+					System.out.println(e.getMessage());
+				}
+			} while (userInputIsValid == false);
+
 			keepGuessing = flowController.isGameFinished();
 		} while (keepGuessing);
 	}

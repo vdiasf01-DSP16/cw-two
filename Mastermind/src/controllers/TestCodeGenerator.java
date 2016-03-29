@@ -40,13 +40,15 @@ public class TestCodeGenerator
 
 	/**
 	 * The initial test setup.
-	 * @throws NonExistingColourException 
+	 * 
+	 * @throws NonExistingColourException
 	 */
 	@Before
 	public void setUp() throws NonExistingColourException
 	{
 		when(this.pegGeneratorMock.createRandomPeg()).thenReturn(this.greenPeg);
-		this.codeGenerator = new CodeGeneratorImpl(CODE_LENGTH, this.pegGeneratorMock);
+		this.codeGenerator = new CodeGeneratorImpl(CODE_LENGTH,
+				this.pegGeneratorMock);
 	}
 
 	/**
@@ -56,8 +58,7 @@ public class TestCodeGenerator
 	@Test
 	public void testIsNotNull()
 	{
-		this.codeGenerator.generateNewCode();
-		assertNotNull(this.codeGenerator.getCode());
+		assertNotNull(this.codeGenerator.generateNewCode());
 	}
 
 	/**
@@ -67,8 +68,7 @@ public class TestCodeGenerator
 	@Test
 	public void testGeneratedCodeSize()
 	{
-		this.codeGenerator.generateNewCode();
-		int actual = this.codeGenerator.getCode().size();
+		int actual = this.codeGenerator.generateNewCode().size();
 		assertEquals(CODE_LENGTH, actual);
 	}
 }

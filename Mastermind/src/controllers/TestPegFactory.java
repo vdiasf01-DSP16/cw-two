@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import controllers.exception.InvalidGuessInput;
+import controllers.exception.InvalidGuessSizeInput;
 import controllers.exception.NonExistingColourException;
 
 /**
@@ -39,11 +39,11 @@ public class TestPegFactory
 	/**
 	 * Test that we get exception when we can't generate a peg.
 	 * 
-	 * @throws InvalidGuessInput
+	 * @throws InvalidGuessSizeInput
 	 * @throws NonExistingColourException 
 	 */
 	@Test(expected = NonExistingColourException.class)
-	public void testExceptionWithNonExistingColour() throws InvalidGuessInput, NonExistingColourException
+	public void testExceptionWithNonExistingColour() throws InvalidGuessSizeInput, NonExistingColourException
 	{
 		this.pegCreator.createPeg("Not known colour"); //$NON-NLS-1$
 	}
@@ -51,11 +51,11 @@ public class TestPegFactory
 	/**
 	 * Test Peg found is of a known colour.
 	 * 
-	 * @throws InvalidGuessInput
+	 * @throws InvalidGuessSizeInput
 	 * @throws NonExistingColourException 
 	 */
 	@Test
-	public void testKnownColourGetPeg() throws InvalidGuessInput, NonExistingColourException
+	public void testKnownColourGetPeg() throws InvalidGuessSizeInput, NonExistingColourException
 	{
 		String expected = "Blue"; //$NON-NLS-1$
 		String actual = null;
