@@ -6,10 +6,16 @@ package controllers;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import controllers.exception.GuessHistoryFull;
+import models.GuessPlayFactory;
+import models.IGuessPlay;
+import models.IPeg;
 
 /**
  * @author Pedro Gordo
@@ -19,14 +25,17 @@ public class TestFlowController
 {
 	private IFlowController flowController;
 	private int numberOfPlays = 10;
+	private IGuessPlay guessPlay;
 
 	/**
-	 * Initialize the private fields.
+	 * Initialise the private fields.
 	 */
 	@Before
 	public void setUp()
 	{
-		this.flowController = new FlowControllerImpl(this.numberOfPlays);
+		List<IPeg> dummyList = new ArrayList<>();
+		this.guessPlay = GuessPlayFactory.create(dummyList, dummyList);
+		this.flowController = new FlowControllerImpl(this.numberOfPlays, 4);
 	}
 
 	/**
@@ -40,7 +49,7 @@ public class TestFlowController
 	{
 		for (int i = 0; i < this.numberOfPlays; i++)
 		{
-			this.flowController.addGuessPlay(null);
+			this.flowController.addGuessPlay(this.guessPlay);
 		}
 		assertTrue(this.flowController.isGameFinished());
 	}
@@ -55,7 +64,7 @@ public class TestFlowController
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			this.flowController.addGuessPlay(null);
+			this.flowController.addGuessPlay(this.guessPlay);
 		}
 		assertFalse(this.flowController.isGameFinished());
 	}
@@ -71,7 +80,7 @@ public class TestFlowController
 	{
 		for (int i = 0; i < this.numberOfPlays - 1; i++)
 		{
-			this.flowController.addGuessPlay(null);
+			this.flowController.addGuessPlay(this.guessPlay);
 		}
 		assertFalse(this.flowController.isGameFinished());
 	}
@@ -85,7 +94,7 @@ public class TestFlowController
 	{
 		for (int i = 0; i < this.numberOfPlays + 1; i++)
 		{
-			this.flowController.addGuessPlay(null);
+			this.flowController.addGuessPlay(this.guessPlay);
 		}
 	}
 }
