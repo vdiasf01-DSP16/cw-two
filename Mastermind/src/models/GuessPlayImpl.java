@@ -9,7 +9,7 @@ import java.util.List;
  * @author Pedro Gordo
  *
  */
-public class GuessPlayImpl implements IGuessPlay {
+class GuessPlayImpl implements IGuessPlay {
 	
 	/**
 	 * The guess set list of pegs played.

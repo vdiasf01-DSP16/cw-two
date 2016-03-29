@@ -10,7 +10,7 @@ import models.IPeg;
  * @author Pedro Gordo
  *
  */
-public interface IPegCreator
+public interface IPegGenerator
 {
 
 	/**
@@ -30,4 +30,14 @@ public interface IPegCreator
 	 * @return IPeg
 	 */
 	public IPeg createRandomPeg();
+
+	/**
+	 * @return a black peg
+	 */
+	public IPeg getBlackPeg();
+
+	/**
+	 * @return a white peg
+	 */
+	public IPeg getWhitePeg();
 }

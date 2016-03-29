@@ -18,21 +18,21 @@ import models.IPeg;
 class CodeGeneratorImpl implements ICodeGenerator
 {
 
-	private IPegCreator pegCreator;
+	private IPegGenerator pegGenerator;
 	private final int CODE_LENGTH;
 
 	/**
 	 * CodeGenerator constructor.
 	 * 
 	 * @param codeLength
-	 * @param pegCreator 
+	 * @param pegGenerator 
 	 */
 	@Inject
-	public CodeGeneratorImpl(@Named("codeLength") int codeLength, IPegCreator pegCreator)
+	public CodeGeneratorImpl(@Named("codeLength") int codeLength, IPegGenerator pegGenerator)
 	{
 		super();
 		this.CODE_LENGTH = codeLength;
-		this.pegCreator = pegCreator;
+		this.pegGenerator = pegGenerator;
 	}
 
 	@Override
@@ -43,7 +43,7 @@ class CodeGeneratorImpl implements ICodeGenerator
 		for (int i = 0; i < this.CODE_LENGTH; i++)
 		{
 			IPeg peg = null;
-			peg = this.pegCreator.createRandomPeg();
+			peg = this.pegGenerator.createRandomPeg();
 			generatedCodePegs.add(peg);
 		}
 

@@ -12,13 +12,13 @@ import com.google.inject.name.Named;
 
 import controllers.exception.NonExistingColourException;
 import models.IPeg;
-import models.PegImpl;
+import static models.PegFactory.create;
 
 /**
  * @author Pedro Gordo
  *
  */
-class PegCreatorImpl implements IPegCreator
+class PegGeneratorImpl implements IPegGenerator
 {
 	private final Map<String, String> colours;
 	private final String errorForNonExistingColour;
@@ -27,10 +27,10 @@ class PegCreatorImpl implements IPegCreator
 	 * Constructor for PegGenerator. It requires the loaded colours list.
 	 * 
 	 * @param coloursLoader
-	 * @param errorForNonExistingColour 
+	 * @param errorForNonExistingColour
 	 */
 	@Inject
-	public PegCreatorImpl(IColourLoader coloursLoader,
+	public PegGeneratorImpl(IColourLoader coloursLoader,
 			@Named("errorForNonExistingColour") String errorForNonExistingColour)
 	{
 		this.colours = coloursLoader.getColours();
@@ -42,10 +42,11 @@ class PegCreatorImpl implements IPegCreator
 	{
 		if (this.colours.containsKey(colourCode) == false)
 		{
-			throw new NonExistingColourException(this.errorForNonExistingColour);
+			throw new NonExistingColourException(
+					this.errorForNonExistingColour);
 		}
 
-		return new PegImpl(colourCode, this.colours.get(colourCode));
+		return create(colourCode, this.colours.get(colourCode));
 	}
 
 	@Override
@@ -77,5 +78,17 @@ class PegCreatorImpl implements IPegCreator
 			System.exit(1);
 		}
 		return peg;
+	}
+
+	@Override
+	public IPeg getBlackPeg()
+	{
+		return create("B", "Black"); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	@Override
+	public IPeg getWhitePeg()
+	{
+		return create("W", "White"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 }

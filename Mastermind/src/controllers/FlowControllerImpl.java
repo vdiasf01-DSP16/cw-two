@@ -7,7 +7,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 import controllers.exception.GuessHistoryFull;
-import models.GuessHistoryImpl;
+import models.GuessHistoryFactory;
 import models.IGuessHistory;
 import models.IGuessPlay;
 
@@ -30,7 +30,7 @@ class FlowControllerImpl implements IFlowController
 	public FlowControllerImpl(@Named(value = "numberOfPlays") int numberOfPlays)
 	{
 		super();
-		this.guessHistory = new GuessHistoryImpl();
+		this.guessHistory = GuessHistoryFactory.create();
 		this.numberOfPlays = numberOfPlays;
 	}
 

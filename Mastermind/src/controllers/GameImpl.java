@@ -10,8 +10,10 @@ import controllers.exception.NonExistingColourException;
 import models.IPeg;
 import views.CaptureUserGuessFactory;
 import views.ICaptureUserGuess;
+import views.IPrintSecretCode;
 import views.IStartText;
 import views.ITextBeforeGuess;
+import views.PrintSecretCodeFactory;
 import views.StartTextFactory;
 import views.TextBeforeGuessFactory;
 
@@ -38,6 +40,7 @@ class GameImpl extends GameAbstractImpl
 		ICaptureUserGuess captureUserGuess = CaptureUserGuessFactory
 				.factoryMethod();
 		IGuessChecker guessChecker = GuessCheckerFactory.create();
+		IPrintSecretCode printSecretCode = PrintSecretCodeFactory.create();
 
 		/*
 		 * Start the game run
@@ -48,13 +51,14 @@ class GameImpl extends GameAbstractImpl
 
 		ITextBeforeGuess textBeforeGuess = TextBeforeGuessFactory.create();
 
-		/*
+		/*secretCode
 		 * This variable is used to know if the number of tries has finished or
 		 * if the secret code was guessed
 		 */
-		boolean keepGuessing = false;
 		do
 		{
+			printSecretCode.show(secretCode);
+
 			boolean userInputIsValid = false;
 			do
 			{
@@ -62,17 +66,19 @@ class GameImpl extends GameAbstractImpl
 				{
 					textBeforeGuess.show(secretCode);
 					String userGuess = captureUserGuess.captureGuess();
-					guessChecker.getResult(secretCode, userGuess);
+					List<IPeg> result = guessChecker.getResult(secretCode,
+							userGuess);
 					userInputIsValid = true;
 				}
 				catch (NonExistingColourException | InvalidGuessSizeInput e)
 				{
-					System.out.println(e.getMessage());
+					// TODO after output is similar to sample, consider
+					// uncomment this.
+					// System.out.println(e.getMessage());
 				}
 			} while (userInputIsValid == false);
 
-			keepGuessing = flowController.isGameFinished();
-		} while (keepGuessing);
+		} while (flowController.isGameFinished() == false);
 	}
 
 }

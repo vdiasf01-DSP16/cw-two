@@ -9,7 +9,7 @@ import java.util.List;
  * @author Pedro Gordo
  *
  */
-public class GuessHistoryImpl implements IGuessHistory
+class GuessHistoryImpl implements IGuessHistory
 {
 	/**
 	 * The list of past plays.

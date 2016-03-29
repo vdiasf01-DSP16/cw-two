@@ -14,7 +14,7 @@ import com.google.inject.name.Names;
  * @author Pedro Gordo
  *
  */
-public class ViewsModule extends AbstractModule
+class ViewsModule extends AbstractModule
 {
 
 	/*
@@ -48,6 +48,8 @@ public class ViewsModule extends AbstractModule
 		bind(IStartText.class).to(StartTextImpl.class);
 		bind(ITextBeforeGuess.class).to(TextBeforeGuessImpl.class);
 		bind(ICaptureUserGuess.class).to(CaptureUserGuessImpl.class);
+		bind(IPrintSecretCode.class).to(PrintSecretCodeImpl.class);
+		bind(IPrintHistory.class).to(PrintHistoryImpl.class);
 	}
 
 }

@@ -23,8 +23,8 @@ public class CodeGeneratorFactory
 	}
 
 	@Provides
-	static IPegCreator providePegCreator()
+	static IPegGenerator providePegCreator()
 	{
-		return PegCreatorFactory.create();
+		return PegGeneratorFactory.create();
 	}
 }

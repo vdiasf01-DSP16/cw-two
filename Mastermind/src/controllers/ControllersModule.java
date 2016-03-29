@@ -41,7 +41,7 @@ class ControllersModule extends AbstractModule
 		 * Bind interfaces to implementations
 		 */
 		bind(Game.class).to(GameImpl.class);
-		bind(IPegCreator.class).to(PegCreatorImpl.class);
+		bind(IPegGenerator.class).to(PegGeneratorImpl.class);
 		bind(IColourLoader.class).to(ColourLoaderImpl.class);
 		bind(IFlowController.class).to(FlowControllerImpl.class);
 		bind(ICodeGenerator.class).to(CodeGeneratorImpl.class);

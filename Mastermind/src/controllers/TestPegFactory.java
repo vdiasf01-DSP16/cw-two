@@ -15,7 +15,7 @@ import controllers.exception.InvalidGuessSizeInput;
 import controllers.exception.NonExistingColourException;
 
 /**
- * Testing the IPegCreator implementation.
+ * Testing the IPegGenerator implementation.
  * 
  * @author Pedro Gordo
  *
@@ -24,9 +24,9 @@ public class TestPegFactory
 {
 
 	/**
-	 * The IPegCreator object handler for test.
+	 * The IPegGenerator object handler for test.
 	 */
-	private IPegCreator pegCreator;
+	private IPegGenerator pegGenerator;
 
 	/**
 	 * Sets up a colour list that will be used as a dictionary to generate pegs.
@@ -39,7 +39,7 @@ public class TestPegFactory
 		Map<String, String> coloursMock = new HashMap<>();
 		coloursMock.put("B", "Blue"); //$NON-NLS-1$ //$NON-NLS-2$
 		when(colourLoader.getColours()).thenReturn(coloursMock);
-		this.pegCreator = new PegCreatorImpl(colourLoader, null);
+		this.pegGenerator = new PegGeneratorImpl(colourLoader, null);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class TestPegFactory
 	@Test(expected = NonExistingColourException.class)
 	public void testExceptionWithNonExistingColour() throws InvalidGuessSizeInput, NonExistingColourException
 	{
-		this.pegCreator.createPeg("Not known colour"); //$NON-NLS-1$
+		this.pegGenerator.createPeg("Not known colour"); //$NON-NLS-1$
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class TestPegFactory
 	{
 		String expected = "Blue"; //$NON-NLS-1$
 		String actual = null;
-		actual = this.pegCreator.createPeg("B").getColourName(); //$NON-NLS-1$
+		actual = this.pegGenerator.createPeg("B").getColourName(); //$NON-NLS-1$
 		assertEquals(expected, actual);
 	}
 	
@@ -75,6 +75,6 @@ public class TestPegFactory
 	@Test
 	public void testGetAPeg()
 	{
-		assertNotNull(this.pegCreator.createRandomPeg());
+		assertNotNull(this.pegGenerator.createRandomPeg());
 	}
 }

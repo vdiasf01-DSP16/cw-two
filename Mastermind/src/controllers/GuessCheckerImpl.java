@@ -10,7 +10,6 @@ import com.google.inject.name.Named;
 import controllers.exception.InvalidGuessSizeInput;
 import controllers.exception.NonExistingColourException;
 import models.IPeg;
-import models.PegImpl;
 
 /**
  * Implementation for GuessChecker.
@@ -20,25 +19,28 @@ import models.PegImpl;
  */
 class GuessCheckerImpl implements IGuessChecker
 {
-	private final IPeg BLACK_PEG = new PegImpl("B", "Black"); //$NON-NLS-1$ //$NON-NLS-2$
-	private final IPeg WHITE_PEG = new PegImpl("W", "White"); //$NON-NLS-1$//$NON-NLS-2$
+	private final IPeg BLACK_PEG;
+	private final IPeg WHITE_PEG;
 
-	private IPegCreator pegCreator;
+	private IPegGenerator pegGenerator;
 
 	private String errorForInvalidGuessSize;
 
 	/**
 	 * Constructor requiring the secret code.
 	 * 
-	 * @param pegCreator
+	 * @param pegGenerator
 	 * @param errorForInvalidGuessSize 
 	 */
 	@Inject
-	public GuessCheckerImpl(IPegCreator pegCreator,
+	public GuessCheckerImpl(IPegGenerator pegGenerator,
 			@Named("errorForInvalidGuessSize") String errorForInvalidGuessSize)
 	{
-		this.pegCreator = pegCreator;
+		this.pegGenerator = pegGenerator;
 		this.errorForInvalidGuessSize = errorForInvalidGuessSize;
+		
+		this.BLACK_PEG = pegGenerator.getBlackPeg();
+		this.WHITE_PEG = pegGenerator.getWhitePeg();
 	}
 
 	@Override
@@ -107,7 +109,8 @@ class GuessCheckerImpl implements IGuessChecker
 		return finalList;
 	}
 
-	private List<IPeg> parseUserInput(String input) throws NonExistingColourException
+	private List<IPeg> parseUserInput(String input)
+			throws NonExistingColourException
 	{
 		// Parse user input and generate pegs
 		List<String> parsedText = new ArrayList<>();
@@ -120,7 +123,7 @@ class GuessCheckerImpl implements IGuessChecker
 		for (int i = 0; i < parsedText.size(); i++)
 		{
 			String colour = parsedText.get(i);
-			IPeg iPeg = this.pegCreator.createPeg(colour);
+			IPeg iPeg = this.pegGenerator.createPeg(colour);
 			if (iPeg != null)
 			{
 				pegList.add(iPeg);

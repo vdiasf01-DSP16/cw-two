@@ -28,6 +28,7 @@ class CaptureUserGuessImpl implements ICaptureUserGuess
 			e.printStackTrace();
 			System.exit(1);
 		}
+		System.out.println();
 		return userGuess;
 	}
 }

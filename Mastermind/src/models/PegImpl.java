@@ -6,7 +6,7 @@ package models;
  * @author Pedro Gordo
  *
  */
-public class PegImpl implements IPeg
+class PegImpl implements IPeg
 {
 	/**
 	 * The Peg colour.
