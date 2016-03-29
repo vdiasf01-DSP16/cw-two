@@ -22,7 +22,7 @@ public interface IFlowController
 
 	/**
 	 * Adds a guess play to the current history.
-	 * TODO this is not immutable. Needs to be changed.
+	 * 
 	 * @param guessPlay
 	 * @throws GuessHistoryFull
 	 *             if we're trying to add a guess play to an history which is

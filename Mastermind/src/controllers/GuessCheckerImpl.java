@@ -20,7 +20,6 @@ import models.PegImpl;
  */
 class GuessCheckerImpl implements IGuessChecker
 {
-	// TODO create abstract pegs
 	private final IPeg BLACK_PEG = new PegImpl("B", "Black"); //$NON-NLS-1$ //$NON-NLS-2$
 	private final IPeg WHITE_PEG = new PegImpl("W", "White"); //$NON-NLS-1$//$NON-NLS-2$
 
@@ -32,7 +31,6 @@ class GuessCheckerImpl implements IGuessChecker
 	 * Constructor requiring the secret code.
 	 * 
 	 * @param pegCreator
-	 *            TODO Inject it
 	 * @param errorForInvalidGuessSize 
 	 */
 	@Inject

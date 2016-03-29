@@ -28,8 +28,7 @@ public interface IGuessChecker
 	 *             when the colour doesn't exist
 	 * @throws InvalidGuessSizeInput
 	 *             when the user input is not valid, for example if the guess is
-	 *             the wrong length TODO make sure there's a test for each of
-	 *             these cases
+	 *             the wrong length these cases
 	 */
 	public List<IPeg> getResult(List<IPeg> secretCode, String input)
 			throws NonExistingColourException, InvalidGuessSizeInput;

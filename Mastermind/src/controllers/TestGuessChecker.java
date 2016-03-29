@@ -318,7 +318,7 @@ public class TestGuessChecker
 		List<IPeg> resultList = new LinkedList<>();
 
 		assertEquals(0, this.guessChecker.getResult(this.secretCode, input).size());
-		verifyResultSet(resultList, this.guessChecker.getResult(null, input));
+		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
 	}
 
 	/**
