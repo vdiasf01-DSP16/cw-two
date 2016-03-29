@@ -1,6 +1,9 @@
 package views;
 
+import java.util.List;
+
 import models.IGuessHistory;
+import models.IPeg;
 
 /**
  * @author Pedro Gordo
@@ -13,5 +16,13 @@ public interface IPrintHistory
 	 * 
 	 * @param guessHistory
 	 */
-	public void print(IGuessHistory guessHistory);
+	public void printProgressingHistory(IGuessHistory guessHistory);
+
+	/**
+	 * Prints the history when the user got the answer right.
+	 * 
+	 * @param history
+	 * @param secretCode TODO
+	 */
+	public void printSuccessHistory(IGuessHistory history, List<IPeg> secretCode);
 }

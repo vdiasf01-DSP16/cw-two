@@ -47,9 +47,11 @@ class ViewsModule extends AbstractModule
 		 */
 		bind(IStartText.class).to(StartTextImpl.class);
 		bind(ITextBeforeGuess.class).to(TextBeforeGuessImpl.class);
-		bind(ICaptureUserGuess.class).to(CaptureUserGuessImpl.class);
+		bind(ICaptureUserGuess.class).to(CaptureUserInputImpl.class);
 		bind(IPrintSecretCode.class).to(PrintSecretCodeImpl.class);
 		bind(IPrintHistory.class).to(PrintHistoryImpl.class);
+		bind(IShowNumberOfTries.class).to(ShowNumberOfTriesImpl.class);
+		bind(ILastText.class).to(LastTextImpl.class);
 	}
 
 }

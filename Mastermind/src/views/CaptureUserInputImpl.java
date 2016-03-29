@@ -11,7 +11,7 @@ import org.apache.commons.io.input.CloseShieldInputStream;
  * @author Pedro Gordo
  *
  */
-class CaptureUserGuessImpl implements ICaptureUserGuess
+class CaptureUserInputImpl implements ICaptureUserGuess
 {
 	@Override
 	public String captureGuess()

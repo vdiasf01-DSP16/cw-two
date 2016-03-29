@@ -41,7 +41,7 @@ class PrintHistoryImpl implements IPrintHistory
 	}
 
 	@Override
-	public void print(IGuessHistory guessHistory)
+	public void printProgressingHistory(IGuessHistory guessHistory)
 	{
 		System.out.println();
 
@@ -55,6 +55,34 @@ class PrintHistoryImpl implements IPrintHistory
 
 		// print played history
 		List<IGuessPlay> guessPlayList = guessHistory.getPlayHistory();
+		printUserPlays(guessPlayList);
+
+		// print lines for missing tries
+		for (int i = 0; i < this.numberOfPlays - guessPlayList.size(); i++)
+		{
+			System.out.println(hidden);
+		}
+
+		System.out.println();
+	}
+
+	@Override
+	public void printSuccessHistory(IGuessHistory history,
+			List<IPeg> secretCode)
+	{
+		String secretCodeString = new String();
+		for (IPeg peg : secretCode)
+		{
+			secretCodeString += peg.getColour();
+		}
+		System.out.println(secretCodeString);
+
+		printUserPlays(history.getPlayHistory());
+	}
+
+	private void printUserPlays(List<IGuessPlay> guessPlayList)
+	{
+		// print played history
 		for (IGuessPlay guessPlay : guessPlayList)
 		{
 			String guess = new String();
@@ -72,21 +100,13 @@ class PrintHistoryImpl implements IPrintHistory
 			{
 				for (IPeg peg : guessPlay.getResultSet())
 				{
-					result += peg.getColour();
+					result += peg.getColourName() + " "; //$NON-NLS-1$
 				}
 			}
 
 			System.out
 					.println(guess + " " + this.middleOfGuessHistory + result); //$NON-NLS-1$
 		}
-
-		// print lines for missing tries
-		for (int i = 0; i < this.numberOfPlays - guessPlayList.size(); i++)
-		{
-			System.out.println(hidden);
-		}
-		
-		System.out.println();
 	}
 
 }

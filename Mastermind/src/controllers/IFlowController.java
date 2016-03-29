@@ -35,4 +35,14 @@ public interface IFlowController
 	 * @return the guess history
 	 */
 	public IGuessHistory getHistory();
+
+	/**
+	 * @return number of tries left
+	 */
+	public int getNumberOfTriesLeft();
+
+	/**
+	 * @return true if the user got the answer right, false otherwise
+	 */
+	public boolean hasCorrectAnswer();
 }
