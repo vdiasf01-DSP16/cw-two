@@ -14,7 +14,7 @@ public class GuessHistoryImpl implements IGuessHistory
 	/**
 	 * The list of past plays.
 	 */
-	private List<IGuessPlay> playedList = new ArrayList<>();
+	private final List<IGuessPlay> playedList = new ArrayList<>();
 
 	@Override
 	public List<IGuessPlay> getPlayHistory()

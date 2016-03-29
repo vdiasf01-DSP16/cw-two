@@ -14,12 +14,12 @@ public class GuessPlayImpl implements IGuessPlay {
 	/**
 	 * The guess set list of pegs played.
 	 */
-	private List<IPeg> guessSet;
+	private final List<IPeg> guessSet;
 	
 	/**
 	 * The result set of pegs for the guess played.
 	 */
-	private List<IPeg> resultSet;
+	private final List<IPeg> resultSet;
 
 	/**
 	 * Constructor.
