@@ -3,8 +3,9 @@
  */
 package views;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.util.Scanner;
+
+import org.apache.commons.io.input.CloseShieldInputStream;
 
 /**
  * @author Pedro Gordo
@@ -16,11 +17,10 @@ class CaptureUserGuessImpl implements ICaptureUserGuess
 	public String captureGuess()
 	{
 		String userGuess = new String();
-		try (BufferedReader br = new BufferedReader(
-				new InputStreamReader(System.in)))
+		try (Scanner reader = new Scanner(
+				new CloseShieldInputStream(System.in)))
 		{
-			userGuess = br.readLine();
-			br.close();
+			userGuess = reader.nextLine();
 		}
 		catch (Exception e)
 		{
