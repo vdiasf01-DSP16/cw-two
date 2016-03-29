@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.Set;
 
 import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
 
 import controllers.exception.NonExistingColourException;
 import models.IPeg;
@@ -18,19 +17,19 @@ import models.PegImpl;
  * @author Pedro Gordo
  *
  */
-public class PegCreatorImpl implements IPegCreator
+class PegCreatorImpl implements IPegCreator
 {
 	private final Map<String, String> colours;
 
 	/**
 	 * Constructor for PegGenerator. It requires the loaded colours list.
 	 * 
-	 * @param colours
+	 * @param coloursLoader
 	 */
 	@Inject
-	public PegCreatorImpl(@Assisted Map<String, String> colours)
+	public PegCreatorImpl(IColourLoader coloursLoader)
 	{
-		this.colours = colours;
+		this.colours = coloursLoader.getColours();
 	}
 
 	@Override

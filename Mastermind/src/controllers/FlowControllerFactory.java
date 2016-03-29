@@ -1,14 +1,10 @@
-package factories;
+package controllers;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 
-import controllers.IFlowController;
-import factories.modules.BindingsModule;
-import factories.modules.PropertiesModule;
-
 /**
- * Factory for FlowController.
+ * GameFactory for FlowController.
  * 
  * @author Pedro Gordo
  *
@@ -25,7 +21,7 @@ public class FlowControllerFactory
 	public static IFlowController factoryMethod()
 	{
 		return Guice
-				.createInjector(new PropertiesModule(), new BindingsModule())
+				.createInjector(new ControllersModule())
 				.getInstance(IFlowController.class);
 	}
 }

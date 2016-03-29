@@ -15,7 +15,7 @@ import models.IGuessPlay;
  * @author Pedro Gordo
  *
  */
-public class FlowControllerImpl implements IFlowController
+class FlowControllerImpl implements IFlowController
 {
 	private IGuessHistory guessHistory;
 	private int numberOfPlays;

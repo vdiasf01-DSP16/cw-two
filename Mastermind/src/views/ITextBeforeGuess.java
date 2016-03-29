@@ -7,7 +7,8 @@ package views;
 public interface ITextBeforeGuess
 {
 	/**
-	 * TODO remove arguments. These should be injected.
+	 * Show text to be printed before the user tries to guess the sceret code.
+	 * @param secretCode TODO
 	 */
-	public void show();
+	public void show(String secretCode);
 }

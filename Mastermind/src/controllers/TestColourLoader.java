@@ -1,4 +1,4 @@
-package tests;
+package controllers;
 
 import static org.junit.Assert.*;
 
@@ -7,9 +7,6 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import controllers.ColourLoaderImpl;
-import controllers.IColourLoader;
 
 /**
  * Testing the Colour Loader.

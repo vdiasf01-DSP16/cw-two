@@ -7,7 +7,7 @@ import com.google.inject.name.Named;
  * @author Pedro Gordo
  *
  */
-public class StartTextImpl implements IStartText
+class StartTextImpl implements IStartText
 {
 	private final String startText;
 

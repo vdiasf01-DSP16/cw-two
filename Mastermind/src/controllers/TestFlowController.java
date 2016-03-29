@@ -1,7 +1,7 @@
 /**
  * 
  */
-package tests;
+package controllers;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,8 +9,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import controllers.FlowControllerImpl;
-import controllers.IFlowController;
 import controllers.exception.GuessHistoryFull;
 
 /**

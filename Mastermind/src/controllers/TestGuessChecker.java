@@ -1,4 +1,4 @@
-package tests;
+package controllers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -12,9 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import controllers.GuessCheckerImpl;
-import controllers.IGuessChecker;
-import controllers.IPegCreator;
 import controllers.exception.InvalidGuessInput;
 import controllers.exception.NonExistingColourException;
 import models.IPeg;
@@ -84,7 +81,7 @@ public class TestGuessChecker
 		this.secretCode.add(pegGeneratorMock.createPeg("B")); // PEG_2 //$NON-NLS-1$
 		this.secretCode.add(pegGeneratorMock.createPeg("Y")); // PEG_3 //$NON-NLS-1$
 		this.secretCode.add(pegGeneratorMock.createPeg("R")); // PEG_4 //$NON-NLS-1$
-		this.guessChecker = new GuessCheckerImpl(this.secretCode, pegGeneratorMock);
+		this.guessChecker = new GuessCheckerImpl(pegGeneratorMock);
 	}
 
 	/**

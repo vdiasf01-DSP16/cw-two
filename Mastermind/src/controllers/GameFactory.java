@@ -1,17 +1,14 @@
-package classes;
+package controllers;
 
 import com.google.inject.Guice;
 
-import factories.modules.BindingsModule;
-import factories.modules.PropertiesModule;
-
 /**
- * Factory to create a Game instance.
+ * GameFactory to create a Game instance.
  * 
  * @author Keith Mannock
  *
  */
-public class Factory
+public class GameFactory
 {
 
 	/**
@@ -22,7 +19,7 @@ public class Factory
 	public static Game getInstance()
 	{
 		return Guice
-				.createInjector(new PropertiesModule(), new BindingsModule())
+				.createInjector(new ControllersModule())
 				.getInstance(Game.class);
 	}
 }

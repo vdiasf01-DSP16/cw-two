@@ -4,19 +4,17 @@
 package views;
 
 import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
 import com.google.inject.name.Named;
 
 /**
  * @author Pedro Gordo
  *
  */
-public class TextBeforeGuessImpl implements ITextBeforeGuess
+class TextBeforeGuessImpl implements ITextBeforeGuess
 {
 	private final boolean easy;
 	private final String textBeforeGuess;
 	private final String secretCodeText;
-	private final String secretCodeValue;
 
 	/**
 	 * @param easy
@@ -25,29 +23,26 @@ public class TextBeforeGuessImpl implements ITextBeforeGuess
 	 * @param textBeforeGuess
 	 *            this text will be formatted with the number of plays
 	 * @param numberOfPlays
-	 * @param secretCodeValue
 	 */
 	@Inject
 	public TextBeforeGuessImpl(@Named("easy") boolean easy,
 			@Named("secretCodeText") String secretCodeText,
 			@Named("textBeforeGuess") String textBeforeGuess,
-			@Named("numberOfPlays") int numberOfPlays,
-			@Assisted String secretCodeValue)
+			@Named("numberOfPlays") int numberOfPlays)
 	{
 		super();
 		this.easy = easy;
 		this.textBeforeGuess = String.format(textBeforeGuess,
 				new Integer(numberOfPlays));
 		this.secretCodeText = secretCodeText;
-		this.secretCodeValue = secretCodeValue;
 	}
 
 	@Override
-	public void show()
+	public void show(String secretCode)
 	{
 		if (this.easy)
 		{
-			System.out.println(String.format(this.secretCodeText, this.secretCodeValue));
+			System.out.println(String.format(this.secretCodeText, secretCode));
 		}
 		System.out.print(this.textBeforeGuess);
 	}

@@ -15,7 +15,7 @@ import com.google.inject.Inject;
  * @author Pedro Gordo
  *
  */
-public class ColourLoaderImpl implements IColourLoader
+class ColourLoaderImpl implements IColourLoader
 {
 	private final Map<String, String> colours;
 

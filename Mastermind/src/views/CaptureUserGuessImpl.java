@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @author Pedro Gordo
  *
  */
-public class CaptureUserGuessImpl implements ICaptureUserGuess
+class CaptureUserGuessImpl implements ICaptureUserGuess
 {
 	/*
 	 * (non-Javadoc)

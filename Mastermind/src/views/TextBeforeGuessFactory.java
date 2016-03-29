@@ -3,17 +3,22 @@
  */
 package views;
 
+import com.google.inject.Guice;
+
 /**
  * @author Pedro Gordo
  *
  */
-public interface TextBeforeGuessFactory
+public class TextBeforeGuessFactory
 {
 	/**
 	 * Creates an instance of ITextBeforeGuess.
 	 * 
-	 * @param secretCodeValue
 	 * @return the instance created
 	 */
-	public ITextBeforeGuess create(String secretCodeValue);
+	public static ITextBeforeGuess create()
+	{
+		return Guice.createInjector(new ViewsModule())
+				.getInstance(ITextBeforeGuess.class);
+	}
 }

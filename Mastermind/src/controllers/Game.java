@@ -1,4 +1,4 @@
-package classes;
+package controllers;
 
 /**
  * Interface with the method to start the game.

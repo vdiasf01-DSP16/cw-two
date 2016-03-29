@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.inject.Inject;
+
 import controllers.exception.InvalidGuessInput;
 import controllers.exception.NonExistingColourException;
 import models.IPeg;
@@ -15,7 +17,7 @@ import models.PegImpl;
  * @author Pedro Gordo
  *
  */
-public class GuessCheckerImpl implements IGuessChecker
+class GuessCheckerImpl implements IGuessChecker
 {
 	// TODO create abstract pegs
 	private final IPeg BLACK_PEG = new PegImpl("B", "Black"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -26,14 +28,12 @@ public class GuessCheckerImpl implements IGuessChecker
 
 	/**
 	 * Constructor requiring the secret code.
-	 * 
-	 * @param secretCode
 	 * @param pegCreator
 	 *            TODO Inject it
 	 */
-	public GuessCheckerImpl(List<IPeg> secretCode, IPegCreator pegCreator)
+	@Inject
+	public GuessCheckerImpl(IPegCreator pegCreator)
 	{
-		this.secretCode = secretCode;
 		this.pegCreator = pegCreator;
 	}
 
@@ -123,5 +123,11 @@ public class GuessCheckerImpl implements IGuessChecker
 			}
 		}
 		return pegList;
+	}
+
+	@Override
+	public void setNewSecretCode(List<IPeg> secretCode)
+	{
+		this.secretCode = secretCode;
 	}
 }

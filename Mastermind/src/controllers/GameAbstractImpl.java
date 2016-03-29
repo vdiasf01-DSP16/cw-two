@@ -1,10 +1,10 @@
-package classes;
+package controllers;
 
 /**
  * @author Keith Mannock
  *
  */
-public abstract class GameAbstractImpl implements Game
+abstract class GameAbstractImpl implements Game
 {
 	/**
 	 * if showCode is true then the secret code is revealed before the game

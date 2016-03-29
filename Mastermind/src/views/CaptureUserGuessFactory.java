@@ -1,9 +1,6 @@
-package factories;
+package views;
 
 import com.google.inject.Guice;
-
-import views.ICaptureUserGuess;
-import views.ViewsModule;
 
 /**
  * @author Pedro Gordo

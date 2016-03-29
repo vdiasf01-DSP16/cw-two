@@ -1,4 +1,4 @@
-package classes;
+package controllers;
 
 /**
  * @author Keith Mannock
@@ -16,7 +16,7 @@ public class MastermindDriver
 	 */
 	public static void main(String[] args)
 	{
-		Game g = Factory.getInstance();
+		Game g = GameFactory.getInstance();
 		g.runGames();
 	}
 }

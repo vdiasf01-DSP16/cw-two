@@ -1,7 +1,7 @@
 /**
  * 
  */
-package tests;
+package controllers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -12,9 +12,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import controllers.CodeGeneratorImpl;
-import controllers.ICodeGenerator;
-import controllers.IPegCreator;
 import controllers.exception.NonExistingColourException;
 import models.IPeg;
 import models.PegImpl;

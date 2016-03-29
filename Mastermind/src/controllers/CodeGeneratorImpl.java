@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
 import com.google.inject.name.Named;
 
 import models.IPeg;
@@ -18,7 +17,7 @@ import models.IPeg;
  * @author Pedro Gordo
  *
  */
-public class CodeGeneratorImpl implements ICodeGenerator
+class CodeGeneratorImpl implements ICodeGenerator
 {
 
 	private IPegCreator pegCreator;
@@ -32,8 +31,7 @@ public class CodeGeneratorImpl implements ICodeGenerator
 	 * @param pegCreator 
 	 */
 	@Inject
-	public CodeGeneratorImpl(@Named("codeLength") int codeLength,
-			@Assisted IPegCreator pegCreator)
+	public CodeGeneratorImpl(@Named("codeLength") int codeLength, IPegCreator pegCreator)
 	{
 		super();
 		this.CODE_LENGTH = codeLength;

@@ -30,4 +30,11 @@ public interface IGuessChecker
 	 */
 	public List<IPeg> getResult(String input)
 			throws NonExistingColourException, InvalidGuessInput;
+
+	/**
+	 * Sets a new secret code. To be used at each new iteration of the game.
+	 * 
+	 * @param secretCode
+	 */
+	public void setNewSecretCode(List<IPeg> secretCode);
 }

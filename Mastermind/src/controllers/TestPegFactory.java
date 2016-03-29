@@ -1,15 +1,13 @@
-package tests;
+package controllers;
 
-import static org.junit.Assert.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
-import controllers.IPegCreator;
-import controllers.PegCreatorImpl;
 import controllers.exception.InvalidGuessInput;
 import controllers.exception.NonExistingColourException;
 
@@ -27,17 +25,15 @@ public class TestPegFactory
 	 */
 	private IPegCreator pegCreator;
 
-	private Map<String, String> colourList;
-
 	/**
 	 * Sets up a colour list that will be used as a dictionary to generate pegs.
 	 */
 	@Before
 	public void setUp()
 	{
-		this.colourList = new HashMap<>();
-		this.colourList.put("B", "Blue"); //$NON-NLS-1$ //$NON-NLS-2$
-		this.pegCreator = new PegCreatorImpl(this.colourList);
+		IColourLoader colourLoader = Mockito.mock(IColourLoader.class);
+		when(colourLoader.getColours().get("B")).thenReturn("Blue"); //$NON-NLS-1$ //$NON-NLS-2$
+		this.pegCreator = new PegCreatorImpl(colourLoader);
 	}
 
 	/**

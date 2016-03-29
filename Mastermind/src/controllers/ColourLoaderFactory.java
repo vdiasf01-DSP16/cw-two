@@ -1,16 +1,12 @@
 /**
  * 
  */
-package factories;
+package controllers;
 
 import com.google.inject.Guice;
 
-import controllers.IColourLoader;
-import factories.modules.BindingsModule;
-import factories.modules.PropertiesModule;
-
 /**
- * Factory for ColourLoader.
+ * GameFactory for ColourLoader.
  * 
  * @author Pedro Gordo
  *
@@ -26,7 +22,7 @@ public class ColourLoaderFactory
 	public static IColourLoader factoryMethod()
 	{
 		return Guice
-				.createInjector(new PropertiesModule(), new BindingsModule())
+				.createInjector(new ControllersModule())
 				.getInstance(IColourLoader.class);
 	}
 }

@@ -1,10 +1,6 @@
-package factories;
+package views;
 
 import com.google.inject.Guice;
-
-import factories.modules.BindingsModule;
-import factories.modules.PropertiesModule;
-import views.IStartText;
 
 /**
  * @author Pedro Gordo
@@ -20,7 +16,7 @@ public class StartTextFactory
 	public static IStartText factoryMethod()
 	{
 		return Guice
-				.createInjector(new PropertiesModule(), new BindingsModule())
+				.createInjector(new ViewsModule())
 				.getInstance(IStartText.class);
 	}
 }
