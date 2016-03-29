@@ -18,7 +18,9 @@ public interface IGuessChecker
 	/**
 	 * Returns a list of pegs based on the user input. This input is then
 	 * checked against the secret code.
-	 * @param secretCode TODO
+	 * 
+	 * @param secretCode
+	 *            the generated secret code for this game run
 	 * @param input
 	 * 
 	 * @return the list of peg objects

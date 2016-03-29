@@ -11,8 +11,10 @@ import models.IPeg;
 public interface ITextBeforeGuess
 {
 	/**
-	 * Show text to be printed before the user tries to guess the sceret code.
-	 * @param secretCode TODO
+	 * Show text to be printed before the user tries to guess the secret code.
+	 * 
+	 * @param secretCode
+	 *            the generated secret code for this game run
 	 */
 	public void show(List<IPeg> secretCode);
 }
