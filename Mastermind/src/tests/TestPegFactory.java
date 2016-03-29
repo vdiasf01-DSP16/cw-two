@@ -8,13 +8,13 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import controllers.IPegFactory;
-import controllers.PegFactoryImpl;
+import controllers.IPegCreator;
+import controllers.PegCreatorImpl;
 import controllers.exception.InvalidGuessInput;
 import controllers.exception.NonExistingColourException;
 
 /**
- * Testing the IPegFactory implementation.
+ * Testing the IPegCreator implementation.
  * 
  * @author Pedro Gordo
  *
@@ -23,9 +23,9 @@ public class TestPegFactory
 {
 
 	/**
-	 * The IPegFactory object handler for test.
+	 * The IPegCreator object handler for test.
 	 */
-	private IPegFactory pegFactory;
+	private IPegCreator pegCreator;
 
 	private Map<String, String> colourList;
 
@@ -37,7 +37,7 @@ public class TestPegFactory
 	{
 		colourList = new HashMap<>();
 		colourList.put("B", "Blue");
-		pegFactory = new PegFactoryImpl(colourList);
+		pegCreator = new PegCreatorImpl(colourList);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class TestPegFactory
 	@Test(expected = NonExistingColourException.class)
 	public void testExceptionWithNonExistingColour() throws InvalidGuessInput, NonExistingColourException
 	{
-		pegFactory.getPeg("Not known colour");
+		pegCreator.createPeg("Not known colour");
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class TestPegFactory
 	{
 		String expected = "Blue";
 		String actual = null;
-		actual = pegFactory.getPeg("B").getColourName();
+		actual = pegCreator.createPeg("B").getColourName();
 		assertEquals(expected, actual);
 	}
 	
@@ -73,6 +73,6 @@ public class TestPegFactory
 	@Test
 	public void testGetAPeg()
 	{
-		assertNotNull(pegFactory.getAPeg());
+		assertNotNull(pegCreator.createRandomPeg());
 	}
 }

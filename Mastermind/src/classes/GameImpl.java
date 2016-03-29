@@ -6,12 +6,12 @@ import com.google.inject.name.Named;
 import controllers.ICodeGenerator;
 import controllers.IColourLoader;
 import controllers.IFlowController;
-import controllers.IPegFactory;
+import controllers.IPegCreator;
 import factories.CaptureUserGuessFactory;
 import factories.CodeGeneratorFactory;
 import factories.ColourLoaderFactory;
 import factories.FlowControllerFactory;
-import factories.PegGeneratorFactory;
+import factories.PegCreatorFactory;
 import factories.StartTextFactory;
 import views.ICaptureUserGuess;
 import views.IStartText;
@@ -25,7 +25,7 @@ import views.TextBeforeGuessFactory;
 public class GameImpl extends GameAbstractImpl
 {
 	@Inject
-	private PegGeneratorFactory pegGeneratorFactory;
+	private PegCreatorFactory pegCreatorFactory;
 	@Inject
 	private StartTextFactory startTextFactory;
 	@Inject
@@ -47,10 +47,10 @@ public class GameImpl extends GameAbstractImpl
 		 */
 		ColourLoaderFactory colourLoaderFactory = new ColourLoaderFactory();
 		IColourLoader colourLoader = colourLoaderFactory.factoryMethod();
-		IPegFactory pegFactory = pegGeneratorFactory
+		IPegCreator pegCreator = pegCreatorFactory
 				.create(colourLoader.getColours());
 		FlowControllerFactory flowControllerFactory = new FlowControllerFactory();
-		ICodeGenerator codeGenerator = codeGeneratorFactory.create(pegFactory);
+		ICodeGenerator codeGenerator = codeGeneratorFactory.create(pegCreator);
 		IStartText startText = startTextFactory.factoryMethod();
 		CaptureUserGuessFactory captureUserGuessFactory = new CaptureUserGuessFactory();
 

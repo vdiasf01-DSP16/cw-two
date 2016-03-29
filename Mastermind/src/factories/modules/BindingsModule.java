@@ -11,10 +11,10 @@ import controllers.FlowControllerImpl;
 import controllers.ICodeGenerator;
 import controllers.IColourLoader;
 import controllers.IFlowController;
-import controllers.IPegFactory;
-import controllers.PegFactoryImpl;
+import controllers.IPegCreator;
+import controllers.PegCreatorImpl;
 import factories.CodeGeneratorFactory;
-import factories.PegGeneratorFactory;
+import factories.PegCreatorFactory;
 import views.IStartText;
 import views.ITextBeforeGuess;
 import views.StartTextImpl;
@@ -37,8 +37,8 @@ public class BindingsModule extends AbstractModule
 		bind(Game.class).to(GameImpl.class);
 
 		install(new FactoryModuleBuilder()
-				.implement(IPegFactory.class, PegFactoryImpl.class)
-				.build(PegGeneratorFactory.class));
+				.implement(IPegCreator.class, PegCreatorImpl.class)
+				.build(PegCreatorFactory.class));
 
 		bind(IColourLoader.class).to(ColourLoaderImpl.class);
 

@@ -1,7 +1,7 @@
 package factories;
 
 import controllers.ICodeGenerator;
-import controllers.IPegFactory;
+import controllers.IPegCreator;
 
 /**
  * Factory for CodeGenerator
@@ -14,8 +14,8 @@ public interface CodeGeneratorFactory
 	/**
 	 * Creates a CodeGenerator instance.
 	 * 
-	 * @param pegFactory
+	 * @param pegCreator
 	 * @return instance of CodeGenerator
 	 */
-	public ICodeGenerator create(IPegFactory pegFactory);
+	public ICodeGenerator create(IPegCreator pegCreator);
 }

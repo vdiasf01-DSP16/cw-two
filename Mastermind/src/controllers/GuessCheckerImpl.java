@@ -22,19 +22,19 @@ public class GuessCheckerImpl implements IGuessChecker
 	private final IPeg WHITE_PEG = new PegImpl("W", "White");
 
 	private List<IPeg> secretCode;
-	private IPegFactory pegFactory;
+	private IPegCreator pegCreator;
 
 	/**
 	 * Constructor requiring the secret code.
 	 * 
 	 * @param secretCode
-	 * @param pegFactory
+	 * @param pegCreator
 	 *            TODO Inject it
 	 */
-	public GuessCheckerImpl(List<IPeg> secretCode, IPegFactory pegFactory)
+	public GuessCheckerImpl(List<IPeg> secretCode, IPegCreator pegCreator)
 	{
 		this.secretCode = secretCode;
-		this.pegFactory = pegFactory;
+		this.pegCreator = pegCreator;
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class GuessCheckerImpl implements IGuessChecker
 		for (int i = 0; i < parsedText.size(); i++)
 		{
 			String colour = parsedText.get(i);
-			IPeg iPeg = pegFactory.getPeg(colour);
+			IPeg iPeg = pegCreator.createPeg(colour);
 			if (iPeg != null)
 			{
 				pegList.add(iPeg);

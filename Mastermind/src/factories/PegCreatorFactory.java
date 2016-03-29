@@ -2,14 +2,13 @@ package factories;
 
 import java.util.Map;
 
-import controllers.IPegFactory;
+import controllers.IPegCreator;
 
 /**
  * @author Pedro Gordo
- * TODO a factory building a factory? Revise this...
  *
  */
-public interface PegGeneratorFactory
+public interface PegCreatorFactory
 {
 	/**
 	 * Creates an instance of PegGenerator.
@@ -17,5 +16,5 @@ public interface PegGeneratorFactory
 	 * @param colourList
 	 * @return the instance created
 	 */
-	public IPegFactory create(Map<String, String> colourList);
+	public IPegCreator create(Map<String, String> colourList);
 }

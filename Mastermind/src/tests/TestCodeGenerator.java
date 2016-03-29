@@ -14,7 +14,7 @@ import org.mockito.Mockito;
 
 import controllers.CodeGeneratorImpl;
 import controllers.ICodeGenerator;
-import controllers.IPegFactory;
+import controllers.IPegCreator;
 import controllers.exception.NonExistingColourException;
 import models.IPeg;
 import models.PegImpl;
@@ -39,7 +39,7 @@ public class TestCodeGenerator
 	 * The peg generator mock.
 	 */
 	@Mock
-	private IPegFactory pegGeneratorMock = Mockito.mock(IPegFactory.class);
+	private IPegCreator pegGeneratorMock = Mockito.mock(IPegCreator.class);
 
 	/**
 	 * The initial test setup.
@@ -48,7 +48,7 @@ public class TestCodeGenerator
 	@Before
 	public void setUp() throws NonExistingColourException
 	{
-		when(pegGeneratorMock.getAPeg()).thenReturn(greenPeg);
+		when(pegGeneratorMock.createRandomPeg()).thenReturn(greenPeg);
 		codeGenerator = new CodeGeneratorImpl(CODE_LENGTH, pegGeneratorMock);
 	}
 

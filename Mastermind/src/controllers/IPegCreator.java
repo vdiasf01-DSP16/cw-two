@@ -10,7 +10,7 @@ import models.IPeg;
  * @author Pedro Gordo
  *
  */
-public interface IPegFactory
+public interface IPegCreator
 {
 
 	/**
@@ -22,12 +22,12 @@ public interface IPegFactory
 	 *             in case the colour doesn't exist in the resources/pegColours
 	 *             file
 	 */
-	public IPeg getPeg(String colour) throws NonExistingColourException;
+	public IPeg createPeg(String colour) throws NonExistingColourException;
 
 	/**
 	 * Returns a generated Peg from a known random colour list.
 	 * 
 	 * @return IPeg
 	 */
-	public IPeg getAPeg();
+	public IPeg createRandomPeg();
 }

@@ -18,7 +18,7 @@ import models.PegImpl;
  * @author Pedro Gordo
  *
  */
-public class PegFactoryImpl implements IPegFactory
+public class PegCreatorImpl implements IPegCreator
 {
 	private final Map<String, String> colours;
 
@@ -28,18 +28,13 @@ public class PegFactoryImpl implements IPegFactory
 	 * @param colours
 	 */
 	@Inject
-	public PegFactoryImpl(@Assisted Map<String, String> colours)
+	public PegCreatorImpl(@Assisted Map<String, String> colours)
 	{
 		this.colours = colours;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see controllers.IPegFactory#getPeg(java.lang.String)
-	 */
 	@Override
-	public IPeg getPeg(String colourCode) throws NonExistingColourException
+	public IPeg createPeg(String colourCode) throws NonExistingColourException
 	{
 		if (colours.containsKey(colourCode) == false)
 		{
@@ -49,13 +44,8 @@ public class PegFactoryImpl implements IPegFactory
 		return new PegImpl(colourCode, colours.get(colourCode));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see controllers.IPegFactory#getAPeg()
-	 */
 	@Override
-	public IPeg getAPeg()
+	public IPeg createRandomPeg()
 	{
 		Set<String> keySet = colours.keySet();
 		int size = keySet.size();
@@ -72,10 +62,10 @@ public class PegFactoryImpl implements IPegFactory
 			i++;
 		}
 
-		IPeg peg = null; 
+		IPeg peg = null;
 		try
 		{
-			peg = getPeg(colourCode);
+			peg = createPeg(colourCode);
 		}
 		catch (NonExistingColourException e)
 		{

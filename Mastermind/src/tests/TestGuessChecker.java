@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 
 import controllers.GuessCheckerImpl;
 import controllers.IGuessChecker;
-import controllers.IPegFactory;
+import controllers.IPegCreator;
 import controllers.exception.InvalidGuessInput;
 import controllers.exception.NonExistingColourException;
 import models.IPeg;
@@ -67,22 +67,22 @@ public class TestGuessChecker
 	@Before
 	public void setUp() throws NonExistingColourException
 	{
-		IPegFactory pegGeneratorMock = Mockito.mock(IPegFactory.class);
+		IPegCreator pegGeneratorMock = Mockito.mock(IPegCreator.class);
 
-		when(pegGeneratorMock.getPeg("G"))
+		when(pegGeneratorMock.createPeg("G"))
 				.thenReturn(new PegImpl("G", "Green"));
-		when(pegGeneratorMock.getPeg("B")).thenReturn(new PegImpl("B", "Blue"));
-		when(pegGeneratorMock.getPeg("Y"))
+		when(pegGeneratorMock.createPeg("B")).thenReturn(new PegImpl("B", "Blue"));
+		when(pegGeneratorMock.createPeg("Y"))
 				.thenReturn(new PegImpl("Y", "Yellow"));
-		when(pegGeneratorMock.getPeg("R")).thenReturn(new PegImpl("R", "Red"));
-		when(pegGeneratorMock.getPeg("P")).thenReturn(new PegImpl("P", "Pink"));
+		when(pegGeneratorMock.createPeg("R")).thenReturn(new PegImpl("R", "Red"));
+		when(pegGeneratorMock.createPeg("P")).thenReturn(new PegImpl("P", "Pink"));
 
 		// The secret code to be guessed.
 		secretCode = new LinkedList<IPeg>();
-		secretCode.add(pegGeneratorMock.getPeg("G")); // PEG_1
-		secretCode.add(pegGeneratorMock.getPeg("B")); // PEG_2
-		secretCode.add(pegGeneratorMock.getPeg("Y")); // PEG_3
-		secretCode.add(pegGeneratorMock.getPeg("R")); // PEG_4
+		secretCode.add(pegGeneratorMock.createPeg("G")); // PEG_1
+		secretCode.add(pegGeneratorMock.createPeg("B")); // PEG_2
+		secretCode.add(pegGeneratorMock.createPeg("Y")); // PEG_3
+		secretCode.add(pegGeneratorMock.createPeg("R")); // PEG_4
 		guessChecker = new GuessCheckerImpl(secretCode, pegGeneratorMock);
 	}
 
