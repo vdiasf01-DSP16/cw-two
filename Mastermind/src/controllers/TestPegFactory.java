@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -32,8 +35,11 @@ public class TestPegFactory
 	public void setUp()
 	{
 		IColourLoader colourLoader = Mockito.mock(IColourLoader.class);
-		when(colourLoader.getColours().get("B")).thenReturn("Blue"); //$NON-NLS-1$ //$NON-NLS-2$
-		this.pegCreator = new PegCreatorImpl(colourLoader);
+		
+		Map<String, String> coloursMock = new HashMap<>();
+		coloursMock.put("B", "Blue"); //$NON-NLS-1$ //$NON-NLS-2$
+		when(colourLoader.getColours()).thenReturn(coloursMock);
+		this.pegCreator = new PegCreatorImpl(colourLoader, null);
 	}
 
 	/**

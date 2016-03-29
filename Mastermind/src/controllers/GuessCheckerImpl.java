@@ -109,8 +109,7 @@ class GuessCheckerImpl implements IGuessChecker
 		return finalList;
 	}
 
-	private List<IPeg> parseUserInput(String input)
-			throws NonExistingColourException
+	private List<IPeg> parseUserInput(String input) throws NonExistingColourException
 	{
 		// Parse user input and generate pegs
 		List<String> parsedText = new ArrayList<>();

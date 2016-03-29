@@ -3,7 +3,8 @@
  */
 package views;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /**
  * @author Pedro Gordo
@@ -11,22 +12,19 @@ import java.util.Scanner;
  */
 class CaptureUserGuessImpl implements ICaptureUserGuess
 {
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see views.ICaptureUserGuess#captureGuess()
-	 */
 	@Override
 	public String captureGuess()
 	{
 		String userGuess = new String();
-		try (Scanner reader = new Scanner(System.in))
+		try (BufferedReader br = new BufferedReader(
+				new InputStreamReader(System.in)))
 		{
-			reader.nextLine();
-			reader.close();
+			userGuess = br.readLine();
+			br.close();
 		}
 		catch (Exception e)
 		{
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 			System.exit(1);
 		}
