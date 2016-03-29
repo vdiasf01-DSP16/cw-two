@@ -18,7 +18,9 @@ public interface IPegFactory
 	 * 
 	 * @param colour
 	 * @return IPeg
-	 * @throws NonExistingColourException TODO
+	 * @throws NonExistingColourException
+	 *             in case the colour doesn't exist in the resources/pegColours
+	 *             file
 	 */
 	public IPeg getPeg(String colour) throws NonExistingColourException;
 

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import com.google.inject.name.Named;
 
 import models.IPeg;
@@ -28,12 +29,15 @@ public class CodeGeneratorImpl implements ICodeGenerator
 	 * CodeGenerator constructor.
 	 * 
 	 * @param codeLength
+	 * @param pegFactory 
 	 */
 	@Inject
-	public CodeGeneratorImpl(@Named("codeLength") int codeLength)
+	public CodeGeneratorImpl(@Named("codeLength") int codeLength,
+			@Assisted IPegFactory pegFactory)
 	{
 		super();
 		this.CODE_LENGTH = codeLength;
+		this.pegFactory = pegFactory;
 	}
 
 	/*
@@ -86,11 +90,5 @@ public class CodeGeneratorImpl implements ICodeGenerator
 		}
 
 		return codeString;
-	}
-
-	@Override
-	public void setPegGenerator(IPegFactory pegFactory)
-	{
-		this.pegFactory = pegFactory;
 	}
 }

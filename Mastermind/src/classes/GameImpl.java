@@ -30,6 +30,8 @@ public class GameImpl extends GameAbstractImpl
 	private StartTextFactory startTextFactory;
 	@Inject
 	private TextBeforeGuessFactory textBeforeGuessFactory;
+	@Inject
+	private CodeGeneratorFactory codeGeneratorFactory;
 
 	@Inject
 	private GameImpl(@Named("easy") boolean easy)
@@ -47,10 +49,8 @@ public class GameImpl extends GameAbstractImpl
 		IColourLoader colourLoader = colourLoaderFactory.factoryMethod();
 		IPegFactory pegFactory = pegGeneratorFactory
 				.create(colourLoader.getColours());
-		CodeGeneratorFactory codeGeneratorFactory = new CodeGeneratorFactory();
 		FlowControllerFactory flowControllerFactory = new FlowControllerFactory();
-		ICodeGenerator codeGenerator = codeGeneratorFactory
-				.factoryMethod(pegFactory);
+		ICodeGenerator codeGenerator = codeGeneratorFactory.create(pegFactory);
 		IStartText startText = startTextFactory.factoryMethod();
 		CaptureUserGuessFactory captureUserGuessFactory = new CaptureUserGuessFactory();
 
@@ -78,7 +78,6 @@ public class GameImpl extends GameAbstractImpl
 			System.out.println("#### CAPTURED: " + userGuess);
 
 			keepGuessing = flowController.isGameFinished();
-			// TODO change condition for loop
 		} while (keepGuessing);
 	}
 

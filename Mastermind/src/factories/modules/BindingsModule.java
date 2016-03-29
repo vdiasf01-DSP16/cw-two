@@ -13,6 +13,7 @@ import controllers.IColourLoader;
 import controllers.IFlowController;
 import controllers.IPegFactory;
 import controllers.PegFactoryImpl;
+import factories.CodeGeneratorFactory;
 import factories.PegGeneratorFactory;
 import views.IStartText;
 import views.ITextBeforeGuess;
@@ -43,7 +44,9 @@ public class BindingsModule extends AbstractModule
 
 		bind(IFlowController.class).to(FlowControllerImpl.class);
 
-		bind(ICodeGenerator.class).to(CodeGeneratorImpl.class);
+		install(new FactoryModuleBuilder()
+				.implement(ICodeGenerator.class, CodeGeneratorImpl.class)
+				.build(CodeGeneratorFactory.class));
 
 		bind(IStartText.class).to(StartTextImpl.class);
 

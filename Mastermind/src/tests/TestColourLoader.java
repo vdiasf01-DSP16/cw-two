@@ -21,11 +21,6 @@ public class TestColourLoader
 {
 
 	/**
-	 * The path to the colour list test file.
-	 */
-	private final String PATH = "resources/pegColours";
-
-	/**
 	 * The loader object to test.
 	 */
 	private IColourLoader loader;

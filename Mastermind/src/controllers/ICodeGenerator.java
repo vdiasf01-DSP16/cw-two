@@ -31,11 +31,4 @@ public interface ICodeGenerator
 	 * @return the secret code string
 	 */
 	public String getCodeString();
-
-	/**
-	 * TODO remove this and set it using DI.
-	 * 
-	 * @param pegFactory
-	 */
-	public void setPegGenerator(IPegFactory pegFactory);
 }

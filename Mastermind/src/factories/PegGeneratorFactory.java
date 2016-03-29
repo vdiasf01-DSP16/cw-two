@@ -6,6 +6,7 @@ import controllers.IPegFactory;
 
 /**
  * @author Pedro Gordo
+ * TODO a factory building a factory? Revise this...
  *
  */
 public interface PegGeneratorFactory

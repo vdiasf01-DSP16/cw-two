@@ -57,7 +57,6 @@ public class PegFactoryImpl implements IPegFactory
 	@Override
 	public IPeg getAPeg()
 	{
-		// TODO Auto-generated method stub
 		Set<String> keySet = colours.keySet();
 		int size = keySet.size();
 		int random = new Random().nextInt(size);

@@ -49,8 +49,7 @@ public class TestCodeGenerator
 	public void setUp() throws NonExistingColourException
 	{
 		when(pegGeneratorMock.getAPeg()).thenReturn(greenPeg);
-		codeGenerator = new CodeGeneratorImpl(CODE_LENGTH);
-		codeGenerator.setPegGenerator(pegGeneratorMock);
+		codeGenerator = new CodeGeneratorImpl(CODE_LENGTH, pegGeneratorMock);
 	}
 
 	/**
