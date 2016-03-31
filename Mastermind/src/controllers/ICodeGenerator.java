@@ -3,17 +3,20 @@
  */
 package controllers;
 
-import java.util.Map;
+import java.util.List;
 
 import models.IPeg;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public interface ICodeGenerator {
-
-	void generateNewCode();
-
-	Map<Integer, IPeg> getCode();
+public interface ICodeGenerator
+{
+	/**
+	 * Creates a new secret code
+	 * 
+	 * @return the generated secret code
+	 */
+	public List<IPeg> generateNewCode();
 }

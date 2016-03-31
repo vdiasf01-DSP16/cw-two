@@ -1,34 +1,30 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The Guess history implementation for all past plays.
  * 
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public class GuessHistoryImpl implements IGuessHistory {
-
+class GuessHistoryImpl implements IGuessHistory
+{
 	/**
 	 * The list of past plays.
 	 */
-	private List<IGuessPlay> playedList;
+	private final List<IGuessPlay> playedList = new ArrayList<>();
 
-	/**
-	 * Constructor
-	 * 
-	 * @param playedList
-	 */
-	public GuessHistoryImpl(List<IGuessPlay> playedList) {
-		this.playedList = playedList;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	public List<IGuessPlay> getPlayHistory() {
-		return playedList;
+	public List<IGuessPlay> getPlayHistory()
+	{
+		return this.playedList;
+	}
+
+	@Override
+	public void addGuessPlay(IGuessPlay guessPlay)
+	{
+		this.playedList.add(guessPlay);
 	}
 }

@@ -1,0 +1,80 @@
+package controllers;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
+
+import controllers.exception.InvalidGuessSizeInput;
+import controllers.exception.NonExistingColourException;
+
+/**
+ * Testing the IPegGenerator implementation.
+ * 
+ * @author Pedro Gordo
+ *
+ */
+public class TestPegFactory
+{
+
+	/**
+	 * The IPegGenerator object handler for test.
+	 */
+	private IPegGenerator pegGenerator;
+
+	/**
+	 * Sets up a colour list that will be used as a dictionary to generate pegs.
+	 */
+	@Before
+	public void setUp()
+	{
+		IColourLoader colourLoader = Mockito.mock(IColourLoader.class);
+		
+		Map<String, String> coloursMock = new HashMap<>();
+		coloursMock.put("B", "Blue"); //$NON-NLS-1$ //$NON-NLS-2$
+		when(colourLoader.getColours()).thenReturn(coloursMock);
+		this.pegGenerator = new PegGeneratorImpl(colourLoader, null);
+	}
+
+	/**
+	 * Test that we get exception when we can't generate a peg.
+	 * 
+	 * @throws InvalidGuessSizeInput
+	 * @throws NonExistingColourException 
+	 */
+	@Test(expected = NonExistingColourException.class)
+	public void testExceptionWithNonExistingColour() throws InvalidGuessSizeInput, NonExistingColourException
+	{
+		this.pegGenerator.createPeg("Not known colour"); //$NON-NLS-1$
+	}
+
+	/**
+	 * Test Peg found is of a known colour.
+	 * 
+	 * @throws InvalidGuessSizeInput
+	 * @throws NonExistingColourException 
+	 */
+	@Test
+	public void testKnownColourGetPeg() throws InvalidGuessSizeInput, NonExistingColourException
+	{
+		String expected = "Blue"; //$NON-NLS-1$
+		String actual = null;
+		actual = this.pegGenerator.createPeg("B").getColourName(); //$NON-NLS-1$
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test that we get a non null peg.
+	 */
+	@Test
+	public void testGetAPeg()
+	{
+		assertNotNull(this.pegGenerator.createRandomPeg());
+	}
+}

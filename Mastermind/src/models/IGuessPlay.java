@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * The guess play interface for each historical play.
  * 
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
 public interface IGuessPlay {

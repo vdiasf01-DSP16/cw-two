@@ -3,50 +3,50 @@
  */
 package controllers;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 import models.IPeg;
 
 /**
- * @author pdeara01
+ * @author Pedro Gordo
  *
  */
-public class CodeGeneratorImpl implements ICodeGenerator {
+class CodeGeneratorImpl implements ICodeGenerator
+{
 
-	private final IPegGenerator pegGenerator;
+	private IPegGenerator pegGenerator;
 	private final int CODE_LENGTH;
-	private Map<Integer, IPeg> generatedCodePegs;
-	
+
+	/**
+	 * CodeGenerator constructor.
+	 * 
+	 * @param codeLength
+	 * @param pegGenerator 
+	 */
 	@Inject
-	public CodeGeneratorImpl(int codeLength, IPegGenerator pegGenerator) {
+	public CodeGeneratorImpl(@Named("codeLength") int codeLength, IPegGenerator pegGenerator)
+	{
 		super();
 		this.CODE_LENGTH = codeLength;
 		this.pegGenerator = pegGenerator;
 	}
 
-	/* (non-Javadoc)
-	 * @see controllers.ICodeGenerator#generateNewCode()
-	 */
 	@Override
-	public void generateNewCode() {
-		generatedCodePegs = new HashMap<>();
-		
-		for (int i = 0; i < CODE_LENGTH; i++) {
-			IPeg peg = pegGenerator.getAPeg();
-			if (peg != null) {
-				generatedCodePegs.put(i, peg);
-			}
-		}
-	}
+	public List<IPeg> generateNewCode()
+	{
+		List<IPeg> generatedCodePegs = new LinkedList<>();
 
-	/* (non-Javadoc)
-	 * @see controllers.ICodeGenerator#getCode()
-	 */
-	@Override
-	public Map<Integer, IPeg> getCode() {
+		for (int i = 0; i < this.CODE_LENGTH; i++)
+		{
+			IPeg peg = null;
+			peg = this.pegGenerator.createRandomPeg();
+			generatedCodePegs.add(peg);
+		}
+
 		return generatedCodePegs;
 	}
 }
