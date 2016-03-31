@@ -54,6 +54,7 @@ public class TestGuessChecker
 	 * The GuessChecker handler to test with.
 	 */
 	private IGuessChecker guessChecker;
+	private IPegGenerator pegGeneratorMock = Mockito.mock(IPegGenerator.class);
 
 	/**
 	 * Sets up the secret code to which the guess will be matched against and
@@ -65,7 +66,7 @@ public class TestGuessChecker
 	@Before
 	public void setUp() throws NonExistingColourException
 	{
-		IPegGenerator pegGeneratorMock = Mockito.mock(IPegGenerator.class);
+//		IPegGenerator pegGeneratorMock = Mockito.mock(IPegGenerator.class);
 
 		when(pegGeneratorMock.createPeg("G")) //$NON-NLS-1$
 				.thenReturn(create("G", "Green")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -96,6 +97,7 @@ public class TestGuessChecker
 	@Test
 	public void testBBBB() throws InvalidGuessSizeInput, NonExistingColourException
 	{
+		// The guess peg list.
 		String input = this.PEG_1.getColour() + this.PEG_2.getColour() + this.PEG_3.getColour()
 				+ this.PEG_4.getColour();
 
@@ -104,70 +106,6 @@ public class TestGuessChecker
 		resultList.add(this.BLACK_PEG);
 		resultList.add(this.BLACK_PEG);
 		resultList.add(this.BLACK_PEG);
-		resultList.add(this.BLACK_PEG);
-
-		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
-	}
-
-	/**
-	 * Testing BBB.
-	 * 
-	 * @throws NonExistingColourException 
-	 * @throws InvalidGuessSizeInput 
-	 */
-	@Test
-	public void testBBB() throws NonExistingColourException, InvalidGuessSizeInput
-	{
-		// The expected result list
-		List<IPeg> expected = new LinkedList<>();
-		expected.add(this.BLACK_PEG);
-		expected.add(this.BLACK_PEG);
-		expected.add(this.BLACK_PEG);
-
-		// The guess peg list.
-		String input = this.PEG_1.getColour() + this.PEG_2.getColour() + this.PEG_3.getColour()
-				+ this.wrongColourPeg.getColour();
-		List<IPeg> actual = this.guessChecker.getResult(this.secretCode, input);
-
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Testing BB.
-	 * 
-	 * @throws InvalidGuessSizeInput
-	 * @throws NonExistingColourException 
-	 */
-	@Test
-	public void testBB() throws InvalidGuessSizeInput, NonExistingColourException
-	{
-		// The guess peg list.
-		String input = this.PEG_1.getColour() + this.PEG_2.getColour()
-				+ this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour();
-
-		// The expected result list
-		List<IPeg> resultList = new LinkedList<>();
-		resultList.add(this.BLACK_PEG);
-		resultList.add(this.BLACK_PEG);
-
-		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
-	}
-
-	/**
-	 * Testing B.
-	 * 
-	 * @throws InvalidGuessSizeInput
-	 * @throws NonExistingColourException 
-	 */
-	@Test
-	public void testB() throws InvalidGuessSizeInput, NonExistingColourException
-	{
-		// The guess peg list.
-		String input = this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour()
-				+ this.wrongColourPeg.getColour() + this.PEG_4.getColour();
-
-		// The expected result list
-		List<IPeg> resultList = new LinkedList<>();
 		resultList.add(this.BLACK_PEG);
 
 		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
@@ -220,6 +158,72 @@ public class TestGuessChecker
 	}
 
 	/**
+	 * Testing BBB.
+	 * 
+	 * @throws NonExistingColourException 
+	 * @throws InvalidGuessSizeInput 
+	 */
+	@Test
+	public void testBBB() throws NonExistingColourException, InvalidGuessSizeInput
+	{
+		// The guess peg list.
+		String input = this.PEG_1.getColour() + this.PEG_2.getColour() + this.PEG_3.getColour()
+				+ this.wrongColourPeg.getColour();
+
+		// The expected result list
+		List<IPeg> resultList = new LinkedList<>();
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
+
+		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
+	}
+
+	/**
+	 * Testing BBW.
+	 * 
+	 * @throws NonExistingColourException 
+	 * @throws InvalidGuessSizeInput 
+	 */
+	@Test
+	public void testBBW() throws NonExistingColourException, InvalidGuessSizeInput
+	{
+		// The guess peg list.
+		String input = this.PEG_1.getColour() + this.PEG_2.getColour() + this.PEG_4.getColour()
+				+ this.wrongColourPeg.getColour();
+
+		// The expected result list
+		List<IPeg> resultList = new LinkedList<>();
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.WHITE_PEG);
+
+		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
+	}
+
+	/**
+	 * Testing BWW.
+	 * 
+	 * @throws NonExistingColourException 
+	 * @throws InvalidGuessSizeInput 
+	 */
+	@Test
+	public void testBWW() throws NonExistingColourException, InvalidGuessSizeInput
+	{
+		// The guess peg list.
+		String input = this.PEG_1.getColour() + this.PEG_3.getColour() + this.PEG_4.getColour()
+				+ this.wrongColourPeg.getColour();
+
+		// The expected result list
+		List<IPeg> resultList = new LinkedList<>();
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.WHITE_PEG);
+		resultList.add(this.WHITE_PEG);
+
+		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
+	}
+
+	/**
 	 * Testing WWW.
 	 * 
 	 * @throws InvalidGuessSizeInput
@@ -244,6 +248,48 @@ public class TestGuessChecker
 	}
 
 	/**
+	 * Testing BB.
+	 * 
+	 * @throws InvalidGuessSizeInput
+	 * @throws NonExistingColourException 
+	 */
+	@Test
+	public void testBB() throws InvalidGuessSizeInput, NonExistingColourException
+	{
+		// The guess peg list.
+		String input = this.PEG_1.getColour() + this.PEG_2.getColour()
+				+ this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour();
+
+		// The expected result list
+		List<IPeg> resultList = new LinkedList<>();
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.BLACK_PEG);
+
+		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
+	}
+
+	/**
+	 * Testing BW.
+	 * 
+	 * @throws InvalidGuessSizeInput
+	 * @throws NonExistingColourException 
+	 */
+	@Test
+	public void testBW() throws InvalidGuessSizeInput, NonExistingColourException
+	{
+		// The guess peg list.
+		String input = this.PEG_2.getColour() + this.wrongColourPeg.getColour()
+				+ this.PEG_3.getColour() + this.wrongColourPeg.getColour();
+
+		// The expected result list
+		List<IPeg> resultList = new LinkedList<>();
+		resultList.add(this.BLACK_PEG);
+		resultList.add(this.WHITE_PEG);
+
+		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
+	}
+
+	/**
 	 * Testing WW.
 	 * 
 	 * @throws InvalidGuessSizeInput
@@ -262,6 +308,53 @@ public class TestGuessChecker
 		resultList.add(this.WHITE_PEG);
 
 		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
+	}
+
+	/**
+	 * Testing B.
+	 * 
+	 * @throws InvalidGuessSizeInput
+	 * @throws NonExistingColourException 
+	 */
+	@Test
+	public void testB() throws InvalidGuessSizeInput, NonExistingColourException
+	{
+		// The guess peg list.
+		String input = this.PEG_1.getColour() + this.wrongColourPeg.getColour()
+				+ this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour();
+
+		// The expected result list
+		List<IPeg> resultList = new LinkedList<>();
+		resultList.add(this.BLACK_PEG);
+
+		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
+	}
+
+	/**
+	 * Testing B2.
+	 * 
+	 * @throws InvalidGuessSizeInput
+	 * @throws NonExistingColourException 
+	 */
+	@Test
+	public void testB2() throws InvalidGuessSizeInput, NonExistingColourException
+	{
+		List<IPeg> secretCode = new LinkedList<>();
+		// The secret code to be guessed.
+		secretCode.add(pegGeneratorMock.createPeg("G"));
+		secretCode.add(pegGeneratorMock.createPeg("B"));
+		secretCode.add(pegGeneratorMock.createPeg("Y"));
+		secretCode.add(pegGeneratorMock.createPeg("G"));
+
+		// The guess peg list.
+		String input = this.PEG_1.getColour() + this.wrongColourPeg.getColour()
+				+ this.wrongColourPeg.getColour() + this.wrongColourPeg.getColour();
+
+		// The expected result list
+		List<IPeg> resultList = new LinkedList<>();
+		resultList.add(this.BLACK_PEG);
+
+		verifyResultSet(resultList, this.guessChecker.getResult(secretCode, input));
 	}
 
 	/**
@@ -301,7 +394,6 @@ public class TestGuessChecker
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
 		
-		assertEquals(0, this.guessChecker.getResult(this.secretCode, input).size());
 		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
 	}
 
@@ -322,31 +414,7 @@ public class TestGuessChecker
 		// The expected result list
 		List<IPeg> resultList = new LinkedList<>();
 
-		assertEquals(0, this.guessChecker.getResult(this.secretCode, input).size());
 		verifyResultSet(resultList, this.guessChecker.getResult(this.secretCode, input));
-	}
-
-	/**
-	 * Verify that the expected list of result pegs match found.
-	 * 
-	 * @param expectedList
-	 *            IPeg
-	 * @param foundList
-	 *            IPeg
-	 */
-	private static void verifyResultSet(List<IPeg> expectedList, List<IPeg> foundList)
-	{
-		// List must have same size.
-		assertEquals(expectedList.size(), foundList.size());
-
-		// Check each one in order
-		for (int index = 0; index < expectedList.size(); index++)
-		{
-			assertEquals(expectedList.get(index).getColour(),
-					foundList.get(index).getColour());
-			assertEquals(expectedList.get(index).getColourName(),
-					foundList.get(index).getColourName());
-		}
 	}
 
 	/**
@@ -389,5 +457,26 @@ public class TestGuessChecker
 		List<IPeg> foundPegs = this.guessChecker.getResult(this.secretCode, "QWET"); //$NON-NLS-1$
 		System.out.println(foundPegs.toString());
 		assertTrue(foundPegs.isEmpty());
+	}
+
+	/**
+	 * Verify that the expected list of result pegs match found.
+	 * 
+	 * @param expectedList IPeg
+	 * @param foundList IPeg
+	 */
+	private static void verifyResultSet(List<IPeg> expectedList, List<IPeg> foundList)
+	{
+		// List must have same size.
+		assertEquals(expectedList.size(), foundList.size());
+
+		// Check each one in order
+		for (int index = 0; index < expectedList.size(); index++)
+		{
+			assertEquals(expectedList.get(index).getColour(),
+					foundList.get(index).getColour());
+			assertEquals(expectedList.get(index).getColourName(),
+					foundList.get(index).getColourName());
+		}
 	}
 }
