@@ -68,24 +68,24 @@ public class TestGuessChecker
 	{
 //		IPegGenerator pegGeneratorMock = Mockito.mock(IPegGenerator.class);
 
-		when(pegGeneratorMock.createPeg("G")) //$NON-NLS-1$
+		when(this.pegGeneratorMock.createPeg("G")) //$NON-NLS-1$
 				.thenReturn(create("G", "Green")); //$NON-NLS-1$ //$NON-NLS-2$
-		when(pegGeneratorMock.createPeg("B")).thenReturn(create("B", "Blue")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		when(pegGeneratorMock.createPeg("Y")) //$NON-NLS-1$
+		when(this.pegGeneratorMock.createPeg("B")).thenReturn(create("B", "Blue")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		when(this.pegGeneratorMock.createPeg("Y")) //$NON-NLS-1$
 				.thenReturn(create("Y", "Yellow")); //$NON-NLS-1$ //$NON-NLS-2$
-		when(pegGeneratorMock.createPeg("R")).thenReturn(create("R", "Red")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		when(pegGeneratorMock.createPeg("P")).thenReturn(create("P", "Pink")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		when(this.pegGeneratorMock.createPeg("R")).thenReturn(create("R", "Red")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		when(this.pegGeneratorMock.createPeg("P")).thenReturn(create("P", "Pink")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		
-		when(pegGeneratorMock.getBlackPeg()).thenReturn(create("B", "Black")); //$NON-NLS-1$ //$NON-NLS-2$
-		when(pegGeneratorMock.getWhitePeg()).thenReturn(create("W", "White")); //$NON-NLS-1$ //$NON-NLS-2$
+		when(this.pegGeneratorMock.getBlackPeg()).thenReturn(create("B", "Black")); //$NON-NLS-1$ //$NON-NLS-2$
+		when(this.pegGeneratorMock.getWhitePeg()).thenReturn(create("W", "White")); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// The secret code to be guessed.
 		this.secretCode = new ArrayList<>();
-		this.secretCode.add(pegGeneratorMock.createPeg("G")); // PEG_1 //$NON-NLS-1$
-		this.secretCode.add(pegGeneratorMock.createPeg("B")); // PEG_2 //$NON-NLS-1$
-		this.secretCode.add(pegGeneratorMock.createPeg("Y")); // PEG_3 //$NON-NLS-1$
-		this.secretCode.add(pegGeneratorMock.createPeg("R")); // PEG_4 //$NON-NLS-1$
-		this.guessChecker = new GuessCheckerImpl(pegGeneratorMock, null);
+		this.secretCode.add(this.pegGeneratorMock.createPeg("G")); // PEG_1 //$NON-NLS-1$
+		this.secretCode.add(this.pegGeneratorMock.createPeg("B")); // PEG_2 //$NON-NLS-1$
+		this.secretCode.add(this.pegGeneratorMock.createPeg("Y")); // PEG_3 //$NON-NLS-1$
+		this.secretCode.add(this.pegGeneratorMock.createPeg("R")); // PEG_4 //$NON-NLS-1$
+		this.guessChecker = new GuessCheckerImpl(this.pegGeneratorMock, null);
 	}
 
 	/**
@@ -339,12 +339,12 @@ public class TestGuessChecker
 	@Test
 	public void testB2() throws InvalidGuessSizeInput, NonExistingColourException
 	{
-		List<IPeg> secretCode = new LinkedList<>();
+		List<IPeg> secretCode1 = new LinkedList<>();
 		// The secret code to be guessed.
-		secretCode.add(pegGeneratorMock.createPeg("G"));
-		secretCode.add(pegGeneratorMock.createPeg("B"));
-		secretCode.add(pegGeneratorMock.createPeg("Y"));
-		secretCode.add(pegGeneratorMock.createPeg("G"));
+		secretCode1.add(this.pegGeneratorMock.createPeg("G")); //$NON-NLS-1$
+		secretCode1.add(this.pegGeneratorMock.createPeg("B")); //$NON-NLS-1$
+		secretCode1.add(this.pegGeneratorMock.createPeg("Y")); //$NON-NLS-1$
+		secretCode1.add(this.pegGeneratorMock.createPeg("G")); //$NON-NLS-1$
 
 		// The guess peg list.
 		String input = this.PEG_1.getColour() + this.wrongColourPeg.getColour()
@@ -354,7 +354,7 @@ public class TestGuessChecker
 		List<IPeg> resultList = new LinkedList<>();
 		resultList.add(this.BLACK_PEG);
 
-		verifyResultSet(resultList, this.guessChecker.getResult(secretCode, input));
+		verifyResultSet(resultList, this.guessChecker.getResult(secretCode1, input));
 	}
 
 	/**
