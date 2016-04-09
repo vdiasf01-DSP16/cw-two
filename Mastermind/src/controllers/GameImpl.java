@@ -100,9 +100,7 @@ class GameImpl extends GameAbstractImpl
 					}
 					catch (NonExistingColourException | InvalidGuessSizeInput e)
 					{
-						// TODO after output is similar to sample, consider
-						// uncomment this.
-						// System.out.println(e.getMessage());
+						 System.out.println(e.getMessage());
 					}
 				} while (userInputIsValid == false);
 
