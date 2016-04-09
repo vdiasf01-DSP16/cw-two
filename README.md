@@ -6,4 +6,4 @@ The group is composed by:
 
 Pedro Gordo - "sedulam" - Student nmr 13018708
 
-Vasco Horta - "vdiasf01-DSP16" - Student nmr 
+Vasco Horta - "vdiasf01-DSP16" - Student nmr 13011260
