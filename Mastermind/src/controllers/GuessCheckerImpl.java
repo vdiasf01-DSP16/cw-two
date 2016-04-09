@@ -47,24 +47,21 @@ class GuessCheckerImpl implements IGuessChecker
 	public List<IPeg> getResult(List<IPeg> secretCode, String input)
 			throws NonExistingColourException, InvalidGuessSizeInput
 	{
-		// parse the user input and return a map where the key is the peg
-		// position
+		// parse the user input and return a list of pegs
 		List<IPeg> pegList = parseUserInput(input);
 
 		// Validate arguments.
-		if (pegList.size() != secretCode.size())
+		if (pegList.size() != secretCode.size()) 
 			throw new InvalidGuessSizeInput(this.errorForInvalidGuessSize);
 
+		// The answer list with black and white pegs.
 		List<IPeg> finalList = new LinkedList<>();
 		int blackPegs = 0;
 		int whitePegs = 0;
 
 		// First count all user guess pegs that match on secret code colours as
-		// white pegs
-		// Then count how many user guess pegs match colour and index on black
-		// pegs.
-		// Subtract the now set as black peginput colour from the white peg
-		// count.
+		// white pegs, then count how many user guess pegs match colour and 
+		// index as black pegs. Subtract the black peg from the white peg count.
 
 		// All matched colours regardless of index
 		List<IPeg> matchedPegByColour = new LinkedList<>();
@@ -75,9 +72,11 @@ class GuessCheckerImpl implements IGuessChecker
 			{
 				if (guessPeg.getColour().equals(secretPeg.getColour()))
 				{
-					matchedPegByColour.add(secretPeg);
-					whitePegs++;
-					break;
+					if ( !matchedPegByColour.contains(secretPeg) ) {
+						matchedPegByColour.add(secretPeg);
+						whitePegs++;
+						break;
+					}
 				}
 			}
 		}
